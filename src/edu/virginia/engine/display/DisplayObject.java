@@ -462,5 +462,11 @@ public class DisplayObject implements IEventListener {
 	public void setScaleY(double value) {
 		scale.y = value;
 	}
+	public Point getPos() {
+		return pos;
+	}
+	public float getAlpha() {
+		return alpha;
+	}
 
 }

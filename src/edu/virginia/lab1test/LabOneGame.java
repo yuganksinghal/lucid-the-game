@@ -10,6 +10,10 @@ import edu.virginia.engine.display.Item;
 import edu.virginia.engine.display.Player;
 import edu.virginia.engine.display.Sprite;
 import edu.virginia.engine.events.PickedUpEvent;
+import edu.virginia.engine.tween.Tween;
+import edu.virginia.engine.tween.TweenJuggler;
+import edu.virginia.engine.tween.TweenParam;
+import edu.virginia.engine.tween.TweenableParam;
 
 /**
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
@@ -29,6 +33,7 @@ public class LabOneGame extends Game{
 	 * */
 	public LabOneGame() {
 		super("Test", 500, 300);
+		
 		player = new Player("player", "Mario.png");
 		player.setScale(0.3);
 		player.setPosition(50, 50);
@@ -39,6 +44,7 @@ public class LabOneGame extends Game{
 		coin = new Item("Coin", "Coin.png");
 		coin.setScale(0.2);
 		coin.setPosition(200, 200);
+		coin.setAlpha(0.0);
 		coin2 = new Item("Coin2", "Coin.png");
 		coin2.setScale(0.2);
 		coin2.setPosition(270, 200);
@@ -51,6 +57,10 @@ public class LabOneGame extends Game{
 		Sys.addItem(coin);
 		Sys.addItem(coin2);
 		Sys.addSprite(platform);
+		
+		TweenParam p1 = new TweenParam(TweenableParam.ALPHA, 0, 1, 2000);
+		Tween t1 = new Tween(coin, 2000, p1, 1);
+		Sys.tweenJuggler.add(t1);
 	}
 	
 	/**
@@ -72,6 +82,7 @@ public class LabOneGame extends Game{
 			Sys.spriteList.remove(s);
 		}
 		Sys.garbage.clear();
+		Sys.tweenJuggler.nextFrame();
 	}
 
 	

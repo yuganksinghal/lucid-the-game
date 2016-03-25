@@ -1,13 +1,10 @@
 package edu.virginia.engine.tween;
 
-import java.util.ArrayList;
-
 import edu.virginia.engine.display.DisplayObject;
-import edu.virginia.lab1test.LabOneGame.TWEENABLEPARAM;
 
 public class Tween {
 	private DisplayObject obj;
-	private TWEENABLEPARAM tweenparam;
+	private TweenableParam tweenparam;
 	private long endTime;
 	private long startTime;
 	private double start;
@@ -22,16 +19,16 @@ public class Tween {
 		this.end = end;
 		switch (p.getParam()) {
 			case X:
-				this.start = this.obj.getPosition().getX();
+				this.start = this.obj.getPos().x;
 				break;
 			case Y:
-				this.start = this.obj.getPosition().getY();
+				this.start = this.obj.getPos().y;
 				break;
 			case SCALE_X:
 				this.start = this.obj.getScaleX();
 				break;
 			case SCALE_Y:
-				this.start = this.obj.getScaley();
+				this.start = this.obj.getScaleY();
 				break;
 			case ALPHA:
 				this.start = this.obj.getAlpha();
@@ -41,7 +38,7 @@ public class Tween {
 	}
 	
 	
-	public TWEENABLEPARAM getParam() {
+	public TweenableParam getParam() {
 		return this.tweenparam;
 	}
 	
@@ -49,7 +46,7 @@ public class Tween {
 		return this.end;
 	}
 	
-	public void animate(TWEENABLEPARAM tweenparam2, double start, double end, double time) {
+	public void animate(TweenableParam tweenparam2, double start, double end, double time) {
 		double percent = (time - startTime) / (endTime-startTime);
 		double value = percent * (end - start) + start;
 		this.setValue(tweenparam2, value);
@@ -63,13 +60,13 @@ public class Tween {
 		return System.currentTimeMillis() >= this.endTime;
 	}
 	
-	public void setValue(TWEENABLEPARAM tweenparam2, double value) {
+	public void setValue(TweenableParam tweenparam2, double value) {
 		switch (tweenparam2) {
 			case X:
-				this.obj.setPosition((int) value, this.obj.getPosition().getY());
+				this.obj.setPosition((int) value, this.obj.getPos().y);
 				break;
 			case Y:
-				this.obj.setPosition(this.obj.getPosition().getX(), (int) value);
+				this.obj.setPosition(this.obj.getPos().x, (int) value);
 				break;
 			case SCALE_X:
 				this.obj.setScaleX(value);
