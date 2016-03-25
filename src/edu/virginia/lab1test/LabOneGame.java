@@ -37,17 +37,11 @@ public class LabOneGame extends Game{
 		player = new Player("player", "Mario.png");
 		player.setScale(0.3);
 		player.setPosition(50, 50);
-		babyMario = new Sprite("BabyMario", "Mario.png");
-		babyMario.setRelScale(1);
-		babyMario.setRelativePosition(500,500);
-//		player.addChild(babyMario);
-		coin = new Item("Coin", "Coin.png");
-		coin.setScale(0.2);
-		coin.setPosition(200, 200);
-		coin.setAlpha(0.0);
+		
 		coin2 = new Item("Coin2", "Coin.png");
 		coin2.setScale(0.2);
 		coin2.setPosition(270, 200);
+		
 		platform = new Sprite("Platform","Platform.png");
 		platform.setPosition(200, 260);
 		platform.setScale(0.3);
@@ -70,30 +64,14 @@ public class LabOneGame extends Game{
 	@Override
 	public void update(ArrayList<String> pressedKeys){
 //		super.update(pressedKeys);
-		
+
 		/* Make sure player is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
 		for (Sprite s : Sys.spriteList) {
 			if (s != null) s.update(pressedKeys);
-			if (!s.isFixed()) applyPhysics(s);
 			if (!s.exists()) Sys.garbage.add(s);
 		}
 		
-		for (Sprite s : Sys.garbage) {
-			Sys.spriteList.remove(s);
-		}
-		Sys.garbage.clear();
-		Sys.tweenJuggler.nextFrame();
-	}
-
-	
-	public void applyPhysics(Sprite s) {
-		double GRAVITY = 2;
-		double newVelX = s.getVelX();
-		double newVelY = s.getVelY();
-		newVelX /= 1.1;
-		newVelY /= 1.1;
-		s.setVelocity(newVelX, newVelY);
-		s.setAccelY(GRAVITY);
+		Sys.update();
 	}
 	
 	/**

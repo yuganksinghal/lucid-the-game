@@ -37,4 +37,12 @@ public class Sys {
 	public static void addSprite(Sprite s) {
 		spriteList.add(s);
 	}
+	
+	public static void update() {
+		for (Sprite s : Sys.garbage) {
+			Sys.spriteList.remove(s);
+		}
+		Sys.garbage.clear();
+		Sys.tweenJuggler.nextFrame();
+	}
 }
