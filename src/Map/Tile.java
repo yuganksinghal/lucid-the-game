@@ -7,4 +7,5 @@ public class Tile {
 	private BufferedImage image;
 	private boolean isPortal;
 	private Map portalTo;
+	
 }
