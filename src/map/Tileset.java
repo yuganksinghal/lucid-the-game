@@ -52,7 +52,7 @@ public class Tileset {
 	}
 
 	public BufferedImage makeTileImage(int gid) {
-		if (gid > lastGid || gid < firstGid) {
+		if (gid <= lastGid || gid >= firstGid) {
 			int localGid = gid - firstGid;
 			int x = localGid % tileAmountWidth;
 			int y = Math.floorDiv(localGid, tileAmountWidth);

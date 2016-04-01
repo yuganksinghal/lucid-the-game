@@ -58,7 +58,6 @@ public class Map {
 				
 				
 				Node imageNode = tNode.getFirstChild();
-				System.out.println("DEBUG:" + tElement.getChildNodes());
 				Element iElement = (Element) tElement.getElementsByTagName("image").item(0);
 				int imageHeight = Integer.parseInt(iElement.getAttribute("height"));
 				int imageWidth = Integer.parseInt(iElement.getAttribute("width"));
@@ -87,18 +86,49 @@ public class Map {
 			NodeList layerList = doc.getElementsByTagName("layer");
 			
 			Node backgroundLayer = layerList.item(0);
-			Node collisionLayer = layerList.item(1);
-			Node foregroundLayer = layerList.item(2);
+			//Node collisionLayer = layerList.item(1);
+			Node foregroundLayer = layerList.item(1);
 			
-			this.background = new Tile[width][height];
+			this.background = new Tile[height][width];
+			this.foreground = new Tile[height][width];
 			
-			NodeList backgroundTiles = backgroundLayer.getChildNodes();
+			NodeList backgroundTiles = backgroundLayer.getChildNodes().item(1).getChildNodes();
+			NodeList foregroundTiles = foregroundLayer.getChildNodes().item(1).getChildNodes();
+			
 			
 			for (int j = 0 ; j < this.height ; j++) {
 				for (int i = 0 ; i < this.width ; i++) {
-					Node curNode = backgroundTiles.item(j*this.height + i);
+					Node curNode = backgroundTiles.item((j*this.width + i)*2 +1);
+					Element tempElement = (Element) curNode;
 					Tile t = new Tile(); //TODO: refer to tiled tutorial for how to do this
-					this.background[i][j] = t;
+					int gid = Integer.parseInt(tempElement.getAttribute("gid"));
+					for (Tileset sheet: tilesets){
+						if ((gid > sheet.lastGid) || (gid < sheet.firstGid))
+							continue;
+						t.setImage(sheet.makeTileImage(gid));
+						t.setPortal(false);
+						t.setPortalTo(null);
+						break;
+					}
+					this.background[j][i] = t;
+				}
+			}
+			
+			for (int j = 0 ; j < this.height ; j++) {
+				for (int i = 0 ; i < this.width ; i++) {
+					Node curNode = foregroundTiles.item((j*this.width + i)*2 +1);
+					Element tempElement = (Element) curNode;
+					Tile t = new Tile(); //TODO: refer to tiled tutorial for how to do this
+					int gid = Integer.parseInt(tempElement.getAttribute("gid"));
+					for (Tileset sheet: tilesets){
+						if ((gid > sheet.lastGid) || (gid < sheet.firstGid))
+							continue;
+						t.setImage(sheet.makeTileImage(gid));
+						t.setPortal(false);
+						t.setPortalTo(null);
+						break;
+					}
+					this.foreground[j][i] = t;
 				}
 			}
 			
