@@ -14,6 +14,7 @@ import edu.virginia.engine.tween.Tween;
 import edu.virginia.engine.tween.TweenJuggler;
 import edu.virginia.engine.tween.TweenParam;
 import edu.virginia.engine.tween.TweenableParam;
+import map.Map;
 
 /**
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
@@ -27,34 +28,35 @@ public class LabOneGame extends Game{
 	Item coin;
 	Item coin2;
 	Sprite platform;
-	
+	Map m;
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
 	 * */
 	public LabOneGame() {
 		super("Test", 500, 300);
 		
-		player = new Player("player", "Mario.png");
-		player.setScale(0.3);
-		player.setPosition(50, 50);
+//		player = new Player("player", "Mario.png");
+//		player.setScale(0.3);
+//		player.setPosition(50, 50);
+//		
+//		coin2 = new Item("Coin2", "Coin.png");
+//		coin2.setScale(0.2);
+//		coin2.setPosition(270, 200);
+//		
+//		platform = new Sprite("Platform","Platform.png");
+//		platform.setPosition(200, 260);
+//		platform.setScale(0.3);
+//		platform.setScaleDelta(new Point.Double(1,0));
 		
-		coin2 = new Item("Coin2", "Coin.png");
-		coin2.setScale(0.2);
-		coin2.setPosition(270, 200);
+//		Sys.addSprite(player);
+//		Sys.addItem(coin);
+//		Sys.addItem(coin2);
+//		Sys.addSprite(platform);
 		
-		platform = new Sprite("Platform","Platform.png");
-		platform.setPosition(200, 260);
-		platform.setScale(0.3);
-		platform.setScaleDelta(new Point.Double(1,0));
-		
-		Sys.addSprite(player);
-		Sys.addItem(coin);
-		Sys.addItem(coin2);
-		Sys.addSprite(platform);
-		
-		TweenParam p1 = new TweenParam(TweenableParam.ALPHA, 0, 1, 2000);
-		Tween t1 = new Tween(coin, 2000, p1, 1);
-		Sys.tweenJuggler.add(t1);
+		//TweenParam p1 = new TweenParam(TweenableParam.ALPHA, 0, 1, 2000);
+		//Tween t1 = new Tween(coin, 2000, p1, 1);
+		//Sys.tweenJuggler.add(t1);
+		m = new Map("alsobad.tmx");
 	}
 	
 	/**
@@ -81,10 +83,14 @@ public class LabOneGame extends Game{
 	@Override
 	public void draw(Graphics g){
 		super.draw(g);
+		
+		m.drawBackground(g);
 
 		for (Sprite s : Sys.spriteList) {
 			if (s != null) s.draw(g);
 		}
+		
+		m.drawForeground(g);
 		
 		g.drawRect(10, 10, 480, 280);
 	}

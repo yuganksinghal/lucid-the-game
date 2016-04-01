@@ -1,5 +1,7 @@
 package map;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -16,64 +18,62 @@ public class Map {
 	Tile[][] collidables;
 	Tile[][] background;
 	boolean[][] occupied;
-	
+
 	boolean debug = true;
-	
+
 	int width;
 	int height;
 	int tileWidth;
 	int tileHeight;
 	ArrayList<Tileset> tilesets;
-	
+
 	public Map(String mapFile) {
 		tilesets = new ArrayList<Tileset>();
-		
-		//take in an XML file from res/maps/<mapFile>
+
+		// take in an XML file from res/maps/<mapFile>
 		//
-		
+
 		try {
 			File fXmlFile = new File("res" + File.separator + "maps" + File.separator + mapFile);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(fXmlFile);
-			
-			//normalize document
+
+			// normalize document
 			doc.getDocumentElement().normalize();
-			
-			
-			
-			//CREATE TILESETS IN ENGINE
-			
+
+			// CREATE TILESETS IN ENGINE
+
 			NodeList tilesetList = doc.getElementsByTagName("tileset");
-			
+
 			// (untested)
-			for (int i = 0 ; i < tilesetList.getLength() ; i++) {
+			for (int i = 0; i < tilesetList.getLength(); i++) {
 				Node tNode = tilesetList.item(i);
 				Element tElement = (Element) tNode;
 				int firstGid = Integer.parseInt(tElement.getAttribute("firstgid"));
 				int tileWidth = Integer.parseInt(tElement.getAttribute("tilewidth"));
 				int tileHeight = Integer.parseInt(tElement.getAttribute("tileheight"));
-				
+
 				String tilesetName = tElement.getAttribute("name");
-				
-				
+
 				Node imageNode = tNode.getFirstChild();
 				Element iElement = (Element) tElement.getElementsByTagName("image").item(0);
 				int imageHeight = Integer.parseInt(iElement.getAttribute("height"));
 				int imageWidth = Integer.parseInt(iElement.getAttribute("width"));
 				String tilesetImagePath = iElement.getAttribute("source");
 
-				Tileset ts = new Tileset(tilesetName, tilesetImagePath, tileWidth, tileHeight, firstGid, imageWidth, imageHeight);
+				Tileset ts = new Tileset(tilesetName, tilesetImagePath, tileWidth, tileHeight, firstGid, imageWidth,
+						imageHeight);
 				tilesets.add(ts);
 			}
-			
-			//tilesets finished being initialized
-			
+
+			// tilesets finished being initialized
+
 			System.out.println("Root element: " + doc.getDocumentElement().getNodeName());
-			//tileheight
-			//tilewidth
-			//height
-			//width
+			// tileheight
+			// tilewidth
+			// height
+			// width
 			NodeList nList = doc.getElementsByTagName("map");
 			Node map = nList.item(0);
 			Element eElement = (Element) map;
@@ -81,28 +81,42 @@ public class Map {
 			this.height = Integer.parseInt(eElement.getAttribute("height"));
 			this.tileWidth = Integer.parseInt(eElement.getAttribute("tilewidth"));
 			this.tileHeight = Integer.parseInt(eElement.getAttribute("tileheight"));
-			if (debug) System.out.println(width + " " + height + " " + tileWidth + " " + tileHeight);
-			
+			if (debug)
+				System.out.println(width + " " + height + " " + tileWidth + " " + tileHeight);
+
 			NodeList layerList = doc.getElementsByTagName("layer");
-			
+
 			Node backgroundLayer = layerList.item(0);
-			//Node collisionLayer = layerList.item(1);
+			// Node collisionLayer = layerList.item(1);
 			Node foregroundLayer = layerList.item(1);
-			
+
 			this.background = new Tile[height][width];
 			this.foreground = new Tile[height][width];
-			
+
 			NodeList backgroundTiles = backgroundLayer.getChildNodes().item(1).getChildNodes();
 			NodeList foregroundTiles = foregroundLayer.getChildNodes().item(1).getChildNodes();
-			
-			
-			for (int j = 0 ; j < this.height ; j++) {
-				for (int i = 0 ; i < this.width ; i++) {
-					Node curNode = backgroundTiles.item((j*this.width + i)*2 +1);
+
+			for (int j = 0; j < this.height; j++) {
+				for (int i = 0; i < this.width; i++) {
+					Node curNode = backgroundTiles.item((j * this.width + i) * 2 + 1); // turns
+					// out
+					// there
+					// is
+					// a
+					// blank
+					// "text"
+					// node
+					// between
+					// each
+					// node
+					// when
+					// parsing
+					// xml
 					Element tempElement = (Element) curNode;
-					Tile t = new Tile(); //TODO: refer to tiled tutorial for how to do this
+					Tile t = new Tile(); // TODO: refer to tiled tutorial for
+					// how to do this
 					int gid = Integer.parseInt(tempElement.getAttribute("gid"));
-					for (Tileset sheet: tilesets){
+					for (Tileset sheet : tilesets) {
 						if ((gid > sheet.lastGid) || (gid < sheet.firstGid))
 							continue;
 						t.setImage(sheet.makeTileImage(gid));
@@ -113,14 +127,15 @@ public class Map {
 					this.background[j][i] = t;
 				}
 			}
-			
-			for (int j = 0 ; j < this.height ; j++) {
-				for (int i = 0 ; i < this.width ; i++) {
-					Node curNode = foregroundTiles.item((j*this.width + i)*2 +1);
+
+			for (int j = 0; j < this.height; j++) {
+				for (int i = 0; i < this.width; i++) {
+					Node curNode = foregroundTiles.item((j * this.width + i) * 2 + 1);
 					Element tempElement = (Element) curNode;
-					Tile t = new Tile(); //TODO: refer to tiled tutorial for how to do this
+					Tile t = new Tile(); // TODO: refer to tiled tutorial for
+					// how to do this
 					int gid = Integer.parseInt(tempElement.getAttribute("gid"));
-					for (Tileset sheet: tilesets){
+					for (Tileset sheet : tilesets) {
 						if ((gid > sheet.lastGid) || (gid < sheet.firstGid))
 							continue;
 						t.setImage(sheet.makeTileImage(gid));
@@ -131,12 +146,34 @@ public class Map {
 					this.foreground[j][i] = t;
 				}
 			}
-			
-				
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+	}
+
+	public void drawBackground(Graphics g) {
+
+		Graphics2D g2d = (Graphics2D) g;
+
+		for (int j = 0; j < this.height; j++) {
+			for (int i = 0; i < this.width; i++) {
+				g2d.translate(i * tileWidth, j * tileHeight);
+				g2d.drawImage(background[j][i].getImage(), null, null);
+				g2d.translate(-i * tileWidth, -j * tileHeight);
+			}
+		}
+	}
+
+	public void drawForeground(Graphics g) {
+
+		Graphics2D g2d = (Graphics2D) g;
+
+		for (int j = 0; j < this.height; j++) {
+			for (int i = 0; i < this.width; i++) {
+				g2d.translate(i * tileWidth, j * tileHeight);
+				g2d.drawImage(background[j][i].getImage(), null, null);
+				g2d.translate(-i * tileWidth, -j * tileHeight);
+			}
+		}
 	}
 }
