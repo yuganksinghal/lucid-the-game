@@ -29,9 +29,16 @@ public class Player extends Sprite {
 		super.update(pressedKeys, map);
 		playerInput(pressedKeys, map);
 	}
-
+	
 	public void playerInput(ArrayList<String> keys, Map map) {
-		//put player input mechanics here
+		if (keys.contains("D")) {
+		}
+		else if (keys.contains("A")) {
+		}
+		if (keys.contains("S")) {
+		}
+		if (keys.contains("W")) {
+		}
 	}
 
 	public boolean isPlayer() {

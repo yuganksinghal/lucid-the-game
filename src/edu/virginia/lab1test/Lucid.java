@@ -34,9 +34,10 @@ public class Lucid extends Game{
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
 	 * */
+
 	public Lucid() {
 		super("Test", GAME_WIDTH, GAME_HEIGHT);
-		
+
 		player = new Player("player", "Mario.png");
 		player.setPosition(0, 0);
 		Sys.addSprite(player);
