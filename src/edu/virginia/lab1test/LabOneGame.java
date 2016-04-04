@@ -35,26 +35,10 @@ public class LabOneGame extends Game{
 		super("Test", 500, 300);
 		
 		player = new Player("player", "Mario.png");
-		player.setScale(0.3);
 		player.setPosition(0, 0);
-//		
-//		coin2 = new Item("Coin2", "Coin.png");
-//		coin2.setScale(0.2);
-//		coin2.setPosition(270, 200);
-//		
-//		platform = new Sprite("Platform","Platform.png");
-//		platform.setPosition(200, 260);
-//		platform.setScale(0.3);
-//		platform.setScaleDelta(new Point.Double(1,0));
-		
+
 		Sys.addSprite(player);
-//		Sys.addItem(coin);
-//		Sys.addItem(coin2);
-//		Sys.addSprite(platform);
-		
-		//TweenParam p1 = new TweenParam(TweenableParam.ALPHA, 0, 1, 2000);
-		//Tween t1 = new Tween(coin, 2000, p1, 1);
-		//Sys.tweenJuggler.add(t1);
+
 		loadedMap = new Map("alsobad.tmx");
 	}
 	

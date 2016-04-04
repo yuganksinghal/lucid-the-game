@@ -31,39 +31,7 @@ public class Player extends Sprite {
 	}
 
 	public void playerInput(ArrayList<String> keys, Map map) {
-		if (keys.contains("D")) {
-			// this.setAccelX(1);
-			if (this.xGrid < map.getWidth())
-				this.setPosX((int) (++xGrid) * map.getTileWidth());
-
-		} else if (keys.contains("A")) {
-			if (this.xGrid > 0)
-				this.setPosX((int) (--xGrid) * map.getTileWidth());
-		} else
-			this.setAccelX(0);
-		if (keys.contains("S")) {
-			if (this.yGrid < map.getHeight())
-				this.setPosY((int) (++yGrid) * map.getTileHeight());
-			System.out.println(yGrid);
-		}
-		if (keys.contains("W")) {
-			if (this.yGrid > 0)
-				this.setPosY((int) (--yGrid) * map.getTileHeight());
-			// velocity must be actively applied
-			// if (this.grounded) {
-			// this.setVelocityY(-JUMP_HEIGHT);
-			// SoundManager.playSoundSO("baby_x.wav");
-			// }
-		} else
-			//this.setAccelY(0);
-		if (keys.contains("Z"))
-			this.setRotationDelta(-1);
-		if (keys.contains("X"))
-			this.setRotationDelta(+1);
-		if (keys.contains("N"))
-			this.setScaleDelta(0.01);
-		if (keys.contains("M"))
-			this.setScaleDelta(-0.01);
+		//put player input mechanics here
 	}
 
 	public boolean isPlayer() {
