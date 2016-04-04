@@ -19,7 +19,7 @@ import javax.swing.Timer;
  * Highest level class for creating a game in Java.
  * 
  * */
-public class Game extends DisplayObjectContainer implements ActionListener, KeyListener {
+public class Game extends DisplayObject implements ActionListener, KeyListener {
 	
 	private int height;
 	private int width;

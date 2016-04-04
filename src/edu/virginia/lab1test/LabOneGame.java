@@ -33,7 +33,7 @@ public class LabOneGame extends Game{
 	 * Constructor. See constructor in Game.java for details on the parameters given
 	 * */
 	public LabOneGame() {
-		super("Test", 500, 300);
+		super("Test", 600, 500);
 		
 //		player = new Player("player", "Mario.png");
 //		player.setScale(0.3);
