@@ -28,16 +28,15 @@ public class LabOneGame extends Game{
 	Item coin;
 	Item coin2;
 	Sprite platform;
-	Map m;
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
 	 * */
 	public LabOneGame() {
 		super("Test", 500, 300);
 		
-//		player = new Player("player", "Mario.png");
-//		player.setScale(0.3);
-//		player.setPosition(50, 50);
+		player = new Player("player", "Mario.png");
+		player.setScale(0.3);
+		player.setPosition(0, 0);
 //		
 //		coin2 = new Item("Coin2", "Coin.png");
 //		coin2.setScale(0.2);
@@ -48,7 +47,7 @@ public class LabOneGame extends Game{
 //		platform.setScale(0.3);
 //		platform.setScaleDelta(new Point.Double(1,0));
 		
-//		Sys.addSprite(player);
+		Sys.addSprite(player);
 //		Sys.addItem(coin);
 //		Sys.addItem(coin2);
 //		Sys.addSprite(platform);
@@ -56,7 +55,7 @@ public class LabOneGame extends Game{
 		//TweenParam p1 = new TweenParam(TweenableParam.ALPHA, 0, 1, 2000);
 		//Tween t1 = new Tween(coin, 2000, p1, 1);
 		//Sys.tweenJuggler.add(t1);
-		m = new Map("alsobad.tmx");
+		loadedMap = new Map("alsobad.tmx");
 	}
 	
 	/**
@@ -64,12 +63,12 @@ public class LabOneGame extends Game{
 	 * the set of keys (as strings) that are currently being pressed down
 	 * */
 	@Override
-	public void update(ArrayList<String> pressedKeys){
+	public void update(ArrayList<String> pressedKeys, Map map){
 //		super.update(pressedKeys);
 
 		/* Make sure player is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
 		for (Sprite s : Sys.spriteList) {
-			if (s != null) s.update(pressedKeys);
+			if (s != null) s.update(pressedKeys, map);
 			if (!s.exists()) Sys.garbage.add(s);
 		}
 		
@@ -84,15 +83,15 @@ public class LabOneGame extends Game{
 	public void draw(Graphics g){
 		super.draw(g);
 		
-		m.drawBackground(g);
+		loadedMap.drawBackground(g);
 
 		for (Sprite s : Sys.spriteList) {
 			if (s != null) s.draw(g);
 		}
 		
-		m.drawForeground(g);
+		loadedMap.drawForeground(g);
 		
-		g.drawRect(10, 10, 480, 280);
+		//g.drawRect(10, 10, 480, 280);
 	}
 
 	/**

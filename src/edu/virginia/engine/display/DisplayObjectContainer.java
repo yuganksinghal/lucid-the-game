@@ -3,6 +3,8 @@ package edu.virginia.engine.display;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import map.Map;
+
 public class DisplayObjectContainer extends DisplayObject {
 	
 	private ArrayList<DisplayObject> children;
@@ -35,10 +37,10 @@ public class DisplayObjectContainer extends DisplayObject {
 	}
 	
 	@Override
-	public void update(ArrayList<String> pressedKeys) {
-		super.update(pressedKeys);
+	public void update(ArrayList<String> pressedKeys, Map map) {
+		super.update(pressedKeys, map);
 		for (DisplayObject child : children) {
-			child.update(pressedKeys);
+			child.update(pressedKeys, map);
 		}
 	}
 	

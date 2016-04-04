@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
+import map.Map;
+
 
 /**
  * Highest level class for creating a game in Java.
@@ -35,6 +37,8 @@ public class Game extends DisplayObjectContainer implements ActionListener, KeyL
 	
 	/* The JPanel for this game */
 	private GameScenePanel scenePanel;
+	
+	protected Map loadedMap;
 
 	public Game(String gameId, int width, int height) {
 		super(gameId);
@@ -143,7 +147,7 @@ public class Game extends DisplayObjectContainer implements ActionListener, KeyL
 
 		try {
 			/* Update all objects on the stage */
-			this.update(pressedKeys);
+			this.update(pressedKeys, loadedMap);
 
 			/* Draw everything on the screen */
 			this.draw(g);

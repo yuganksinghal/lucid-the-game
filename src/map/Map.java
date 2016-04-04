@@ -157,6 +157,8 @@ public class Map {
 
 		for (int j = 0; j < this.height; j++) {
 			for (int i = 0; i < this.width; i++) {
+				if(background[j][i].getImage() == null)
+					continue;
 				g2d.translate(i * tileWidth, j * tileHeight);
 				g2d.drawImage(background[j][i].getImage(), null, null);
 				g2d.translate(-i * tileWidth, -j * tileHeight);
@@ -170,10 +172,62 @@ public class Map {
 
 		for (int j = 0; j < this.height; j++) {
 			for (int i = 0; i < this.width; i++) {
+				if(foreground[j][i].getImage() == null)
+					continue;
 				g2d.translate(i * tileWidth, j * tileHeight);
-				g2d.drawImage(background[j][i].getImage(), null, null);
+				g2d.drawImage(foreground[j][i].getImage(), null, null);
 				g2d.translate(-i * tileWidth, -j * tileHeight);
 			}
 		}
 	}
+
+	public Tile[][] getCollidables() {
+		return collidables;
+	}
+
+	public void setCollidables(Tile[][] collidables) {
+		this.collidables = collidables;
+	}
+
+	public boolean[][] getOccupied() {
+		return occupied;
+	}
+
+	public void setOccupied(boolean[][] occupied) {
+		this.occupied = occupied;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public int getTileWidth() {
+		return tileWidth;
+	}
+
+	public void setTileWidth(int tileWidth) {
+		this.tileWidth = tileWidth;
+	}
+
+	public int getTileHeight() {
+		return tileHeight;
+	}
+
+	public void setTileHeight(int tileHeight) {
+		this.tileHeight = tileHeight;
+	}
+	
+	
 }

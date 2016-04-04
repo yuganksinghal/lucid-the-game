@@ -18,6 +18,7 @@ import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.IEventListener;
 import edu.virginia.engine.events.PickedUpEvent;
 import edu.virginia.lab1test.LabOneGame;
+import map.Map;
 
 public class DisplayObject implements IEventListener {
 
@@ -235,7 +236,7 @@ public class DisplayObject implements IEventListener {
 	 * objects state before the draw occurs. Should be overridden if necessary
 	 * to update objects appropriately.
 	 * */
-	protected void update(ArrayList<String> pressedKeys) {
+	protected void update(ArrayList<String> pressedKeys, Map map) {
 		//normalize values
 		if (degreesRotation >= 360 || degreesRotation <= -360) degreesRotation %= 360;
 		if (scale.x < 0.01) scale.x = 0.05;
