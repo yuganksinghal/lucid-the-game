@@ -17,7 +17,7 @@ import edu.virginia.engine.events.CollisionEvent;
 import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.IEventListener;
 import edu.virginia.engine.events.PickedUpEvent;
-import edu.virginia.lab1test.LabOneGame;
+import edu.virginia.lab1test.Lucid;
 import map.Map;
 
 public class DisplayObject {

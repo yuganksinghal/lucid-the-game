@@ -7,7 +7,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 
-import edu.virginia.lab1test.LabOneGame;
+import edu.virginia.lab1test.Lucid;
 
 public class SoundManager {
 	public SoundManager() {
@@ -23,7 +23,7 @@ public class SoundManager {
 		        Clip clip = AudioSystem.getClip();
 		        
 		        AudioInputStream inputStream = AudioSystem.getAudioInputStream(
-		          LabOneGame.class.getResourceAsStream("/res/sounds/" + url));
+		          Lucid.class.getResourceAsStream("/res/sounds/" + url));
 		        
 		        clip.open(inputStream);
 		        clip.start(); 
