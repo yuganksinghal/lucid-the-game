@@ -41,15 +41,4 @@ public class DisplayObjectContainer extends DisplayObject {
 			child.update(pressedKeys);
 		}
 	}
-	
-	@Override
-	public boolean collidesWith(DisplayObject obj) {
-		if (super.collidesWith(obj)) return true;
-		else {
-			for (DisplayObject child : children) {
-				if (child.collidesWith(obj)) return true;
-			}
-			return false;
-		}
-	}
 }

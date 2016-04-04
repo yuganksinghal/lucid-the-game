@@ -28,27 +28,13 @@ public class Player extends Sprite {
 	
 	public void playerInput(ArrayList<String> keys) {
 		if (keys.contains("D")) {
-			this.setAccelX(1);
 		}
 		else if (keys.contains("A")) {
-			this.setAccelX(-1);
 		}
-		else this.setAccelX(0);
 		if (keys.contains("S")) {
-			this.setAccelY(1);
 		}
 		if (keys.contains("W")) {
-			//velocity must be actively applied
-			if (this.grounded) {
-				this.setVelocityY(-JUMP_HEIGHT);
-				SoundManager.playSoundSO("baby_x.wav");
-			}
 		}
-		else this.setAccelY(0);
-		if (keys.contains("Z")) this.setRotationDelta(- 1);
-		if (keys.contains("X")) this.setRotationDelta(+ 1);
-		if (keys.contains("N")) this.setScaleDelta(0.01);
-		if (keys.contains("M")) this.setScaleDelta(-0.01);
 	}
 	
 	public boolean isPlayer() {
