@@ -26,12 +26,12 @@ public class Walkable extends AnimatedSprite {
 	public Walkable(String id) {
 		super(id);
 		// TODO Auto-generated constructor stub
-		SPEED = 500;
+		SPEED = 250;
 	}
 	
 	public Walkable(String id, String image) {
 		super(id, image);
-		SPEED = 500;
+		SPEED = 250;
 	}
 	
 	public void up(Map m) {

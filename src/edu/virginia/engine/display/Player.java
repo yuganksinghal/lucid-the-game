@@ -27,37 +27,37 @@ public class Player extends Walkable {
 	public void update(ArrayList<String> pressedKeys, Map map) {
 		super.update(pressedKeys, map);
 		playerInput(pressedKeys, map);
-		System.out.println("X: " + xGrid + ", Y: " + yGrid);
+//		System.out.println("X: " + xGrid + ", Y: " + yGrid);
 	}
 	
 	public void playerInput(ArrayList<String> keys, Map map) {
 		if (!moving) {
 
 			if (keys.contains("D")) {
-				if (map.checkCollision(xGrid+1,yGrid)) {
+				if (!map.checkCollision(yGrid,xGrid+1)) {
 					this.right(map);
 					this.moving = true;
 				}
 			}
 			else if (keys.contains("A")) {
-				if (map.checkCollision(xGrid-1,yGrid)) {
+				if (!map.checkCollision(yGrid,xGrid-1)) {
 					this.left(map);
 					this.moving = true;
 				}
 			}
 			if (keys.contains("S")) {
-				if (map.checkCollision(xGrid,yGrid+1)) {
+				if (!map.checkCollision(yGrid+1,xGrid)) {
 					this.down(map);
 					this.moving = true;
 				}
 			}
 			if (keys.contains("W")) {
-				if (map.checkCollision(xGrid,yGrid-1)) {
+				if (!map.checkCollision(yGrid-1,xGrid)) {
 					this.up(map);
 					this.moving = true;
 				}
 			}
-		} else System.out.println("moving!");
+		}
 	}
 
 	public boolean isPlayer() {

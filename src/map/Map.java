@@ -165,7 +165,7 @@ public class Map {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		System.out.println("what");
 	}
 
 	public void drawBackground(Graphics g) {
@@ -253,9 +253,11 @@ public class Map {
 		this.tileHeight = tileHeight;
 	}
 
-	public boolean checkCollision(int i, int j) {
-		collidables[i][j] = true;
-		return collidables[i][j] && occupied[i][j];
+	public boolean checkCollision(int j, int i) {
+		System.out.println(i + ", " + j);
+		System.out.println("coll: " + collidables[j][i]);
+		System.out.println("occ: " + occupied[j][i]);
+		return (collidables[j][i] || occupied[j][i]);
 	}
 
 }
