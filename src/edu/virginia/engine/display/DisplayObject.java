@@ -51,6 +51,8 @@ public class DisplayObject implements IEventListener {
 	protected int degreesRotation;
 	protected int rotationDelta;
 	protected float alpha;
+	protected int xGrid;
+	protected int yGrid;
 	
 	protected Point relPos;
 	protected int relRotation;

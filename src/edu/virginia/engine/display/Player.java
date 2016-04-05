@@ -6,8 +6,6 @@ import edu.virginia.engine.SoundManager;
 import map.Map;
 
 public class Player extends Sprite {
-	private int xGrid;
-	private int yGrid;
 
 	public Player(String id, String imageFileName) {
 		super(id, imageFileName);
