@@ -53,6 +53,9 @@ public class DisplayObject {
 	protected Point relPos;
 	protected int relRotation;
 	protected Point.Double relScale;
+	
+	protected int xGrid;
+	protected int yGrid;
 
 	
 
