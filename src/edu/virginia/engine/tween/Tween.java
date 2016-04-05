@@ -6,7 +6,7 @@ import edu.virginia.engine.display.Walkable;
 public class Tween {
 	private DisplayObject obj;
 	private TweenableParam tweenparam;
-	private double endTime;
+	private long endTime;
 	private long startTime;
 	private double start;
 	private double end;
@@ -17,7 +17,7 @@ public class Tween {
 		double end = p.getEndVal();
 		this.obj = s;
 		this.startTime = System.currentTimeMillis();
-		this.endTime = startTime + time;
+		this.endTime = (long) (startTime + time);
 		this.tweenparam = p.getParam();
 		this.end = end;
 		switch (p.getParam()) {
@@ -38,7 +38,7 @@ public class Tween {
 		((Walkable) obj).stop();
 		return;
 	}
-	
+
 	
 	public TweenableParam getParam() {
 		return this.tweenparam;
@@ -46,6 +46,14 @@ public class Tween {
 	
 	public double getEnd() {
 		return this.end;
+	}
+	
+	public double getStart() {
+		return this.start;
+	}
+	
+	public long getEndTime() {
+		return this.endTime;
 	}
 	
 	public void animate(TweenableParam tweenparam2, double start, double end, double time) {
