@@ -34,15 +34,9 @@ public class DisplayObject {
 	protected boolean fixed;
 	protected boolean grounded;
 	protected Point pos;
-	protected Point.Double velocity;
 	protected float alpha;
 	protected int xGrid;
-	protected int yGrid;
-	
-	protected Point relPos;
-	protected int relRotation;
-	protected Point.Double relScale;
-	
+	protected int yGrid;	
 
 	/* The image that is displayed by this object */
 
@@ -57,11 +51,7 @@ public class DisplayObject {
 		this.collideable = true;
 		this.visible = true;
 		this.pos = new Point(0,0);
-		this.velocity = new Point.Double(0,0);
 		this.alpha = 1f;
-		this.relPos = new Point(0,0);
-		this.relScale = new Point.Double(1,1);
-		this.relRotation = 0;
 		this.grounded = false;
 	}
 	public DisplayObject(String id) {
@@ -132,23 +122,8 @@ public class DisplayObject {
 		if(image == null) return;
 		displayImage = image;
 	}
-	public void setVelocity(double x, double y) {
-		velocity.setLocation(x, y);
-	}
-	public void setVelocityX(double x) {
-		velocity.setLocation(x, velocity.y);
-	}
-	public void setVelocityY(double y) {
-		velocity.setLocation(velocity.x, y);
-	}
 	public void setPosition(int x, int y) {
 		pos.setLocation(x,y);
-	}
-	public double getVelY() {
-		return velocity.y;
-	}
-	public double getVelX() {
-		return velocity.x;
 	}
 	
 	/**
