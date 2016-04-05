@@ -4,7 +4,6 @@ import java.awt.AlphaComposite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -12,12 +11,6 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import edu.virginia.engine.Sys;
-import edu.virginia.engine.events.CollisionEvent;
-import edu.virginia.engine.events.Event;
-import edu.virginia.engine.events.IEventListener;
-import edu.virginia.engine.events.PickedUpEvent;
-import edu.virginia.lab1test.Lucid;
 import map.Map;
 
 public class DisplayObject {
@@ -25,10 +18,6 @@ public class DisplayObject {
 	/*
 	 * MASTER TO-DO LIST:
 	 * DONE: implement checks for scaling and rotation so they don't break hitboxes
-	 * TODO: get rid of children DOs
-	 * TODO: get rid of scaling
-	 * TODO: get rid of rotation
-	 * TODO: get rid of pivotpoints
 	 *
 	 *
 	 */
@@ -37,7 +26,6 @@ public class DisplayObject {
 	// Fields
 	
 	protected String id; // all DOs have a unique ID
-	private DisplayObject parent;
 	private BufferedImage displayImage;
 
 	private boolean exists;
@@ -46,16 +34,9 @@ public class DisplayObject {
 	protected boolean fixed;
 	protected boolean grounded;
 	protected Point pos;
-	protected Point piv;
-	protected Point.Double velocity;
 	protected float alpha;
 	protected int xGrid;
-	protected int yGrid;
-	
-	protected Point relPos;
-	protected int relRotation;
-	protected Point.Double relScale;
-	
+	protected int yGrid;	
 
 	/* The image that is displayed by this object */
 
@@ -70,12 +51,7 @@ public class DisplayObject {
 		this.collideable = true;
 		this.visible = true;
 		this.pos = new Point(0,0);
-		this.piv = new Point(0,0);
-		this.velocity = new Point.Double(0,0);
 		this.alpha = 1f;
-		this.relPos = new Point(0,0);
-		this.relScale = new Point.Double(1,1);
-		this.relRotation = 0;
 		this.grounded = false;
 	}
 	public DisplayObject(String id) {
@@ -146,32 +122,8 @@ public class DisplayObject {
 		if(image == null) return;
 		displayImage = image;
 	}
-	public void setVelocity(double x, double y) {
-		velocity.setLocation(x, y);
-	}
-	public void setVelocityX(double x) {
-		velocity.setLocation(x, velocity.y);
-	}
-	public void setVelocityY(double y) {
-		velocity.setLocation(velocity.x, y);
-	}
 	public void setPosition(int x, int y) {
 		pos.setLocation(x,y);
-	}
-	public void setRelativePosition(int x, int y) {
-		relPos.setLocation(x, y);
-	}
-	public void setParent(DisplayObject obj) {
-		parent = obj;
-	}
-	public void setRelScale(double x) {
-		relScale.setLocation(x,x);
-	}
-	public double getVelY() {
-		return velocity.y;
-	}
-	public double getVelX() {
-		return velocity.x;
 	}
 	
 	/**
@@ -203,8 +155,8 @@ public class DisplayObject {
 			
 			/* Actually draw the image, perform the pivot point translation here */
 			g2d.drawImage(displayImage, 
-					(int) (-this.piv.x), 
-					(int) (-this.piv.y),
+					0, 
+					0,
 					(int) (getUnscaledWidth()),
 					(int) (getUnscaledHeight()), null);
 			/*

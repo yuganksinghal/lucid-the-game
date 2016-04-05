@@ -34,8 +34,10 @@ public class Player extends Walkable {
 		if (!moving) {
 
 			if (keys.contains("D")) {
-				this.right(map);
-				this.moving = true;
+				if (map.checkCollision(0,0)) {
+					this.right(map);
+					this.moving = true;
+				}
 			}
 			else if (keys.contains("A")) {
 				this.left(map);

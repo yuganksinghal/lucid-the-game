@@ -211,6 +211,13 @@ public class Map {
 	public void setOccupied(boolean[][] occupied) {
 		this.occupied = occupied;
 	}
+	
+	public void occupy(int i, int j) {
+		this.occupied[i][j] = true;
+	}
+	public void vacate(int i, int j) {
+		this.occupied[i][j] = false;
+	}
 
 	public int getWidth() {
 		return width;
@@ -242,6 +249,10 @@ public class Map {
 
 	public void setTileHeight(int tileHeight) {
 		this.tileHeight = tileHeight;
+	}
+
+	public boolean checkCollision(int i, int j) {
+		return collidables[i][j] && occupied[i][j];
 	}
 
 }
