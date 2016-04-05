@@ -92,6 +92,8 @@ public class Map {
 
 			this.background = new Tile[height][width];
 			this.foreground = new Tile[height][width];
+			this.collidables = new boolean[height][width];
+			this.occupied = new boolean[height][width];
 
 			NodeList backgroundTiles = backgroundLayer.getChildNodes().item(1).getChildNodes();
 			NodeList foregroundTiles = foregroundLayer.getChildNodes().item(1).getChildNodes();
@@ -163,8 +165,6 @@ public class Map {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		occupied = new boolean[width][height];
 
 	}
 
