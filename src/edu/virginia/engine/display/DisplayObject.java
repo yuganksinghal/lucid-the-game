@@ -46,7 +46,6 @@ public class DisplayObject {
 	protected boolean fixed;
 	protected boolean grounded;
 	protected Point pos;
-	protected Point piv;
 	protected Point.Double velocity;
 	protected float alpha;
 	
@@ -72,7 +71,6 @@ public class DisplayObject {
 		this.collideable = true;
 		this.visible = true;
 		this.pos = new Point(0,0);
-		this.piv = new Point(0,0);
 		this.velocity = new Point.Double(0,0);
 		this.alpha = 1f;
 		this.relPos = new Point(0,0);
@@ -205,8 +203,8 @@ public class DisplayObject {
 			
 			/* Actually draw the image, perform the pivot point translation here */
 			g2d.drawImage(displayImage, 
-					(int) (-this.piv.x), 
-					(int) (-this.piv.y),
+					0, 
+					0,
 					(int) (getUnscaledWidth()),
 					(int) (getUnscaledHeight()), null);
 			/*
