@@ -211,7 +211,8 @@ public class DisplayObject {
 			 * objects
 			 */
 			reverseTransformations(g2d);
-		} else System.out.println("Not drawing " + id);
+		} 
+//		else System.out.println("Not drawing " + id);
 	}
 
 	/**
