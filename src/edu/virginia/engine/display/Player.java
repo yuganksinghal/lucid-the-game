@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import edu.virginia.engine.SoundManager;
 import map.Map;
 
-public class Player extends Sprite {
+public class Player extends walkable {
 	private int xGrid;
 	private int yGrid;
 
