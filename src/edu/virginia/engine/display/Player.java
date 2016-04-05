@@ -32,12 +32,16 @@ public class Player extends walkable {
 	
 	public void playerInput(ArrayList<String> keys, Map map) {
 		if (keys.contains("D")) {
+			
 		}
-		else if (keys.contains("A")) {
+		if (keys.contains("A")) {
+			
 		}
 		if (keys.contains("S")) {
+			
 		}
 		if (keys.contains("W")) {
+			
 		}
 	}
 
