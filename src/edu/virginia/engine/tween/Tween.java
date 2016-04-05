@@ -5,13 +5,15 @@ import edu.virginia.engine.display.DisplayObject;
 public class Tween {
 	private DisplayObject obj;
 	private TweenableParam tweenparam;
-	private long endTime;
+	private double endTime;
 	private long startTime;
 	private double start;
 	private double end;
 	
 	
-	public Tween(DisplayObject s, long time, TweenParam p, double end) {
+	public Tween(DisplayObject s, TweenParam p) {
+		double time = p.getDuration();
+		double end = p.getEndVal();
 		this.obj = s;
 		this.startTime = System.currentTimeMillis();
 		this.endTime = startTime + time;

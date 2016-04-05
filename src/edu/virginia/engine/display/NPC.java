@@ -6,7 +6,7 @@ import dialog.Dialog;
 import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.IEventListener;
 
-public class NPC extends walkable implements IEventListener{
+public class NPC extends Walkable implements IEventListener{
 	
 	ArrayList<Dialog> dialogs;
 	Dialog currentDialog = new Dialog();

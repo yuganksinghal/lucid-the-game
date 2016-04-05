@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import edu.virginia.engine.SoundManager;
 import map.Map;
 
-public class Player extends walkable {
+public class Player extends Walkable {
 	private int xGrid;
 	private int yGrid;
+	protected boolean moving;
 
 	public Player(String id, String imageFileName) {
 		super(id, imageFileName);
@@ -22,6 +23,7 @@ public class Player extends walkable {
 	private void construct() {
 		this.setFixed(false);
 		this.visible = true;
+		this.moving = false;
 	}
 
 	@Override
@@ -31,14 +33,25 @@ public class Player extends walkable {
 	}
 	
 	public void playerInput(ArrayList<String> keys, Map map) {
-		if (keys.contains("D")) {
-		}
-		else if (keys.contains("A")) {
-		}
-		if (keys.contains("S")) {
-		}
-		if (keys.contains("W")) {
-		}
+		if (!moving) {
+			
+			if (keys.contains("D")) {
+				this.right(map);
+				this.moving = true;
+			}
+			else if (keys.contains("A")) {
+				this.left(map);
+				this.moving = true;
+			}
+			if (keys.contains("S")) {
+				this.down(map);
+				this.moving = true;
+			}
+			if (keys.contains("W")) {
+				this.up(map);
+				this.moving = true;
+			}
+		} else System.out.println("moving!");
 	}
 
 	public boolean isPlayer() {
