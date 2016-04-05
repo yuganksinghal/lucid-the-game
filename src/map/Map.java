@@ -15,7 +15,7 @@ import org.w3c.dom.NodeList;
 
 public class Map {
 	Tile[][] foreground;
-	Tile[][] collidables;
+	boolean[][] collidables;
 	Tile[][] background;
 	boolean[][] occupied;
 
@@ -146,9 +146,23 @@ public class Map {
 					this.foreground[j][i] = t;
 				}
 			}
+			
+			for (int j = 0; j < this.height; j++) {
+				for (int i = 0; i < this.width; i++) {
+					Node curNode = foregroundTiles.item((j * this.width + i) * 2 + 1);
+					Element tempElement = (Element) curNode;
+					// how to do this
+					int gid = Integer.parseInt(tempElement.getAttribute("gid"));
+					if(gid != 0)
+						this.collidables[j][i] = true;
+					else
+						this.collidables[j][i] = false;
+				}
+			}			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	public void drawBackground(Graphics g) {
@@ -157,7 +171,7 @@ public class Map {
 
 		for (int j = 0; j < this.height; j++) {
 			for (int i = 0; i < this.width; i++) {
-				if(background[j][i].getImage() == null)
+				if (background[j][i].getImage() == null)
 					continue;
 				g2d.translate(i * tileWidth, j * tileHeight);
 				g2d.drawImage(background[j][i].getImage(), null, null);
@@ -172,7 +186,7 @@ public class Map {
 
 		for (int j = 0; j < this.height; j++) {
 			for (int i = 0; i < this.width; i++) {
-				if(foreground[j][i].getImage() == null)
+				if (foreground[j][i].getImage() == null)
 					continue;
 				g2d.translate(i * tileWidth, j * tileHeight);
 				g2d.drawImage(foreground[j][i].getImage(), null, null);
@@ -181,11 +195,11 @@ public class Map {
 		}
 	}
 
-	public Tile[][] getCollidables() {
+	public boolean[][] getCollidables() {
 		return collidables;
 	}
 
-	public void setCollidables(Tile[][] collidables) {
+	public void setCollidables(boolean[][] collidables) {
 		this.collidables = collidables;
 	}
 
@@ -228,6 +242,5 @@ public class Map {
 	public void setTileHeight(int tileHeight) {
 		this.tileHeight = tileHeight;
 	}
-	
-	
+
 }
