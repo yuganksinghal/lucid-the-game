@@ -34,22 +34,28 @@ public class Player extends Walkable {
 		if (!moving) {
 
 			if (keys.contains("D")) {
-				if (map.checkCollision(0,0)) {
+				if (map.checkCollision(xGrid+1,yGrid)) {
 					this.right(map);
 					this.moving = true;
 				}
 			}
 			else if (keys.contains("A")) {
-				this.left(map);
-				this.moving = true;
+				if (map.checkCollision(xGrid-1,yGrid)) {
+					this.left(map);
+					this.moving = true;
+				}
 			}
 			if (keys.contains("S")) {
-				this.down(map);
-				this.moving = true;
+				if (map.checkCollision(xGrid,yGrid+1)) {
+					this.down(map);
+					this.moving = true;
+				}
 			}
 			if (keys.contains("W")) {
-				this.up(map);
-				this.moving = true;
+				if (map.checkCollision(xGrid,yGrid-1)) {
+					this.up(map);
+					this.moving = true;
+				}
 			}
 		} else System.out.println("moving!");
 	}
