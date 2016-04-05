@@ -1,6 +1,7 @@
 package edu.virginia.engine.tween;
 
 import edu.virginia.engine.display.DisplayObject;
+import edu.virginia.engine.display.Walkable;
 
 public class Tween {
 	private DisplayObject obj;
@@ -31,6 +32,11 @@ public class Tween {
 				break;
 			default: break;
 		}
+	}
+	
+	public void stop() {
+		((Walkable) obj).stop();
+		return;
 	}
 	
 	

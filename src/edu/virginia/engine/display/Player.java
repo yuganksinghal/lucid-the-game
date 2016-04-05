@@ -8,7 +8,6 @@ import map.Map;
 public class Player extends Walkable {
 	private int xGrid;
 	private int yGrid;
-	protected boolean moving;
 
 	public Player(String id, String imageFileName) {
 		super(id, imageFileName);
@@ -26,6 +25,7 @@ public class Player extends Walkable {
 		this.moving = false;
 	}
 
+
 	@Override
 	public void update(ArrayList<String> pressedKeys, Map map) {
 		super.update(pressedKeys, map);
@@ -34,7 +34,7 @@ public class Player extends Walkable {
 	
 	public void playerInput(ArrayList<String> keys, Map map) {
 		if (!moving) {
-			
+
 			if (keys.contains("D")) {
 				this.right(map);
 				this.moving = true;

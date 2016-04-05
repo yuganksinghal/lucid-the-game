@@ -8,15 +8,18 @@ import map.Map;
 
 public class Walkable extends Sprite {
 	int SPEED;
+	protected boolean moving;
+
 
 	public Walkable(String id) {
 		super(id);
 		// TODO Auto-generated constructor stub
-		SPEED = 1000;
+		SPEED = 500;
 	}
 	
 	public Walkable(String id, String image) {
 		super(id, image);
+		SPEED = 500;
 	}
 	
 	public void up(Map m) {
@@ -45,6 +48,11 @@ public class Walkable extends Sprite {
 		TweenParam tp = new TweenParam(TweenableParam.X, this.getPos().x, this.getPos().x + Sys.TILE_SIZE, SPEED);
 		Tween t = new Tween(this, tp);
 		Sys.tweenJuggler.add(t);
+	}
+
+	public void stop() {
+		// TODO Auto-generated method stub
+		this.moving = false;
 	}
 
 }

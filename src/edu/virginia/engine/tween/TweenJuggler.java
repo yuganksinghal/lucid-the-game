@@ -18,6 +18,7 @@ public class TweenJuggler {
 		if (tweens.size() > 0) {
 			for(int i = tweens.size()-1; i >= 0; i--) {
 				if (tweens.get(i).isComplete()){
+					tweens.get(i).stop();
 					tweens.remove(i);
 				} else {
 					tweens.get(i).update();
