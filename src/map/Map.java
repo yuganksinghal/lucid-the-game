@@ -164,6 +164,8 @@ public class Map {
 			e.printStackTrace();
 		}
 
+		occupied = new boolean[width][height];
+
 	}
 
 	public void drawBackground(Graphics g) {
@@ -252,6 +254,7 @@ public class Map {
 	}
 
 	public boolean checkCollision(int i, int j) {
+		collidables[i][j] = true;
 		return collidables[i][j] && occupied[i][j];
 	}
 

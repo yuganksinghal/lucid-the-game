@@ -1,4 +1,4 @@
-package dialog;
+package edu.virginia.dialog;
 
 import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.IEventListener;

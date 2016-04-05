@@ -40,6 +40,7 @@ public class Walkable extends AnimatedSprite {
 		Tween t = new Tween(this, tp);
 		Sys.tweenJuggler.add(t);
 		facing = FACE_UP;
+		--yGrid;
 		
 	}
 	
@@ -49,6 +50,7 @@ public class Walkable extends AnimatedSprite {
 		Tween t = new Tween(this, tp);
 		Sys.tweenJuggler.add(t);
 		facing = FACE_DOWN;
+		++yGrid;
 	}
 	
 	public void left(Map m) {
@@ -57,6 +59,7 @@ public class Walkable extends AnimatedSprite {
 		Tween t = new Tween(this, tp);
 		Sys.tweenJuggler.add(t);
 		facing = FACE_LEFT;
+		--xGrid;
 	}
 	
 	public void right(Map m) {
@@ -65,6 +68,7 @@ public class Walkable extends AnimatedSprite {
 		Tween t = new Tween(this, tp);
 		Sys.tweenJuggler.add(t);
 		facing = FACE_RIGHT;
+		++xGrid;
 	}
 
 	public void stop() {

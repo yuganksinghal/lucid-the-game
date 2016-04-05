@@ -2,7 +2,6 @@ package edu.virginia.engine.display;
 
 import java.util.ArrayList;
 
-import edu.virginia.engine.SoundManager;
 import map.Map;
 
 public class Player extends Walkable {
@@ -28,6 +27,7 @@ public class Player extends Walkable {
 	public void update(ArrayList<String> pressedKeys, Map map) {
 		super.update(pressedKeys, map);
 		playerInput(pressedKeys, map);
+		System.out.println("X: " + xGrid + ", Y: " + yGrid);
 	}
 	
 	public void playerInput(ArrayList<String> keys, Map map) {

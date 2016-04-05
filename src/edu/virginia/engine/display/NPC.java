@@ -2,7 +2,7 @@ package edu.virginia.engine.display;
 
 import java.util.ArrayList;
 
-import dialog.Dialog;
+import edu.virginia.dialog.Dialog;
 import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.IEventListener;
 
