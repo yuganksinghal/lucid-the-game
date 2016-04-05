@@ -20,7 +20,7 @@ import map.Map;
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
  * although, for now, it won't be a very fun game :)
  * */
-public class LabOneGame extends Game{
+public class Lucid extends Game{
 
 	/* Create a sprite object for our game. We'll use player */
 	Player player;
@@ -28,34 +28,22 @@ public class LabOneGame extends Game{
 	Item coin;
 	Item coin2;
 	Sprite platform;
+	Camera camera;
+	static int GAME_WIDTH = 600;
+	static int GAME_HEIGHT = 500;
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
 	 * */
-	public LabOneGame() {
-		super("Test", 500, 300);
-		
+
+	public Lucid() {
+		super("Test", GAME_WIDTH, GAME_HEIGHT);
+
 		player = new Player("player", "Mario.png");
-		player.setScale(0.3);
 		player.setPosition(0, 0);
-//		
-//		coin2 = new Item("Coin2", "Coin.png");
-//		coin2.setScale(0.2);
-//		coin2.setPosition(270, 200);
-//		
-//		platform = new Sprite("Platform","Platform.png");
-//		platform.setPosition(200, 260);
-//		platform.setScale(0.3);
-//		platform.setScaleDelta(new Point.Double(1,0));
-		
 		Sys.addSprite(player);
-//		Sys.addItem(coin);
-//		Sys.addItem(coin2);
-//		Sys.addSprite(platform);
-		
-		//TweenParam p1 = new TweenParam(TweenableParam.ALPHA, 0, 1, 2000);
-		//Tween t1 = new Tween(coin, 2000, p1, 1);
-		//Sys.tweenJuggler.add(t1);
+
 		loadedMap = new Map("alsobad.tmx");
+		camera = new Camera(GAME_WIDTH, GAME_HEIGHT, player);
 	}
 	
 	/**
@@ -82,16 +70,17 @@ public class LabOneGame extends Game{
 	@Override
 	public void draw(Graphics g){
 		super.draw(g);
-		
+		if (loadedMap == null) return;
+		//draw background
 		loadedMap.drawBackground(g);
 
+		//draw sprites
 		for (Sprite s : Sys.spriteList) {
 			if (s != null) s.draw(g);
 		}
 		
+		//draw foreground
 		loadedMap.drawForeground(g);
-		
-		//g.drawRect(10, 10, 480, 280);
 	}
 
 	/**
@@ -99,7 +88,7 @@ public class LabOneGame extends Game{
 	 * that calls update() and draw() every frame
 	 * */
 	public static void main(String[] args) {
-		LabOneGame game = new LabOneGame();
+		Lucid game = new Lucid();
 		game.start();
 	}
 }

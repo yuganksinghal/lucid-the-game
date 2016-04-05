@@ -21,7 +21,7 @@ import map.Map;
  * Highest level class for creating a game in Java.
  * 
  * */
-public class Game extends DisplayObjectContainer implements ActionListener, KeyListener {
+public class Game extends DisplayObject implements ActionListener, KeyListener {
 	
 	private int height;
 	private int width;
@@ -42,7 +42,6 @@ public class Game extends DisplayObjectContainer implements ActionListener, KeyL
 
 	public Game(String gameId, int width, int height) {
 		super(gameId);
-		this.collideable = false;
 		
 		setUpMainFrame(gameId, width, height+22); //TODO: find a new fix for this problem. Tell floryan about it.
 		

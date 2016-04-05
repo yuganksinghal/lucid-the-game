@@ -24,12 +24,6 @@ public class Tween {
 			case Y:
 				this.start = this.obj.getPos().y;
 				break;
-			case SCALE_X:
-				this.start = this.obj.getScaleX();
-				break;
-			case SCALE_Y:
-				this.start = this.obj.getScaleY();
-				break;
 			case ALPHA:
 				this.start = this.obj.getAlpha();
 				break;
@@ -67,12 +61,6 @@ public class Tween {
 				break;
 			case Y:
 				this.obj.setPosition(this.obj.getPos().x, (int) value);
-				break;
-			case SCALE_X:
-				this.obj.setScaleX(value);
-				break;
-			case SCALE_Y:
-				this.obj.setScaleY(value);
 				break;
 			case ALPHA:
 				this.obj.setAlpha(value);
