@@ -4,7 +4,7 @@ import edu.virginia.engine.Sys;
 import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.IEventListener;
 import edu.virginia.engine.events.PickedUpEvent;
-import edu.virginia.lab1test.LabOneGame;
+import edu.virginia.lab1test.Lucid;
 
 public class Item extends Sprite implements IEventListener {
 
