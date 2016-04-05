@@ -1,7 +1,6 @@
 package edu.virginia.lab1test;
 
 import java.awt.Graphics;
-import java.awt.Point;
 import java.util.ArrayList;
 
 import edu.virginia.engine.Sys;
@@ -9,11 +8,6 @@ import edu.virginia.engine.display.Game;
 import edu.virginia.engine.display.Item;
 import edu.virginia.engine.display.Player;
 import edu.virginia.engine.display.Sprite;
-import edu.virginia.engine.events.PickedUpEvent;
-import edu.virginia.engine.tween.Tween;
-import edu.virginia.engine.tween.TweenJuggler;
-import edu.virginia.engine.tween.TweenParam;
-import edu.virginia.engine.tween.TweenableParam;
 import map.Map;
 
 /**
@@ -38,7 +32,7 @@ public class Lucid extends Game{
 	public Lucid() {
 		super("Test", GAME_WIDTH, GAME_HEIGHT);
 
-		player = new Player("player", "Mario.png");
+		player = new Player("player", "Player.png");
 		player.setPosition(0, 0);
 		Sys.addSprite(player);
 

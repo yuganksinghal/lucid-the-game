@@ -22,4 +22,5 @@ public class Sprite extends DisplayObject {
 	public void update(ArrayList<String> pressedKeys, Map map) {
 		super.update(pressedKeys, map);
 	}
+	
 }

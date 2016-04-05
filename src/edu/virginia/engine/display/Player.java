@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import edu.virginia.engine.SoundManager;
 import map.Map;
 
-public class Player extends Sprite {
+public class Player extends Walkable {
 
 	public Player(String id, String imageFileName) {
 		super(id, imageFileName);
@@ -20,7 +20,9 @@ public class Player extends Sprite {
 	private void construct() {
 		this.setFixed(false);
 		this.visible = true;
+		this.moving = false;
 	}
+
 
 	@Override
 	public void update(ArrayList<String> pressedKeys, Map map) {
@@ -29,14 +31,25 @@ public class Player extends Sprite {
 	}
 	
 	public void playerInput(ArrayList<String> keys, Map map) {
-		if (keys.contains("D")) {
-		}
-		else if (keys.contains("A")) {
-		}
-		if (keys.contains("S")) {
-		}
-		if (keys.contains("W")) {
-		}
+		if (!moving) {
+
+			if (keys.contains("D")) {
+				this.right(map);
+				this.moving = true;
+			}
+			else if (keys.contains("A")) {
+				this.left(map);
+				this.moving = true;
+			}
+			if (keys.contains("S")) {
+				this.down(map);
+				this.moving = true;
+			}
+			if (keys.contains("W")) {
+				this.up(map);
+				this.moving = true;
+			}
+		} else System.out.println("moving!");
 	}
 
 	public boolean isPlayer() {

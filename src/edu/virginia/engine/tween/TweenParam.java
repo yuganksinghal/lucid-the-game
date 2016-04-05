@@ -30,4 +30,8 @@ public class TweenParam {
 	public double getTweenTime() {
 		return this.time;
 	}
+
+	public double getDuration() {
+		return time;
+	}
 }

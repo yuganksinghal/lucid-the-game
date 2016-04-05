@@ -10,6 +10,11 @@ public class Camera {
 	int height;
 	DisplayObject focus;
 	
+	/**
+	 * @param width
+	 * @param height
+	 * @param focus
+	 */
 	public Camera(int width, int height, DisplayObject focus) {
 		offset = new Point(0,0);
 		this.width = width;
@@ -17,6 +22,10 @@ public class Camera {
 		this.focus = focus;
 	}
 	
+	
+	/**
+	 * 
+	 */
 	public void update() {
 		//if map.height < game.height, center map vertically. 
 		

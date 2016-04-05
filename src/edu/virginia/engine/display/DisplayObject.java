@@ -55,7 +55,6 @@ public class DisplayObject {
 	protected Point relPos;
 	protected int relRotation;
 	protected Point.Double relScale;
-
 	
 
 	/* The image that is displayed by this object */
@@ -213,7 +212,8 @@ public class DisplayObject {
 			 * objects
 			 */
 			reverseTransformations(g2d);
-		} else System.out.println("Not drawing " + id);
+		} 
+//		else System.out.println("Not drawing " + id);
 	}
 
 	/**
