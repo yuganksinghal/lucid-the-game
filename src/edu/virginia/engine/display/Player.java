@@ -7,7 +7,6 @@ import map.Map;
 
 public class Player extends Walkable {
 
-
 	public Player(String id, String imageFileName) {
 		super(id, imageFileName);
 		construct();

@@ -48,14 +48,12 @@ public class DisplayObject {
 	protected Point pos;
 	protected Point.Double velocity;
 	protected float alpha;
+	protected int xGrid;
+	protected int yGrid;
 	
 	protected Point relPos;
 	protected int relRotation;
 	protected Point.Double relScale;
-	
-	protected int xGrid;
-	protected int yGrid;
-
 	
 
 	/* The image that is displayed by this object */
