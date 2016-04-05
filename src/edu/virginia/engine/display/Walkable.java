@@ -26,14 +26,22 @@ public class Walkable extends AnimatedSprite {
 	public Walkable(String id) {
 		super(id);
 		// TODO Auto-generated constructor stub
-		SPEED = 250;
+		construct();
 	}
 	
 	public Walkable(String id, String image) {
 		super(id, image);
-		SPEED = 250;
+		addAnimationFrame("WALKING", this.readImage(image));
+
+		construct();
 	}
 	
+	private void construct() {
+		SPEED = 250;
+		addAnimationFrame("WALKING", this.readImage("PlayerWalking.png"));
+		this.setAnimationSpeed(100);
+	}
+
 	public void up(Map m) {
 		//tween position up by one tile
 		TweenParam tp = new TweenParam(TweenableParam.Y, this.getPos().y, this.getPos().y - Sys.TILE_SIZE, SPEED);
@@ -41,7 +49,7 @@ public class Walkable extends AnimatedSprite {
 		Sys.tweenJuggler.add(t);
 		facing = FACE_UP;
 		--yGrid;
-		
+		this.setAnimation("WALKING");
 	}
 	
 	public void down(Map m) {

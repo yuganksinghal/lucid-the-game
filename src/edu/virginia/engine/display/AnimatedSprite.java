@@ -28,6 +28,8 @@ public class AnimatedSprite extends Sprite {
 	public AnimatedSprite(String id, String img) {
 		super(id,img);
 		construct();
+		addAnimationFrame("IDLE", this.readImage(img));
+		setAnimation("IDLE");
 	}
 	
 	private void construct() {
@@ -49,12 +51,15 @@ public class AnimatedSprite extends Sprite {
 	@Override
 	public void update(ArrayList<String> pressedKeys, Map m) {
 		super.update(pressedKeys, m);
+		animate();
 		
 	}
 	
 	public void setAnimation(String s) {
 		currentAnimationID = s;
 		currentFrame = 0;
+		this.currentAnimation = this.animations.get(s);
+		frames = this.currentAnimation.size();
 	}
 	
 	public void animate() {		
@@ -63,7 +68,8 @@ public class AnimatedSprite extends Sprite {
 			this.lastTime = currentTime;
 			if (currentFrame < frames - 1) {
 				currentFrame ++;
-			}
+			} else currentFrame = 0;
+			System.out.println(currentFrame + "/" + frames);
 		}
 		
 		this.setImage(currentAnimation.get(currentFrame));
@@ -71,5 +77,15 @@ public class AnimatedSprite extends Sprite {
 	public void pause() {
 		
 	}
+	
+	
+	protected void setAnimationSpeed(int i) {
+		animationTime = i;
+	}
+	
+	protected String getAnimationID() {
+		return currentAnimationID;
+	}
+
 
 }

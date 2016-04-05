@@ -57,7 +57,9 @@ public class Player extends Walkable {
 					this.moving = true;
 				}
 			}
-		}
+			this.setAnimation("IDLE");
+		} 
+		else if (!getAnimationID().equals("WALKING")) setAnimation("WALKING");
 	}
 
 	public boolean isPlayer() {

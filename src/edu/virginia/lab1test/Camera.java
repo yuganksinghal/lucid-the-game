@@ -30,11 +30,13 @@ public class Camera {
 		//if map.height < game.height, center map vertically. 
 		
 		//else:
-		offset.x = (int) ((width/2) - (focus.getUnscaledWidth()/2));
+//		offset.x = (int) ((width/2) + (focus.getUnscaledWidth()/2));
+		offset.x = -focus.getPos().x + (int) (width/2) - focus.getUnscaledWidth(); 
 		
 		//if map.width < game.width, center map horizontally. 
 		
 		//else:
-		offset.y = (int) ((height/2) - (focus.getUnscaledHeight()/2));
+		offset.y = -focus.getPos().y + (int) (height/2) - focus.getUnscaledHeight(); 
+		System.out.println("offset x: " + offset.x + "\toffset y: " + offset.y);
 	}
 }

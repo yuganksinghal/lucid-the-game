@@ -55,6 +55,7 @@ public class Lucid extends Game{
 		}
 		
 		Sys.update();
+		camera.update();
 	}
 	
 	/**
@@ -64,6 +65,8 @@ public class Lucid extends Game{
 	@Override
 	public void draw(Graphics g){
 		super.draw(g);
+		g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+		g.translate(camera.offset.x, camera.offset.y);
 		if (loadedMap == null) return;
 		//draw background
 		loadedMap.drawBackground(g);
@@ -75,6 +78,9 @@ public class Lucid extends Game{
 		
 		//draw foreground
 		loadedMap.drawForeground(g);
+		
+		g.translate(-camera.offset.x, -camera.offset.y);
+
 	}
 
 	/**
