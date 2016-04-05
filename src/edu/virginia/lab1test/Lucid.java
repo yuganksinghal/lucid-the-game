@@ -36,7 +36,7 @@ public class Lucid extends Game{
 		player.setPosition(0, 0);
 		Sys.addSprite(player);
 
-		loadedMap = new Map("alsobad.tmx");
+		loadedMap = new Map("alsobadcollision.tmx");
 		camera = new Camera(GAME_WIDTH, GAME_HEIGHT, player);
 	}
 	

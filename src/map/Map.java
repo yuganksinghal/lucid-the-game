@@ -87,7 +87,7 @@ public class Map {
 			NodeList layerList = doc.getElementsByTagName("layer");
 
 			Node backgroundLayer = layerList.item(0);
-			// Node collisionLayer = layerList.item(1);
+			Node collisionLayer = layerList.item(2);
 			Node foregroundLayer = layerList.item(1);
 
 			this.background = new Tile[height][width];
@@ -95,6 +95,7 @@ public class Map {
 
 			NodeList backgroundTiles = backgroundLayer.getChildNodes().item(1).getChildNodes();
 			NodeList foregroundTiles = foregroundLayer.getChildNodes().item(1).getChildNodes();
+			NodeList collideableTiles = collisionLayer.getChildNodes().item(1).getChildNodes();
 
 			for (int j = 0; j < this.height; j++) {
 				for (int i = 0; i < this.width; i++) {
@@ -149,7 +150,7 @@ public class Map {
 			
 			for (int j = 0; j < this.height; j++) {
 				for (int i = 0; i < this.width; i++) {
-					Node curNode = foregroundTiles.item((j * this.width + i) * 2 + 1);
+					Node curNode = collideableTiles.item((j * this.width + i) * 2 + 1);
 					Element tempElement = (Element) curNode;
 					// how to do this
 					int gid = Integer.parseInt(tempElement.getAttribute("gid"));
