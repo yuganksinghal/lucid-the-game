@@ -100,7 +100,7 @@ public class Map {
 			this.occupied = new boolean[height][width];
 
 			NodeList backgroundTiles = backgroundLayer.getChildNodes().item(1).getChildNodes();
-			NodeList backgroundTiles2 = backgroundLayer.getChildNodes().item(1).getChildNodes();
+			NodeList backgroundTiles2 = backgroundLayer2.getChildNodes().item(1).getChildNodes();
 			NodeList foregroundTiles = foregroundLayer.getChildNodes().item(1).getChildNodes();
 			NodeList collideableTiles = collisionLayer.getChildNodes().item(1).getChildNodes();
 

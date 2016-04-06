@@ -121,6 +121,7 @@ public class Lucid extends Game implements IEventListener {
 		if (loadedMap == null) return;
 		//draw background
 		loadedMap.drawBackground(g);
+		loadedMap.drawBackground2(g);
 
 		//draw sprites
 		for (Sprite s : Sys.spriteList) {
