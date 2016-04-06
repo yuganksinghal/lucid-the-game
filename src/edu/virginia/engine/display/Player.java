@@ -24,6 +24,9 @@ public class Player extends Walkable {
 		this.setFixed(false);
 		this.visible = true;
 		this.moving = false;
+//		this.addAnimationFrame("WALKING_UP", this.readImage("WALKING_UP1.png"));
+//		this.addAnimationFrame("WALKING_UP", this.readImage("WALKING_UP2.png"));
+//		this.addAnimationFrame("WALKING_DOWN", this.readImage("WALKING_DOWN1.png"));
 	}
 
 
@@ -71,9 +74,16 @@ public class Player extends Walkable {
 				interact();
 				actionPressed = false;
 			}
-			this.setAnimation("IDLE");
+//			this.setAnimation("IDLE");
 		} 
-		else if (!getAnimationID().equals("WALKING")) setAnimation("WALKING");
+		else {
+//			if (!getAnimationID().equals("WALKING")) setAnimation("WALKING");
+//			if (!getAnimationID().equals("WALKING_UP") && keys.contains("W")) setAnimation("WALKING_UP");
+//			else if (!getAnimationID().equals("WALKING_DOWN") && keys.contains("S")) setAnimation("WALKING_DOWN");
+//			else if (!getAnimationID().equals("WALKING_LEFT") && keys.contains("A")) setAnimation("WALKING_LEFT");
+//			else if (!getAnimationID().equals("WALKING_RIGHT") && keys.contains("D")) setAnimation("WALKING_RIGHT");
+
+		}
 	}
 
 	public boolean isPlayer() {

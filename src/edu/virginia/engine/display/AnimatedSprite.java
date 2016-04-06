@@ -13,6 +13,7 @@ public class AnimatedSprite extends Sprite {
 	private ArrayList<BufferedImage> currentAnimation;
 	private double lastTime;
 	private double animationTime;
+	private double animationLength;
 	private int startIndex;
 	private int frames;
 	private int currentFrame;
@@ -28,13 +29,12 @@ public class AnimatedSprite extends Sprite {
 	public AnimatedSprite(String id, String img) {
 		super(id,img);
 		construct();
-		addAnimationFrame("IDLE", this.readImage(img));
-		setAnimation("IDLE");
+		addAnimationFrame("DEFAULT", this.readImage(img));
+		setAnimation("DEFAULT");
 	}
 	
 	private void construct() {
 		animations = new HashMap<String, ArrayList<BufferedImage>>();
-		currentAnimationID = "IDLE";
 		this.lastTime = System.currentTimeMillis();
 	}
 	public void addAnimation(String animationId, ArrayList<BufferedImage> images) {
@@ -44,8 +44,10 @@ public class AnimatedSprite extends Sprite {
 	public void addAnimationFrame(String animationId, BufferedImage img) {
 		if (animations.get(animationId) == null) {
 			animations.put(animationId, new ArrayList<BufferedImage>());
+			System.out.println("Created new animation: " + animationId);
 		}
 		animations.get(animationId).add(img);
+		System.out.println("Added frame to animation: " + animationId);
 	}
 	
 	@Override
@@ -56,10 +58,15 @@ public class AnimatedSprite extends Sprite {
 	}
 	
 	public void setAnimation(String s) {
+		if (this.animations.get(s) == null) {
+			System.out.println("NO SUCH ANIMATION");
+			return;
+		}
 		currentAnimationID = s;
 		currentFrame = 0;
 		this.currentAnimation = this.animations.get(s);
 		frames = this.currentAnimation.size();
+		setAnimationLength(this.animationLength);
 	}
 	
 	public void animate() {		
@@ -71,7 +78,6 @@ public class AnimatedSprite extends Sprite {
 			} else currentFrame = 0;
 //			System.out.println(currentFrame + "/" + frames);
 		}
-		
 		this.setImage(currentAnimation.get(currentFrame));
 	}
 	public void pause() {
@@ -79,8 +85,12 @@ public class AnimatedSprite extends Sprite {
 	}
 	
 	
-	protected void setAnimationSpeed(int i) {
-		animationTime = i;
+	protected void setAnimationLength(double i) {
+		animationTime = i / frames;
+		animationLength = i;
+		System.out.println("number of frames: " + frames);
+		System.out.println("Animation length: " + animationLength);
+		System.out.println("Time per frame: " + animationTime);
 	}
 	
 	protected String getAnimationID() {

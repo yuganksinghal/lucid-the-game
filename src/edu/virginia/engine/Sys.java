@@ -19,7 +19,7 @@ public class Sys {
 	final static double VERTICAL_DRAG = 1.05;
 	final static double HORIZONTAL_SPEED = 1;
 	final static double GRAVITY = 1;
-	public final static double TILE_SIZE = 32;
+	public final static int TILE_SIZE = 32;
 	
 	//STATIC STORAGE
 	

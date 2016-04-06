@@ -52,7 +52,7 @@ public class Lucid extends Game implements IEventListener {
 		player.setPosition(0, 0);
 		Sys.addSprite(player);
 
-		loadedMap = new Map("alsobadcollision.tmx");
+		loadedMap = new Map("alphatest.tmx");
 		camera = new Camera(GAME_WIDTH, GAME_HEIGHT, player);
 		s = new Sign(1,5);
 		s.addEventListener(this, "DIALOG_EVENT");
@@ -77,7 +77,7 @@ public class Lucid extends Game implements IEventListener {
 			}
 		
 			Sys.update();
-			camera.update();
+			if (camera != null) camera.update();
 		} else if (GAME_STATE == DIALOG) {
 			//look out for the right key to be pressed to continue dialog
 			if (pressedKeys.contains("Z")) {
@@ -106,7 +106,7 @@ public class Lucid extends Game implements IEventListener {
 	public void draw(Graphics g){
 		super.draw(g);
 		g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
-		g.translate(camera.offset.x, camera.offset.y);
+		if (camera != null) g.translate(camera.offset.x, camera.offset.y);
 		if (loadedMap == null) return;
 		//draw background
 		loadedMap.drawBackground(g);
@@ -119,7 +119,7 @@ public class Lucid extends Game implements IEventListener {
 		//draw foreground
 		loadedMap.drawForeground(g);
 		
-		g.translate(-camera.offset.x, -camera.offset.y);
+		if (camera != null) g.translate(-camera.offset.x, -camera.offset.y);
 
 		if (GAME_STATE == DIALOG) {
 			g.setColor(Color.WHITE);
