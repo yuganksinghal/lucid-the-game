@@ -38,21 +38,25 @@ public class Walkable extends AnimatedSprite {
 	}
 	
 	private void construct() {
-		SPEED = 500;
+		SPEED = 250;
 		this.setAnimationLength(SPEED);
 	}
 
 	public void up(Map m) {
 		//tween position up by one tile
+		m.vacate(xGrid, yGrid);
 		TweenParam tp = new TweenParam(TweenableParam.Y, this.getPos().y, this.getPos().y - Sys.TILE_SIZE, SPEED);
 		Tween t = new Tween(this, tp);
 		Sys.tweenJuggler.add(t);
 		facing = FACE_UP;
 		--yGrid;
 		this.setAnimation("WALKING_UP");
+		m.occupy(xGrid, yGrid);
 	}
 	
 	public void down(Map m) {
+		m.vacate(xGrid, yGrid);
+
 		//tween position down by one tile
 		TweenParam tp = new TweenParam(TweenableParam.Y, this.getPos().y, this.getPos().y + Sys.TILE_SIZE, SPEED);
 		Tween t = new Tween(this, tp);
@@ -60,9 +64,13 @@ public class Walkable extends AnimatedSprite {
 		facing = FACE_DOWN;
 		this.setAnimation("WALKING_DOWN");
 		++yGrid;
+		
+		m.occupy(xGrid, yGrid);
 	}
 	
 	public void left(Map m) {
+		m.vacate(xGrid, yGrid);
+
 		//tween position left by one tile
 		TweenParam tp = new TweenParam(TweenableParam.X, this.getPos().x, this.getPos().x - Sys.TILE_SIZE, SPEED);
 		Tween t = new Tween(this, tp);
@@ -71,9 +79,13 @@ public class Walkable extends AnimatedSprite {
 		this.setAnimation("WALKING_LEFT");
 
 		--xGrid;
+		
+		m.occupy(xGrid, yGrid);
 	}
 	
 	public void right(Map m) {
+		m.vacate(xGrid, yGrid);
+
 		//tween position right by one tile
 		TweenParam tp = new TweenParam(TweenableParam.X, this.getPos().x, this.getPos().x + Sys.TILE_SIZE, SPEED);
 		Tween t = new Tween(this, tp);
@@ -82,6 +94,8 @@ public class Walkable extends AnimatedSprite {
 		this.setAnimation("WALKING_RIGHT");
 
 		++xGrid;
+		
+		m.occupy(xGrid, yGrid);
 	}
 
 	public void stop() {
@@ -103,11 +117,32 @@ public class Walkable extends AnimatedSprite {
 		}
 	}
 	
-	public void teleport(int xTile, int yTile) {
+	public void face(int i) {
+		switch (i) {
+		case FACE_UP:
+			setAnimation("IDLE_UP");
+			facing = FACE_UP;
+			break;
+		case FACE_RIGHT:
+			facing = FACE_RIGHT;
+			setAnimation("IDLE_RIGHT");
+			break;
+		case FACE_DOWN:
+			facing = FACE_DOWN;
+			setAnimation("IDLE_DOWN");
+			break;
+		case FACE_LEFT:
+			facing = FACE_LEFT;
+			setAnimation("IDLE_LEFT");
+			break;
+		}
+	}
+	public void teleport(int xTile, int yTile, Map m) {
 		this.pos.x = (int) (xTile * Sys.TILE_SIZE);
 		this.pos.y = (int) (yTile * Sys.TILE_SIZE);
 		this.xGrid = xTile;
 		this.yGrid = yTile;
+		m.occupy(xTile, yTile);
 	}
 	
 	
@@ -127,6 +162,7 @@ public class Walkable extends AnimatedSprite {
 						break;
 					case 2:
 						addAnimationFrame("IDLE_DOWN", crop);
+						this.setAnimation("IDLE_DOWN");
 						break;
 					case 3:
 						addAnimationFrame("IDLE_LEFT", crop);

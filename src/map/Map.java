@@ -215,10 +215,10 @@ public class Map {
 	}
 	
 	public void occupy(int i, int j) {
-		this.occupied[i][j] = true;
+		this.occupied[j][i] = true;
 	}
 	public void vacate(int i, int j) {
-		this.occupied[i][j] = false;
+		this.occupied[j][i] = false;
 	}
 
 	public int getWidth() {
@@ -257,6 +257,7 @@ public class Map {
 //		System.out.println(i + ", " + j);
 //		System.out.println("coll: " + collidables[j][i]);
 //		System.out.println("occ: " + occupied[j][i]);
+		if (j < 0 || i < 0) return true;
 		return (collidables[j][i] || occupied[j][i]);
 	}
 

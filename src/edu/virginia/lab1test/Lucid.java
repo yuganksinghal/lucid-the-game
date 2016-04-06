@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import edu.virginia.engine.Sys;
 import edu.virginia.engine.display.Game;
 import edu.virginia.engine.display.Item;
+import edu.virginia.engine.display.NPC;
 import edu.virginia.engine.display.Player;
 import edu.virginia.engine.display.Sign;
 import edu.virginia.engine.display.Sprite;
@@ -32,6 +33,7 @@ public class Lucid extends Game implements IEventListener {
 	Sprite platform;
 	Camera camera;
 	Sign s;
+	NPC clone;
 	final static int GAME_WIDTH = 600;
 	final static int GAME_HEIGHT = 500;
 	
@@ -48,15 +50,24 @@ public class Lucid extends Game implements IEventListener {
 	public Lucid() {
 		super("~LUCID~", GAME_WIDTH, GAME_HEIGHT);
 		actionPressed = false;
-		player = new Player("player", "Player.png");
-		player.setPosition(0, 0);
-		Sys.addSprite(player);
+		
 
 		loadedMap = new Map("alphatest.tmx");
+		
+		player = new Player("player", "Player.png");
+		player.teleport(3, 3, loadedMap);
+		Sys.addSprite(player);
+		
+		clone = new NPC("clone","Player.png");
+		clone.teleport(5, 5, loadedMap);
+		Sys.addSprite(clone);
+		
 		camera = new Camera(GAME_WIDTH, GAME_HEIGHT, player);
 		s = new Sign(1,5);
 		s.addEventListener(this, "DIALOG_EVENT");
+		clone.addEventListener(this, "DIALOG_EVENT");
 		player.addEventListener(s, "INTERACT_EVENT");
+		player.addEventListener(clone, "INTERACT_EVENT");
 		
 		dialog = new ArrayList<String>();
 		dialog.add("YOU SHOULD NEVER SEE THIS");
@@ -122,10 +133,12 @@ public class Lucid extends Game implements IEventListener {
 		if (camera != null) g.translate(-camera.offset.x, -camera.offset.y);
 
 		if (GAME_STATE == DIALOG) {
+			//TODO: set text size as a function of line length?
+			//TODO: break up text into multiple lines somehow.
 			g.setColor(Color.WHITE);
 			g.fillRect(20, GAME_HEIGHT-130, GAME_WIDTH-40, 110);
 			g.setColor(Color.BLACK);
-			g.setFont(new Font("Helvetica", Font.PLAIN, 25));
+			g.setFont(new Font("Helvetica", Font.PLAIN, 20));
 			g.drawString(dialog.get(dialogItr), 50, GAME_HEIGHT-100);
 		}
 	}

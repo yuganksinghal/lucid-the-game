@@ -43,29 +43,29 @@ public class Player extends Walkable {
 				if (!map.checkCollision(yGrid,xGrid+1)) {
 					this.right(map);
 					this.moving = true;
-					this.facing = FACE_RIGHT;
-				}
+				} else setAnimation("IDLE_RIGHT");
+				this.facing = FACE_RIGHT;
 			}
 			else if (keys.contains("A")) {
 				if (!map.checkCollision(yGrid,xGrid-1)) {
 					this.left(map);
 					this.moving = true;
-					this.facing = FACE_LEFT;
-				}
+				} else setAnimation("IDLE_LEFT");
+				this.facing = FACE_LEFT;
 			}
 			if (keys.contains("S")) {
 				if (!map.checkCollision(yGrid+1,xGrid)) {
 					this.down(map);
 					this.moving = true;
-					this.facing = FACE_DOWN;
-				}
+				} else setAnimation("IDLE_DOWN");
+				this.facing = FACE_DOWN;
 			}
 			if (keys.contains("W")) {
 				if (!map.checkCollision(yGrid-1,xGrid)) {
 					this.up(map);
 					this.moving = true;
-					this.facing = FACE_UP;
-				}
+				} else setAnimation("IDLE_UP");
+				this.facing = FACE_UP;
 			}
 			if (keys.contains("Z")) {
 				actionPressed = true;
@@ -107,8 +107,8 @@ public class Player extends Walkable {
 			xTile--;
 			break;
 		}
-		InteractEvent e = new InteractEvent(xTile, yTile);
+		InteractEvent e = new InteractEvent(xTile, yTile, facing);
 		this.dispatchEvent(e);
-//		System.out.println("attemdpting interaction...");
+		System.out.println("attempting interaction with objects at " + xTile + ", " + yTile + "...");
 	}
 }
