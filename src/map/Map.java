@@ -17,6 +17,7 @@ public class Map {
 	Tile[][] foreground;
 	boolean[][] collidables;
 	Tile[][] background;
+	Tile[][] background2;
 	boolean[][] occupied;
 
 	boolean debug = true;
@@ -87,15 +88,19 @@ public class Map {
 			NodeList layerList = doc.getElementsByTagName("layer");
 
 			Node backgroundLayer = layerList.item(0);
-			Node collisionLayer = layerList.item(2);
-			Node foregroundLayer = layerList.item(1);
-
+			Node backgroundLayer2 = layerList.item(1);
+			Node foregroundLayer = layerList.item(2);
+			Node collisionLayer = layerList.item(3);
+			
+			
 			this.background = new Tile[height][width];
+			this.background2 = new Tile [height][width];
 			this.foreground = new Tile[height][width];
 			this.collidables = new boolean[height][width];
 			this.occupied = new boolean[height][width];
 
 			NodeList backgroundTiles = backgroundLayer.getChildNodes().item(1).getChildNodes();
+			NodeList backgroundTiles2 = backgroundLayer.getChildNodes().item(1).getChildNodes();
 			NodeList foregroundTiles = foregroundLayer.getChildNodes().item(1).getChildNodes();
 			NodeList collideableTiles = collisionLayer.getChildNodes().item(1).getChildNodes();
 
@@ -116,8 +121,7 @@ public class Map {
 					// parsing
 					// xml
 					Element tempElement = (Element) curNode;
-					Tile t = new Tile(); // TODO: refer to tiled tutorial for
-					// how to do this
+					Tile t = new Tile(); 
 					int gid = Integer.parseInt(tempElement.getAttribute("gid"));
 					for (Tileset sheet : tilesets) {
 						if ((gid > sheet.lastGid) || (gid < sheet.firstGid))
@@ -128,6 +132,24 @@ public class Map {
 						break;
 					}
 					this.background[j][i] = t;
+				}
+			}
+			
+			for (int j = 0; j < this.height; j++) {
+				for (int i = 0; i < this.width; i++) {
+					Node curNode = backgroundTiles2.item((j * this.width + i) * 2 + 1);
+					Element tempElement = (Element) curNode;
+					Tile t = new Tile(); 
+					int gid = Integer.parseInt(tempElement.getAttribute("gid"));
+					for (Tileset sheet : tilesets) {
+						if ((gid > sheet.lastGid) || (gid < sheet.firstGid))
+							continue;
+						t.setImage(sheet.makeTileImage(gid));
+						t.setPortal(false);
+						t.setPortalTo(null);
+						break;
+					}
+					this.background2[j][i] = t;
 				}
 			}
 
@@ -165,7 +187,6 @@ public class Map {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("what");
 	}
 
 	public void drawBackground(Graphics g) {
@@ -178,6 +199,21 @@ public class Map {
 					continue;
 				g2d.translate(i * tileWidth, j * tileHeight);
 				g2d.drawImage(background[j][i].getImage(), null, null);
+				g2d.translate(-i * tileWidth, -j * tileHeight);
+			}
+		}
+	}
+	
+	public void drawBackground2(Graphics g) {
+
+		Graphics2D g2d = (Graphics2D) g;
+
+		for (int j = 0; j < this.height; j++) {
+			for (int i = 0; i < this.width; i++) {
+				if (background2[j][i].getImage() == null)
+					continue;
+				g2d.translate(i * tileWidth, j * tileHeight);
+				g2d.drawImage(background2[j][i].getImage(), null, null);
 				g2d.translate(-i * tileWidth, -j * tileHeight);
 			}
 		}
