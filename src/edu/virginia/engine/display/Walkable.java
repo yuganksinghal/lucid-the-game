@@ -10,10 +10,10 @@ public class Walkable extends AnimatedSprite {
 	int SPEED;
 	protected boolean moving;
 	protected int facing; //(0-3)
-	final static int FACE_UP = 0;
-	final static int FACE_RIGHT = 1;
-	final static int FACE_DOWN = 2;
-	final static int FACE_LEFT = 3;
+	protected final static int FACE_UP = 0;
+	protected final static int FACE_RIGHT = 1;
+	protected final static int FACE_DOWN = 2;
+	protected final static int FACE_LEFT = 3;
 	
 	/*
 	 * 0: up

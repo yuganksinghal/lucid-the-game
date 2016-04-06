@@ -11,9 +11,10 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import edu.virginia.engine.events.EventDispatcher;
 import map.Map;
 
-public class DisplayObject {
+public class DisplayObject extends EventDispatcher {
 
 	/*
 	 * MASTER TO-DO LIST:

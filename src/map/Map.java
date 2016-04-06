@@ -254,9 +254,9 @@ public class Map {
 	}
 
 	public boolean checkCollision(int j, int i) {
-		System.out.println(i + ", " + j);
-		System.out.println("coll: " + collidables[j][i]);
-		System.out.println("occ: " + occupied[j][i]);
+//		System.out.println(i + ", " + j);
+//		System.out.println("coll: " + collidables[j][i]);
+//		System.out.println("occ: " + occupied[j][i]);
 		return (collidables[j][i] || occupied[j][i]);
 	}
 

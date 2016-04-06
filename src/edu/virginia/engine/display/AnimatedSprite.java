@@ -69,7 +69,7 @@ public class AnimatedSprite extends Sprite {
 			if (currentFrame < frames - 1) {
 				currentFrame ++;
 			} else currentFrame = 0;
-			System.out.println(currentFrame + "/" + frames);
+//			System.out.println(currentFrame + "/" + frames);
 		}
 		
 		this.setImage(currentAnimation.get(currentFrame));

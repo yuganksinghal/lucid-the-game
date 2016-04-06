@@ -2,6 +2,7 @@ package edu.virginia.engine;
 
 import java.util.ArrayList;
 
+import edu.virginia.dialog.DialogManager;
 import edu.virginia.engine.display.Item;
 import edu.virginia.engine.display.Sprite;
 import edu.virginia.engine.events.CollisionManager;
@@ -28,6 +29,7 @@ public class Sys {
 	public static CollisionManager collisionManager = new CollisionManager();
 	public static ArrayList<Sprite> garbage = new ArrayList<Sprite>();
 	public static TweenJuggler tweenJuggler = new TweenJuggler();
+	public static DialogManager dialogManager = new DialogManager();
 	
 	public static void addItem(Item i) {
 		itemList.add(i);

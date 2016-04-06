@@ -27,6 +27,7 @@ public class Camera {
 	 * 
 	 */
 	public void update() {
+		// TODO: update camera mechanics
 		//if map.height < game.height, center map vertically. 
 		
 		//else:
@@ -37,6 +38,6 @@ public class Camera {
 		
 		//else:
 		offset.y = -focus.getPos().y + (int) (height/2) - focus.getUnscaledHeight(); 
-		System.out.println("offset x: " + offset.x + "\toffset y: " + offset.y);
+//		System.out.println("offset x: " + offset.x + "\toffset y: " + offset.y);
 	}
 }
