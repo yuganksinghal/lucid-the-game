@@ -52,7 +52,7 @@ public class Lucid extends Game implements IEventListener {
 		actionPressed = false;
 		
 
-		loadedMap = new Map("alphatest.tmx");
+		loadedMap = new Map("alpha.tmx");
 		
 		player = new Player("player", "Player.png");
 		player.teleport(3, 3, loadedMap);
