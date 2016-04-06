@@ -8,6 +8,7 @@ import map.Map;
 public class Player extends Walkable {
 	int LUCIDITY = 5;
 	boolean actionPressed = false;
+	ArrayList<Item> inventory;
 	
 	
 	public Player(String id, String imageFileName) {
@@ -21,9 +22,9 @@ public class Player extends Walkable {
 	}
 
 	private void construct() {
-		this.setFixed(false);
 		this.visible = true;
 		this.moving = false;
+		inventory = new ArrayList<Item>();
 //		this.addAnimationFrame("WALKING_UP", this.readImage("WALKING_UP1.png"));
 //		this.addAnimationFrame("WALKING_UP", this.readImage("WALKING_UP2.png"));
 //		this.addAnimationFrame("WALKING_DOWN", this.readImage("WALKING_DOWN1.png"));

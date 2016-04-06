@@ -15,6 +15,8 @@ import edu.virginia.engine.display.Sprite;
 import edu.virginia.engine.events.DialogEvent;
 import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.IEventListener;
+import edu.virginia.engine.events.LucidityChangeEvent;
+import edu.virginia.quest.AlphaQuest;
 import map.Map;
 
 /**
@@ -32,8 +34,11 @@ public class Lucid extends Game implements IEventListener {
 	Item coin2;
 	Sprite platform;
 	Camera camera;
-	Sign s;
+	Sign bench;
 	NPC clone;
+	AlphaQuest alphaQuest;
+	Map map3;
+	Map map4;
 	final static int GAME_WIDTH = 600;
 	final static int GAME_HEIGHT = 500;
 	
@@ -51,8 +56,15 @@ public class Lucid extends Game implements IEventListener {
 		super("~LUCID~", GAME_WIDTH, GAME_HEIGHT);
 		actionPressed = false;
 		
-
-		loadedMap = new Map("alpha.tmx");
+		//INITIALIZE MAP
+		map3 = new Map("alpha3.tmx");
+		map4 = new Map("alpha4.tmx");
+		loadedMap = map3;
+		
+		
+		
+		
+		// INITIALIZE SPRITES
 		
 		player = new Player("player", "Player.png");
 		player.teleport(3, 3, loadedMap);
@@ -62,15 +74,36 @@ public class Lucid extends Game implements IEventListener {
 		clone.teleport(5, 5, loadedMap);
 		Sys.addSprite(clone);
 		
+		// INITIALIZE CAMERA
+		
 		camera = new Camera(GAME_WIDTH, GAME_HEIGHT, player);
-		s = new Sign(1,5);
-		s.addEventListener(this, "DIALOG_EVENT");
+		
+		// INITIALIZE BENCHES
+		
+		bench = new Sign(12,11);
+		bench.addTile(13, 11);
+		bench.addTile(14, 11);
+		bench.addTile(12, 20);
+		bench.addTile(13, 20);
+		bench.addTile(14, 20);
+		
+		// ADD LISTENERS
+		
+		bench.addEventListener(this, "DIALOG_EVENT");
 		clone.addEventListener(this, "DIALOG_EVENT");
-		player.addEventListener(s, "INTERACT_EVENT");
+		player.addEventListener(bench, "INTERACT_EVENT");
 		player.addEventListener(clone, "INTERACT_EVENT");
 		
 		dialog = new ArrayList<String>();
 		dialog.add("YOU SHOULD NEVER SEE THIS");
+		
+		
+		// INITIALIZE QUESTS
+		
+		alphaQuest = new AlphaQuest();
+		clone.addEventListener(alphaQuest, "DIALOG_EVENT");
+		player.addEventListener(alphaQuest, "INTERACT_EVENT");
+		alphaQuest.addEventListener(this, "LUCIDITY_CHANGE_EVENT");
 	}
 	
 	/**
@@ -84,7 +117,6 @@ public class Lucid extends Game implements IEventListener {
 			/* Make sure player is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
 			for (Sprite s : Sys.spriteList) {
 				if (s != null) s.update(pressedKeys, map);
-				if (!s.exists()) Sys.garbage.add(s);
 			}
 		
 			Sys.update();
@@ -133,7 +165,7 @@ public class Lucid extends Game implements IEventListener {
 		
 		if (camera != null) g.translate(-camera.offset.x, -camera.offset.y);
 
-		if (GAME_STATE == DIALOG) {
+		if (GAME_STATE == DIALOG && dialog.size() > 0) {
 			//TODO: set text size as a function of line length?
 			//TODO: break up text into multiple lines somehow.
 			g.setColor(Color.WHITE);
@@ -141,7 +173,7 @@ public class Lucid extends Game implements IEventListener {
 			g.setColor(Color.BLACK);
 			g.setFont(new Font("Helvetica", Font.PLAIN, 20));
 			g.drawString(dialog.get(dialogItr), 50, GAME_HEIGHT-100);
-		}
+		} else GAME_STATE = DEFAULT;
 	}
 
 	/**
@@ -160,6 +192,20 @@ public class Lucid extends Game implements IEventListener {
 			this.dialog = e.getDialog();
 			GAME_STATE = DIALOG;
 			
+		}
+		if (event.eventType.equals("LUCIDITY_CHANGE_EVENT")) {
+			System.out.println("Saw LCE!");
+			LucidityChangeEvent lce = (LucidityChangeEvent) event;
+			int luc = lce.lucidity;
+			switch (luc) {
+			case 3:
+				loadedMap = map3;
+				break;
+			case 4:
+				loadedMap = map4;
+				System.out.println("LOADED NEW MAP :D");
+				break;
+			}
 		}
 	}
 }

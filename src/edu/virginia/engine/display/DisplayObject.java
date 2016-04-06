@@ -18,7 +18,6 @@ public class DisplayObject extends EventDispatcher {
 
 	/*
 	 * MASTER TO-DO LIST:
-	 * DONE: implement checks for scaling and rotation so they don't break hitboxes
 	 *
 	 *
 	 */
@@ -29,11 +28,7 @@ public class DisplayObject extends EventDispatcher {
 	protected String id; // all DOs have a unique ID
 	private BufferedImage displayImage;
 
-	private boolean exists;
-	protected boolean collideable;
 	protected boolean visible;
-	protected boolean fixed;
-	protected boolean grounded;
 	protected Point pos;
 	protected float alpha;
 	protected int xGrid;
@@ -47,13 +42,9 @@ public class DisplayObject extends EventDispatcher {
 	 */
 	
 	private void construct() {
-		this.setExists(true);
-		this.fixed = true;
-		this.collideable = true;
 		this.visible = true;
 		this.pos = new Point(0,0);
 		this.alpha = 1f;
-		this.grounded = false;
 	}
 	public DisplayObject(String id) {
 		this.setId(id);
@@ -190,20 +181,8 @@ public class DisplayObject extends EventDispatcher {
 	public String toString() {
 		return id;
 	}
-	public boolean isFixed() {
-		return fixed;
-	}
-	public void setFixed(boolean fixed) {
-		this.fixed = fixed;
-	}
 	public boolean isPlayer() {
 		return false;
-	}
-	public boolean exists() {
-		return exists;
-	}
-	public void setExists(boolean exists) {
-		this.exists = exists;
 	}
 	public void setPosX(double x) {
 		this.pos.x = (int) x;

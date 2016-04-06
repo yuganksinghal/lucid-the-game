@@ -45,7 +45,7 @@ public class Walkable extends AnimatedSprite {
 	public void up(Map m) {
 		//tween position up by one tile
 		m.vacate(xGrid, yGrid);
-		TweenParam tp = new TweenParam(TweenableParam.Y, this.getPos().y, this.getPos().y - Sys.TILE_SIZE, SPEED);
+		TweenParam tp = new TweenParam(TweenableParam.Y, this.yGrid * Sys.TILE_SIZE, this.yGrid * Sys.TILE_SIZE - Sys.TILE_SIZE, SPEED);
 		Tween t = new Tween(this, tp);
 		Sys.tweenJuggler.add(t);
 		facing = FACE_UP;
@@ -58,7 +58,7 @@ public class Walkable extends AnimatedSprite {
 		m.vacate(xGrid, yGrid);
 
 		//tween position down by one tile
-		TweenParam tp = new TweenParam(TweenableParam.Y, this.getPos().y, this.getPos().y + Sys.TILE_SIZE, SPEED);
+		TweenParam tp = new TweenParam(TweenableParam.Y, this.yGrid * Sys.TILE_SIZE, this.yGrid * Sys.TILE_SIZE + Sys.TILE_SIZE, SPEED);
 		Tween t = new Tween(this, tp);
 		Sys.tweenJuggler.add(t);
 		facing = FACE_DOWN;
@@ -72,7 +72,7 @@ public class Walkable extends AnimatedSprite {
 		m.vacate(xGrid, yGrid);
 
 		//tween position left by one tile
-		TweenParam tp = new TweenParam(TweenableParam.X, this.getPos().x, this.getPos().x - Sys.TILE_SIZE, SPEED);
+		TweenParam tp = new TweenParam(TweenableParam.X, this.xGrid * Sys.TILE_SIZE, this.xGrid * Sys.TILE_SIZE - Sys.TILE_SIZE, SPEED);
 		Tween t = new Tween(this, tp);
 		Sys.tweenJuggler.add(t);
 		facing = FACE_LEFT;
@@ -87,7 +87,7 @@ public class Walkable extends AnimatedSprite {
 		m.vacate(xGrid, yGrid);
 
 		//tween position right by one tile
-		TweenParam tp = new TweenParam(TweenableParam.X, this.getPos().x, this.getPos().x + Sys.TILE_SIZE, SPEED);
+		TweenParam tp = new TweenParam(TweenableParam.X, this.xGrid * Sys.TILE_SIZE, this.xGrid * Sys.TILE_SIZE + Sys.TILE_SIZE, SPEED);
 		Tween t = new Tween(this, tp);
 		Sys.tweenJuggler.add(t);
 		facing = FACE_RIGHT;

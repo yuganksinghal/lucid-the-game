@@ -11,8 +11,7 @@ import map.Map;
 
 public class NPC extends Walkable implements IEventListener {
 	
-	ArrayList<Dialog> dialogs;
-	Dialog currentDialog = new Dialog();
+	ArrayList<String> dialog;
 
 	public NPC(String id, String imageFileName) {
 		super(id, imageFileName);
@@ -25,7 +24,19 @@ public class NPC extends Walkable implements IEventListener {
 	}
 	
 	public void construct() {
-		dialogs = new ArrayList<Dialog>();
+		dialog = new ArrayList<String>();
+	}
+	
+	public void setDialog(ArrayList<String> dia) {
+		this.dialog = dia;
+	}
+	
+	public void addDialogLine(String s) {
+		this.dialog.add(s);
+	}
+	
+	public void clearDialog() {
+		this.dialog.clear();
 	}
 
 	@Override
@@ -35,12 +46,9 @@ public class NPC extends Walkable implements IEventListener {
 			if (e.getX() == xGrid && e.getY() == yGrid) {
 				this.face((e.getFacing() + 2) % 4);
 				System.out.println("SIGN WORKS");
-				DialogEvent de = new DialogEvent();
+				DialogEvent de = new DialogEvent(id);
 				ArrayList<String> dia = new ArrayList<String>();
-				dia.add("How's it goin', bud?");
-				dia.add("Did you know that the alpha version might be done in time?");
-				dia.add("Neither did I!");
-				de.setDialog(dia);
+				de.setDialog(this.dialog);
 				this.dispatchEvent(de);
 				//LAUNCH DIALOGUE
 			}
@@ -75,6 +83,7 @@ public class NPC extends Walkable implements IEventListener {
 					left(m);
 					break;
 				}
+				break;
 			default:
 				System.out.println("bad coding practice in NPC.java :(");
 			}
