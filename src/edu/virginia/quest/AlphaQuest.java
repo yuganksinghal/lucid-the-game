@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import edu.virginia.engine.Sys;
+import edu.virginia.engine.events.DialogChangeEvent;
 import edu.virginia.engine.events.DialogEvent;
 import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.IEventListener;
@@ -59,7 +60,19 @@ public class AlphaQuest extends Quest implements IEventListener {
 				for (Point p : fountain) {
 					if (p.x == ie.getX() && p.y == ie.getY()) {
 						System.out.println("YOU GOT AN ICICLE FUCK YEAH");
+						ArrayList<String> dial = new ArrayList<String>();
+						dial.add("You break off some of the ice and put it in your pocket.");
+						dial.add("It's real cold.");
+						DialogEvent de = new DialogEvent("fountain");
+						de.setDialog(dial);
+						this.dispatchEvent(de);
 						QUEST_STATE++;
+						ArrayList<String> dia = new ArrayList<String>();
+						dia.add("You found the ice! Thank you so much.");
+						dia.add("Looks like I'll live another day!...");
+						dia.add("*Your lucidity level has increased.*");
+						DialogChangeEvent dce = new DialogChangeEvent(dia);
+						this.dispatchEvent(dce);
 					}
 				}
 				//TODO: implement comparable interface for different objects, including points
@@ -81,6 +94,12 @@ public class AlphaQuest extends Quest implements IEventListener {
 			System.out.println("LAST STATE");
 			LucidityChangeEvent lce = new LucidityChangeEvent(++Sys.LUCIDITY); //TODO: make it Sys.LUCIDITY++
 			this.dispatchEvent(lce);
+			ArrayList<String> dia = new ArrayList<String>();
+			dia.add("I have to eat once every few years...");
+			dia.add("...");
+			dia.add("...or my tummy gets upset.");
+			DialogChangeEvent dce = new DialogChangeEvent(dia);
+			this.dispatchEvent(dce);
 			break;
 		}
 	}

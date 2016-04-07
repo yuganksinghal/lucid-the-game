@@ -67,11 +67,15 @@ public class Lucid extends Game implements IEventListener {
 		// INITIALIZE SPRITES
 		
 		player = new Player("player", "Player.png");
-		player.teleport(3, 3, loadedMap);
+		player.teleport(16, 17, loadedMap);
 		Sys.addSprite(player);
 		
 		clone = new NPC("clone","Player.png");
-		clone.teleport(5, 5, loadedMap);
+		clone.teleport(20, 17, loadedMap);
+		clone.addDialogLine("I'm a little hungry.");
+		clone.addDialogLine("Could you find me some ice?");
+		clone.addDialogLine("I think I saw a whole bunch in front of that building");
+		clone.addDialogLine("You can press Z to pick it up!");
 		Sys.addSprite(clone);
 		
 		// INITIALIZE CAMERA
@@ -86,6 +90,9 @@ public class Lucid extends Game implements IEventListener {
 		bench.addTile(12, 20);
 		bench.addTile(13, 20);
 		bench.addTile(14, 20);
+		bench.addDialogLine("It's a nice bench...");
+		bench.addDialogLine("You wish you could sit on it...");
+		bench.addDialogLine(":(");
 		
 		// ADD LISTENERS
 		
@@ -104,6 +111,8 @@ public class Lucid extends Game implements IEventListener {
 		clone.addEventListener(alphaQuest, "DIALOG_EVENT");
 		player.addEventListener(alphaQuest, "INTERACT_EVENT");
 		alphaQuest.addEventListener(this, "LUCIDITY_CHANGE_EVENT");
+		alphaQuest.addEventListener(clone, "DIALOG_CHANGE_EVENT");
+		alphaQuest.addEventListener(this, "DIALOG_EVENT");
 	}
 	
 	/**

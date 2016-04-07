@@ -2,7 +2,7 @@ package edu.virginia.engine.display;
 
 import java.util.ArrayList;
 
-import edu.virginia.dialog.Dialog;
+import edu.virginia.engine.events.DialogChangeEvent;
 import edu.virginia.engine.events.DialogEvent;
 import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.IEventListener;
@@ -53,12 +53,16 @@ public class NPC extends Walkable implements IEventListener {
 				//LAUNCH DIALOGUE
 			}
 		}
+		if (event.eventType.equals("DIALOG_CHANGE_EVENT")) {
+			DialogChangeEvent dce = (DialogChangeEvent) event;
+			this.dialog = dce.dialog;
+		}
 	}
 	
 	@Override
 	public void update(ArrayList<String> keys, Map m) {
 		super.update(keys, m);
-		int rand = (int) (Math.random()*100);
+		int rand = (int) (Math.random()*200);
 		
 		if (!this.moving && rand == 0) {
 			int random = (int) (Math.random()*4);
