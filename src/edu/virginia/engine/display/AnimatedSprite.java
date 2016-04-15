@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import map.Map;
+import edu.virginia.engine.map.Map;
 
 public class AnimatedSprite extends Sprite {
 

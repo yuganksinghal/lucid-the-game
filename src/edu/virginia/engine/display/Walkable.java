@@ -3,10 +3,10 @@ package edu.virginia.engine.display;
 import java.awt.image.BufferedImage;
 
 import edu.virginia.engine.Sys;
+import edu.virginia.engine.map.Map;
 import edu.virginia.engine.tween.Tween;
 import edu.virginia.engine.tween.TweenParam;
 import edu.virginia.engine.tween.TweenableParam;
-import map.Map;
 
 public class Walkable extends AnimatedSprite {
 	double SPEED;

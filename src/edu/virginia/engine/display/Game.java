@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
-import map.Map;
+import edu.virginia.engine.map.Map;
 
 
 /**

@@ -7,7 +7,7 @@ import edu.virginia.engine.events.DialogEvent;
 import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.IEventListener;
 import edu.virginia.engine.events.InteractEvent;
-import map.Map;
+import edu.virginia.engine.map.Map;
 
 public class NPC extends Walkable implements IEventListener {
 	

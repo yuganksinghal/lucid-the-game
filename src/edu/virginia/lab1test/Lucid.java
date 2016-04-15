@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import edu.virginia.engine.SoundManager;
 import edu.virginia.engine.Sys;
 import edu.virginia.engine.display.Game;
 import edu.virginia.engine.display.Item;
@@ -16,8 +17,8 @@ import edu.virginia.engine.events.DialogEvent;
 import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.IEventListener;
 import edu.virginia.engine.events.LucidityChangeEvent;
+import edu.virginia.engine.map.Map;
 import edu.virginia.quest.AlphaQuest;
-import map.Map;
 
 /**
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
@@ -60,7 +61,6 @@ public class Lucid extends Game implements IEventListener {
 		map3 = new Map("alpha3.tmx");
 		map4 = new Map("alpha4.tmx");
 		loadedMap = map3;
-		
 		
 		
 		
@@ -113,6 +113,8 @@ public class Lucid extends Game implements IEventListener {
 		alphaQuest.addEventListener(this, "LUCIDITY_CHANGE_EVENT");
 		alphaQuest.addEventListener(clone, "DIALOG_CHANGE_EVENT");
 		alphaQuest.addEventListener(this, "DIALOG_EVENT");
+		
+		//SoundManager.playMusic("Lucid.wav");
 	}
 	
 	/**

@@ -2,7 +2,7 @@ package edu.virginia.engine.display;
 
 import java.util.ArrayList;
 
-import map.Map;
+import edu.virginia.engine.map.Map;
 
 /**
  * Nothing in this class (yet) because there is nothing specific to a Sprite yet that a DisplayObject

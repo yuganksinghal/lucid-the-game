@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 import edu.virginia.engine.events.EventDispatcher;
-import map.Map;
+import edu.virginia.engine.map.Map;
 
 public class DisplayObject extends EventDispatcher {
 
