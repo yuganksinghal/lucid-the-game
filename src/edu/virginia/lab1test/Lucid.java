@@ -57,8 +57,8 @@ public class Lucid extends Game implements IEventListener {
 		actionPressed = false;
 		
 		//INITIALIZE MAP
-		map3 = new Map("alpha3.tmx");
-		map4 = new Map("alpha4.tmx");
+		map3 = new Map("betatest.tmx");
+		map4 = new Map("betatest.tmx");
 		loadedMap = map3;
 		
 		
@@ -67,7 +67,7 @@ public class Lucid extends Game implements IEventListener {
 		// INITIALIZE SPRITES
 		
 		player = new Player("player", "Player.png");
-		player.teleport(16, 17, loadedMap);
+		player.teleport(16, 16, loadedMap);
 		Sys.addSprite(player);
 		
 		clone = new NPC("clone","Player.png");
