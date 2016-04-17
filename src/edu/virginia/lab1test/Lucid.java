@@ -71,7 +71,7 @@ public class Lucid extends Game implements IEventListener {
 		Sys.addSprite(player);
 		
 		clone = new NPC("clone","Player.png");
-		clone.teleport(20, 17, loadedMap);
+		clone.teleport(18, 22, loadedMap);
 		clone.addDialogLine("I'm a little hungry.");
 		clone.addDialogLine("Could you find me some ice?");
 		clone.addDialogLine("I think I saw a whole bunch in front of that building");
