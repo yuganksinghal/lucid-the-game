@@ -3,7 +3,7 @@ package edu.virginia.engine.display;
 import java.util.ArrayList;
 
 import edu.virginia.engine.events.InteractEvent;
-import map.Map;
+import edu.virginia.engine.map.Map;
 
 public class Player extends Walkable {
 	int LUCIDITY = 5;

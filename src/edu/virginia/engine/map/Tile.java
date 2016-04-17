@@ -1,4 +1,4 @@
-package map;
+package edu.virginia.engine.map;
 
 import java.awt.image.BufferedImage;
 

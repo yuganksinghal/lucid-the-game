@@ -1,6 +1,6 @@
 package test;
 
-import map.Map;
+import edu.virginia.engine.map.Map;
 
 public class MapTest {
 

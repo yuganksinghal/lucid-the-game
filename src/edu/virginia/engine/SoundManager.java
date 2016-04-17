@@ -36,13 +36,14 @@ public class SoundManager {
 		
 	}
 	public static void playMusic(String url) {
+		System.out.println("res/music/" + url);
 			      try {
 			    	  
 			        Clip clip = AudioSystem.getClip();
 			        
 			        AudioInputStream inputStream = AudioSystem.getAudioInputStream(
-			          SoundManager.class.getResourceAsStream("/res/music/" + url));
-			        
+			          SoundManager.class.getResourceAsStream("res/music/" + url));
+			          
 			        clip.open(inputStream);
 			        clip.start(); 
 			        
