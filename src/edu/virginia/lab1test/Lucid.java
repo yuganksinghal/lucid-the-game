@@ -58,8 +58,8 @@ public class Lucid extends Game implements IEventListener {
 		actionPressed = false;
 		
 		//INITIALIZE MAP
-		map3 = new Map("alpha3.tmx");
-		map4 = new Map("alpha4.tmx");
+		map3 = new Map("betatest.tmx");
+		map4 = new Map("betatest.tmx");
 		loadedMap = map3;
 		
 		
