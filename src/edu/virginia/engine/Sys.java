@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import edu.virginia.dialog.DialogManager;
+import edu.virginia.engine.display.Game;
 import edu.virginia.engine.display.Item;
+import edu.virginia.engine.display.Player;
 import edu.virginia.engine.display.Sprite;
 import edu.virginia.engine.display.Walkable;
 import edu.virginia.engine.events.CollisionManager;
@@ -28,6 +30,8 @@ public class Sys {
 	//STATIC STORAGE
 	
 	public static ArrayList<Sprite> spriteList = new ArrayList<Sprite>();
+	public static Game instance;
+	public static Player MC;
 	public static ArrayList<Item> itemList = new ArrayList<Item>();
 	public static QuestManager questManager = new QuestManager();
 	public static CollisionManager collisionManager = new CollisionManager();

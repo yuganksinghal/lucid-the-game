@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
+import edu.virginia.engine.events.Event;
+import edu.virginia.engine.events.IEventListener;
 import edu.virginia.engine.map.Map;
 
 
@@ -21,7 +23,7 @@ import edu.virginia.engine.map.Map;
  * Highest level class for creating a game in Java.
  * 
  * */
-public class Game extends DisplayObject implements ActionListener, KeyListener {
+public class Game extends DisplayObject implements ActionListener, KeyListener, IEventListener  {
 	
 	private int height;
 	private int width;
@@ -203,6 +205,13 @@ public class Game extends DisplayObject implements ActionListener, KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void handleEvent(Event event) {
 		// TODO Auto-generated method stub
 		
 	}
