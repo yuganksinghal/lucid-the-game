@@ -50,14 +50,6 @@ public class Sys {
 	}
 	
 	public static void update() {
-		//for each portal
-		for (Walkable w : Sys.walkables) {
-			for (Portal p : Sys.portals) {
-				if (p.from.equals(w.getPos())) {
-					w.teleport(p.to.x, p.to.y, p.toMap);
-				}
-			}	
-		}
 		for (Sprite s : Sys.garbage) {
 			Sys.spriteList.remove(s);
 		}
