@@ -26,6 +26,9 @@ public class EventDispatcher implements IEventDispatcher {
 			}
 	}
 	public boolean hasEventListener(IEventListener listener, String eventType) {
-		return listeners.get(eventType).contains(listener);
+		if(listeners.containsKey(eventType))
+			return listeners.get(eventType).contains(listener);
+		else
+			return false;
 	}
 }

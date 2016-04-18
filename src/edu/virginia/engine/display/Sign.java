@@ -3,7 +3,7 @@ package edu.virginia.engine.display;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import edu.virginia.dialog.Dialog;
+import edu.virginia.engine.Sys;
 import edu.virginia.engine.events.DialogEvent;
 import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.EventDispatcher;
@@ -27,6 +27,10 @@ public class Sign extends EventDispatcher implements Interactable  {
 	
 	public void addDialogLine(String s) {
 		dialog.add(s);
+		if(this.hasEventListener(Sys.instance, "DIALOG_EVENT"));
+			this.addEventListener(Sys.instance, "DIALOG_EVENT");
+		if(Sys.MC.hasEventListener(this, "INTERACT_EVENT"));
+			Sys.MC.addEventListener(this, "INTERACT_EVENT");
 	}
 	
 	@Override

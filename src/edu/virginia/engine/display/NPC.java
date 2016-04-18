@@ -2,6 +2,7 @@ package edu.virginia.engine.display;
 
 import java.util.ArrayList;
 
+import edu.virginia.engine.Sys;
 import edu.virginia.engine.events.DialogChangeEvent;
 import edu.virginia.engine.events.DialogEvent;
 import edu.virginia.engine.events.Event;
@@ -33,6 +34,10 @@ public class NPC extends Walkable implements Interactable {
 	
 	public void addDialogLine(String s) {
 		this.dialog.add(s);
+		if(this.hasEventListener(Sys.instance, "DIALOG_EVENT"));
+			this.addEventListener(Sys.instance, "DIALOG_EVENT");
+		if(Sys.MC.hasEventListener(this, "INTERACT_EVENT"));
+			Sys.MC.addEventListener(this, "INTERACT_EVENT");
 	}
 	
 	public void clearDialog() {

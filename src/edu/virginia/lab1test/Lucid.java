@@ -24,9 +24,10 @@ import edu.virginia.quest.AlphaQuest;
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
  * although, for now, it won't be a very fun game :)
  * */
-public class Lucid extends Game implements IEventListener {
+public class Lucid extends Game{
 
 	boolean actionPressed;
+	
 	
 	/* Create a sprite object for our game. We'll use player */
 	Player player;
@@ -37,6 +38,7 @@ public class Lucid extends Game implements IEventListener {
 	Camera camera;
 	Sign bench;
 	NPC clone;
+	NPC partTimeWorker;
 	AlphaQuest alphaQuest;
 	Map map3;
 	Map map4;
@@ -57,6 +59,8 @@ public class Lucid extends Game implements IEventListener {
 		super("~LUCID~", GAME_WIDTH, GAME_HEIGHT);
 		actionPressed = false;
 		
+		Sys.instance = this;
+		
 		//INITIALIZE MAP
 		map3 = new Map("betatest.tmx");
 		map4 = new Map("betatest.tmx");
@@ -69,6 +73,9 @@ public class Lucid extends Game implements IEventListener {
 		player = new Player("player", "Player.png");
 		player.teleport(16, 16, loadedMap);
 		Sys.addSprite(player);
+		Sys.MC = player;
+		
+		
 		
 		clone = new NPC("clone","Dot.png");
 		clone.teleport(18, 22, loadedMap);
@@ -77,6 +84,16 @@ public class Lucid extends Game implements IEventListener {
 		clone.addDialogLine("I think I saw a whole bunch in front of that building");
 		clone.addDialogLine("You can press Z to pick it up!");
 		Sys.addSprite(clone);
+		
+		partTimeWorker = new NPC("Part-Time Worker", "Player.png");
+		partTimeWorker.teleport(7, 10, loadedMap);
+		partTimeWorker.addDialogLine("WATCHU LOOKING AT!");
+		partTimeWorker.addDialogLine("GO AWAY!");
+		partTimeWorker.addDialogLine("I'M ON BREAK!");
+		Sys.addSprite(partTimeWorker);
+		
+		
+		Sys.addSprite(partTimeWorker);
 		
 		// INITIALIZE CAMERA
 		
@@ -96,10 +113,12 @@ public class Lucid extends Game implements IEventListener {
 		
 		// ADD LISTENERS
 		
-		bench.addEventListener(this, "DIALOG_EVENT");
-		clone.addEventListener(this, "DIALOG_EVENT");
-		player.addEventListener(bench, "INTERACT_EVENT");
-		player.addEventListener(clone, "INTERACT_EVENT");
+//		bench.addEventListener(this, "DIALOG_EVENT");
+//		clone.addEventListener(this, "DIALOG_EVENT");
+//		partTimeWorker.addEventListener(this, "DIALOG_EVENT");
+//		player.addEventListener(bench, "INTERACT_EVENT");
+//		player.addEventListener(clone, "INTERACT_EVENT");
+//		player.addEventListener(partTimeWorker, "INTERACT_EVENT");
 		
 		dialog = new ArrayList<String>();
 		dialog.add("YOU SHOULD NEVER SEE THIS");
