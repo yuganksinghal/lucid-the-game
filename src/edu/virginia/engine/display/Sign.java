@@ -10,7 +10,7 @@ import edu.virginia.engine.events.EventDispatcher;
 import edu.virginia.engine.events.IEventListener;
 import edu.virginia.engine.events.InteractEvent;
 
-public class Sign extends EventDispatcher implements IEventListener  {
+public class Sign extends EventDispatcher implements Interactable  {
 	private ArrayList<Point> tiles;
 	
 	private ArrayList<String> dialog;

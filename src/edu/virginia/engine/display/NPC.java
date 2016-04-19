@@ -10,7 +10,7 @@ import edu.virginia.engine.events.IEventListener;
 import edu.virginia.engine.events.InteractEvent;
 import edu.virginia.engine.map.Map;
 
-public class NPC extends Walkable implements IEventListener {
+public class NPC extends Walkable implements Interactable {
 	
 	ArrayList<String> dialog;
 
