@@ -7,31 +7,37 @@ import edu.virginia.engine.Sys;
 import edu.virginia.engine.events.DialogChangeEvent;
 import edu.virginia.engine.events.DialogEvent;
 import edu.virginia.engine.events.Event;
+import edu.virginia.engine.events.EventDispatcher;
 import edu.virginia.engine.events.IEventListener;
 import edu.virginia.engine.events.InteractEvent;
 import edu.virginia.engine.events.LucidityChangeEvent;
 
-public class AlphaQuest extends Quest implements IEventListener {
-	
+public class AlphaQuest extends Quest {
+
 	// FSM:
 	// 0 - you haven't talked to quest giver
 	// 1 - you just talked to quest giver
 	// 2 - you have the icicle
 	// 3 - you have talked to the quest giver and turned in the icicle (LUCID++)
-	
-	
-	
+
 	int QUEST_STATE = 0;
-	
+
 	final int NOT_STARTED = 0;
 	final int QUEST_STARTED = 1;
 	final int ITEM_GATHERED = 2;
 	final int QUEST_COMPLETED = 3;
+	
+	public AlphaQuest(ArrayList<IEventListener>EL){
+		super();
+		((EventDispatcher) EL.get(0)).addEventListener(this, "DIALOG_EVENT");
+		this.addEventListener(EL.get(0), "DIALOG_CHANGE_EVENT");
+	}
+
 	@Override
 	public void handleEvent(Event event) {
 		System.out.println("alphaquest found event!");
 		switch (QUEST_STATE) {
-		
+
 		case NOT_STARTED:
 			System.out.println("quest hasn't started!");
 			if (event.eventType.equals("DIALOG_EVENT")) {
@@ -51,12 +57,12 @@ public class AlphaQuest extends Quest implements IEventListener {
 				System.out.println("it's an interact event! yay!");
 
 				ArrayList<Point> fountain = new ArrayList<Point>();
-				fountain.add(new Point(15,12));
-				fountain.add(new Point(16,12));
-				fountain.add(new Point(15,13));
-				fountain.add(new Point(16,13));
-				fountain.add(new Point(15,14));
-				fountain.add(new Point(16,14));
+				fountain.add(new Point(15, 12));
+				fountain.add(new Point(16, 12));
+				fountain.add(new Point(15, 13));
+				fountain.add(new Point(16, 13));
+				fountain.add(new Point(15, 14));
+				fountain.add(new Point(16, 14));
 				for (Point p : fountain) {
 					if (p.x == ie.getX() && p.y == ie.getY()) {
 						System.out.println("YOU GOT AN ICICLE FUCK YEAH");
@@ -75,8 +81,10 @@ public class AlphaQuest extends Quest implements IEventListener {
 						this.dispatchEvent(dce);
 					}
 				}
-				//TODO: implement comparable interface for different objects, including points
-				//TODO: standardize x,y stuff so x,y for parameters and y,x in method bodies
+				// TODO: implement comparable interface for different objects,
+				// including points
+				// TODO: standardize x,y stuff so x,y for parameters and y,x in
+				// method bodies
 			}
 			break;
 		case ITEM_GATHERED:
@@ -92,7 +100,10 @@ public class AlphaQuest extends Quest implements IEventListener {
 			break;
 		case QUEST_COMPLETED:
 			System.out.println("LAST STATE");
-			LucidityChangeEvent lce = new LucidityChangeEvent(++Sys.LUCIDITY); //TODO: make it Sys.LUCIDITY++
+			LucidityChangeEvent lce = new LucidityChangeEvent(++Sys.LUCIDITY); // TODO:
+			// make
+			// it
+			// Sys.LUCIDITY++
 			this.dispatchEvent(lce);
 			ArrayList<String> dia = new ArrayList<String>();
 			dia.add("I have to eat once every few years...");
@@ -104,6 +115,4 @@ public class AlphaQuest extends Quest implements IEventListener {
 		}
 	}
 
-	
-	
 }

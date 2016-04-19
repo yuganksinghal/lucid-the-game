@@ -113,25 +113,21 @@ public class Lucid extends Game{
 		
 		// ADD LISTENERS
 		
-//		bench.addEventListener(this, "DIALOG_EVENT");
-//		clone.addEventListener(this, "DIALOG_EVENT");
-//		partTimeWorker.addEventListener(this, "DIALOG_EVENT");
-//		player.addEventListener(bench, "INTERACT_EVENT");
-//		player.addEventListener(clone, "INTERACT_EVENT");
-//		player.addEventListener(partTimeWorker, "INTERACT_EVENT");
 		
 		dialog = new ArrayList<String>();
 		dialog.add("YOU SHOULD NEVER SEE THIS");
 		
+		ArrayList alpha = new ArrayList<IEventListener>();
 		
+		alpha.add(clone);
 		// INITIALIZE QUESTS
 		
-		alphaQuest = new AlphaQuest();
-		clone.addEventListener(alphaQuest, "DIALOG_EVENT");
-		player.addEventListener(alphaQuest, "INTERACT_EVENT");
-		alphaQuest.addEventListener(this, "LUCIDITY_CHANGE_EVENT");
-		alphaQuest.addEventListener(clone, "DIALOG_CHANGE_EVENT");
-		alphaQuest.addEventListener(this, "DIALOG_EVENT");
+		alphaQuest = new AlphaQuest(alpha);
+		//clone.addEventListener(alphaQuest, "DIALOG_EVENT");
+		//player.addEventListener(alphaQuest, "INTERACT_EVENT");
+		//alphaQuest.addEventListener(this, "LUCIDITY_CHANGE_EVENT");
+		//alphaQuest.addEventListener(clone, "DIALOG_CHANGE_EVENT");
+		//alphaQuest.addEventListener(this, "DIALOG_EVENT");
 		
 		//SoundManager.playMusic("Lucid.wav");
 	}
