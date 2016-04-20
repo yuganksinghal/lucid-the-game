@@ -143,6 +143,7 @@ public class Walkable extends AnimatedSprite {
 		this.xGrid = xTile;
 		this.yGrid = yTile;
 		m.occupy(xTile, yTile);
+		System.out.println(this.id + " has occupied tile: " + xTile + ", " + yTile);
 	}
 	
 	

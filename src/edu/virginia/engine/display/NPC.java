@@ -75,10 +75,10 @@ public class NPC extends Walkable implements Interactable {
 	public void update(ArrayList<String> keys, Map m) {
 		super.update(keys, m);
 		if (this.behavior == STANDING_STILL) {
-			
+			//JUST STAND THE FUCK STILL, BOIII
 		}
 		else if (this.behavior == MOVING) {
-			int rand = (int) (Math.random()*50);
+			int rand = (int) (Math.random()*200);
 			if (!this.moving && rand == 0) {
 				int random = (int) (Math.random()*4);
 				switch (random) {

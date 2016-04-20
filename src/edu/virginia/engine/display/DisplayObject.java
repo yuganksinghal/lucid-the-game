@@ -16,15 +16,6 @@ import edu.virginia.engine.map.Map;
 
 public class DisplayObject extends EventDispatcher {
 
-	/*
-	 * MASTER TO-DO LIST:
-	 *
-	 *
-	 */
-	
-	
-	// Fields
-	
 	protected String id; // all DOs have a unique ID
 	private BufferedImage displayImage;
 
