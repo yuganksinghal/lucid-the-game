@@ -58,13 +58,13 @@ public class DogBiteQuest extends Quest {
 				InteractEvent ie = (InteractEvent) event;
 				System.out.println("it's an interact event! yay!");
 
-				Point p = new Point(4, 1); // TODO: add points for getting MED KIT;
+				Point p = new Point(78, 38); // TODO: add points for getting MED KIT;
 				if (p.x == ie.getX() && p.y == ie.getY()) {
 					System.out.println("YOU GOT AN MEDKIT");
 					ArrayList<String> dial = new ArrayList<String>();
 					dial.add("You patch yourself up with some antibiotics and bandages");
 					dial.add("It still hurts.");
-					dial.add("You notice a translucent boy next to the bookshelf.");
+					dial.add("You notice a shimmering boy next to the bookshelf.");
 					dial.add("Was he always there?");
 					
 					DialogEvent de = new DialogEvent("medkit");

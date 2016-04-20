@@ -6,6 +6,7 @@ import edu.virginia.engine.events.EventDispatcher;
 import edu.virginia.engine.events.IEventListener;
 
 public class Quest extends EventDispatcher implements IEventListener {
+	protected String questId;
 	
 	public Quest(){
 		this.addEventListener(Sys.instance, "LUCIDITY_CHANGE_EVENT");

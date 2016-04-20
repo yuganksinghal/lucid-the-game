@@ -11,7 +11,7 @@ import edu.virginia.engine.events.IEventListener;
 import edu.virginia.engine.events.InteractEvent;
 
 public class Sign extends EventDispatcher implements Interactable  {
-	private ArrayList<Point> tiles;
+	protected ArrayList<Point> tiles;
 	
 	private ArrayList<String> dialog;
 	
@@ -22,6 +22,9 @@ public class Sign extends EventDispatcher implements Interactable  {
 		tiles = new ArrayList<Point>();
 		tiles.add(new Point(x,y));
 		dialog = new ArrayList<String>();
+		
+		Sys.MC.addEventListener(this, "INTERACT_EVENT");
+		this.addEventListener(Sys.instance, "DIALOG_EVENT");
 	}
 	
 	public void addTile(int y, int x) {
@@ -30,10 +33,6 @@ public class Sign extends EventDispatcher implements Interactable  {
 	
 	public void addDialogLine(String s) {
 		dialog.add(s);
-		if(!this.hasEventListener(Sys.instance, "DIALOG_EVENT"))
-			this.addEventListener(Sys.instance, "DIALOG_EVENT");
-		if(!Sys.MC.hasEventListener(this, "INTERACT_EVENT"))
-			Sys.MC.addEventListener(this, "INTERACT_EVENT");
 	}
 	
 	@Override

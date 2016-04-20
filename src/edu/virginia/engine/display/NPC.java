@@ -13,6 +13,9 @@ import edu.virginia.engine.map.Map;
 public class NPC extends Walkable implements Interactable {
 	
 	ArrayList<String> dialog;
+	private int behavior;
+	static final int MOVING = 0;
+	static final int STANDING_STILL = 1;
 
 	public NPC(String id, String imageFileName) {
 		super(id, imageFileName);
@@ -26,6 +29,7 @@ public class NPC extends Walkable implements Interactable {
 	
 	public void construct() {
 		dialog = new ArrayList<String>();
+		behavior = STANDING_STILL;
 	}
 	
 	public void setDialog(ArrayList<String> dia) {
@@ -59,6 +63,7 @@ public class NPC extends Walkable implements Interactable {
 		}
 		if (event.eventType.equals("DIALOG_CHANGE_EVENT")) {
 			DialogChangeEvent dce = (DialogChangeEvent) event;
+			System.out.println("dialog changed! for " + id);
 			if (dce.speakerId.equals(this.id)) {
 				this.dialog = dce.dialog;
 				System.out.println(this.dialog);
@@ -69,36 +74,39 @@ public class NPC extends Walkable implements Interactable {
 	@Override
 	public void update(ArrayList<String> keys, Map m) {
 		super.update(keys, m);
-		int rand = (int) (Math.random()*200);
-		
-		if (!this.moving && rand == 0) {
-			int random = (int) (Math.random()*4);
-			switch (random) {
-			case 0:
-				if (!m.checkCollision(yGrid-1, xGrid)) {
-					up(m);
+		if (this.behavior == STANDING_STILL) {
+			
+		}
+		else if (this.behavior == MOVING) {
+			int rand = (int) (Math.random()*50);
+			if (!this.moving && rand == 0) {
+				int random = (int) (Math.random()*4);
+				switch (random) {
+				case 0:
+					if (!m.checkCollision(yGrid-1, xGrid)) {
+						up(m);
+						break;
+					}
+				case 1:
+					if (!m.checkCollision(yGrid, xGrid+1)) {
+						right(m);
+						break;
+					}
+				case 2:
+					if (!m.checkCollision(yGrid+1, xGrid)) {
+						down(m);
+						break;
+					}
+				case 3:
+					if (!m.checkCollision(yGrid, xGrid-1)) {
+						left(m);
+						break;
+					}
 					break;
+				default:
+					System.out.println("bad coding practice in NPC.java :(");
 				}
-			case 1:
-				if (!m.checkCollision(yGrid, xGrid+1)) {
-					right(m);
-					break;
-				}
-			case 2:
-				if (!m.checkCollision(yGrid+1, xGrid)) {
-					down(m);
-					break;
-				}
-			case 3:
-				if (!m.checkCollision(yGrid, xGrid-1)) {
-					left(m);
-					break;
-				}
-				break;
-			default:
-				System.out.println("bad coding practice in NPC.java :(");
 			}
-			//System.out.println("moved to " + xGrid + ", " + yGrid);
 		}
 	}
 	

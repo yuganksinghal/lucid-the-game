@@ -41,7 +41,9 @@ public class Sys {
 	public static ArrayList<Portal> portals = new ArrayList<Portal>();
 	public static ArrayList<Walkable> walkables = new ArrayList<Walkable>();
 	
-	public static HashMap<Map, String> maps = new HashMap<Map, String>();
+//	public static HashMap<Map, String> maps = new HashMap<Map, String>();
+	public static Map currentMap;
+	public static Map[] maps;
 	
 	public static void addItem(Item i) {
 		itemList.add(i);

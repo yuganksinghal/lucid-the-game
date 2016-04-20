@@ -5,10 +5,9 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-import edu.virginia.engine.SoundManager;
 import edu.virginia.engine.Sys;
 import edu.virginia.engine.display.Game;
-import edu.virginia.engine.display.Item;
+import edu.virginia.engine.display.Mirror;
 import edu.virginia.engine.display.NPC;
 import edu.virginia.engine.display.Player;
 import edu.virginia.engine.display.Sign;
@@ -18,8 +17,10 @@ import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.IEventListener;
 import edu.virginia.engine.events.LucidityChangeEvent;
 import edu.virginia.engine.map.Map;
+import edu.virginia.engine.map.Portal;
 import edu.virginia.quest.AlphaQuest;
 import edu.virginia.quest.DogBiteQuest;
+import edu.virginia.quest.MushroomHuntQuest;
 
 /**
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
@@ -32,17 +33,16 @@ public class Lucid extends Game{
 	
 	/* Create a sprite object for our game. We'll use player */
 	Player player;
-	Sprite babyMario;
-	Item coin;
-	Item coin2;
-	Sprite platform;
 	Camera camera;
 	Sign bench;
 	NPC clone;
 	NPC dog;
 	NPC partTimeWorker;
+	NPC mom;
+	Mirror mirror;
 	AlphaQuest alphaQuest;
 	DogBiteQuest dogBiteQuest;
+	MushroomHuntQuest mushroomHuntQuest;
 	Map map3;
 	Map map4;
 	final static int GAME_WIDTH = 600;
@@ -65,23 +65,26 @@ public class Lucid extends Game{
 		Sys.instance = this;
 		
 		//INITIALIZE MAP
-		map3 = new Map("betatest.tmx");
-		map4 = new Map("betatest.tmx");
-		loadedMap = map3;
-		
+		Sys.maps = new Map[5];
+		Sys.maps[0] = new Map("betatest.tmx");
+		Sys.maps[1] = new Map("betatest.tmx");
+		Sys.maps[2] = new Map("betatest.tmx");
+		Sys.maps[3] = new Map("betatest.tmx");
+		Sys.maps[4] = new Map("betatest.tmx");
+		Sys.currentMap = Sys.maps[2];		
 		
 		
 		// INITIALIZE SPRITES
 		
 		player = new Player("player", "Player.png");
-		player.teleport(16, 16, loadedMap);
+		player.teleport(16, 16, Sys.currentMap);
 		Sys.addSprite(player);
 		Sys.MC = player;
 		
 		
 		
 		clone = new NPC("clone","Dot.png");
-		clone.teleport(18, 22, loadedMap);
+		clone.teleport(18, 22, Sys.currentMap);
 		clone.addDialogLine("I'm a little hungry.");
 		clone.addDialogLine("Could you find me some ice?");
 		clone.addDialogLine("I think I saw a whole bunch in front of that building");
@@ -90,14 +93,14 @@ public class Lucid extends Game{
 		Sys.addSprite(clone);
 		
 		partTimeWorker = new NPC("Part-Time Worker", "Player.png");
-		partTimeWorker.teleport(7, 10, loadedMap);
+		partTimeWorker.teleport(7, 10, Sys.currentMap);
 		partTimeWorker.addDialogLine("WATCHU LOOKING AT!");
 		partTimeWorker.addDialogLine("GO AWAY!");
 		partTimeWorker.addDialogLine("I'M ON BREAK!");
 		Sys.addSprite(partTimeWorker);
 		
 		dog = new NPC("dog", "Player.png");
-		dog.teleport(19, 7, loadedMap);
+		dog.teleport(19, 7, Sys.currentMap);
 		dog.addDialogLine("*BITE*");
 		dog.addDialogLine("Old Man: Oh, Dear");
 		dog.addDialogLine("It seems that Rex bit you.");
@@ -105,6 +108,14 @@ public class Lucid extends Game{
 		dog.addDialogLine("...and remember...");
 		dog.addDialogLine("Don't sue me! Sue my Dog!.");
 		Sys.addSprite(dog);
+		
+		mom = new NPC("mom", "Player.png");
+		mom.teleport(78,44, Sys.currentMap);
+		mom.addDialogLine("Hi honey!");
+		mom.addDialogLine("Could you bring me some mushrooms from down the way?");
+		mom.addDialogLine("We're making soup!");
+		
+		Sys.addSprite(mom);
 		
 		
 		Sys.addSprite(partTimeWorker);
@@ -125,6 +136,8 @@ public class Lucid extends Game{
 		bench.addDialogLine("You wish you could sit on it...");
 		bench.addDialogLine(":(");
 		
+		mirror = new Mirror("mirror",76,36);
+		
 		// ADD LISTENERS
 		
 		
@@ -141,7 +154,18 @@ public class Lucid extends Game{
 		// INITIALIZE QUESTS
 		dogBiteQuest = new DogBiteQuest(dogbite);
 		
-		//SoundManager.playMusic("Lucid.wav");
+		ArrayList<IEventListener> mushroom = new ArrayList<IEventListener>();
+		mushroom.add(mom);
+		mushroomHuntQuest = new MushroomHuntQuest(mushroom);
+		
+//		SoundManager.playMusic("Lucid.wav");
+		
+		
+		//DECLARE PORTALS
+		
+		//portals to player house
+		Portal homeDoor1 = new Portal(79,46,18,5);
+		Portal homeDoor2 = new Portal(18,4,79,45);
 		
 	}
 	
@@ -189,10 +213,10 @@ public class Lucid extends Game{
 		super.draw(g);
 		g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 		if (camera != null) g.translate(camera.offset.x, camera.offset.y);
-		if (loadedMap == null) return;
+		if (Sys.currentMap == null) return;
 		//draw background
-		loadedMap.drawBackground(g);
-		loadedMap.drawBackground2(g);
+		Sys.currentMap.drawBackground(g);
+		Sys.currentMap.drawBackground2(g);
 
 		//draw sprites
 		for (Sprite s : Sys.spriteList) {
@@ -200,7 +224,7 @@ public class Lucid extends Game{
 		}
 		
 		//draw foreground
-		loadedMap.drawForeground(g);
+		Sys.currentMap.drawForeground(g);
 		
 		if (camera != null) g.translate(-camera.offset.x, -camera.offset.y);
 
@@ -237,12 +261,21 @@ public class Lucid extends Game{
 			LucidityChangeEvent lce = (LucidityChangeEvent) event;
 			int luc = lce.lucidity;
 			switch (luc) {
+			case 1:
+				Sys.currentMap = Sys.maps[0];
+				break;
+			case 2:
+				Sys.currentMap = Sys.maps[1];
+				break;
 			case 3:
-				loadedMap = map3;
+				Sys.currentMap = Sys.maps[2];
 				break;
 			case 4:
-				loadedMap = map4;
+				Sys.currentMap = Sys.maps[3];
 				System.out.println("LOADED NEW MAP :D");
+				break;
+			case 5:
+				Sys.currentMap = Sys.maps[4];
 				break;
 			}
 		}
