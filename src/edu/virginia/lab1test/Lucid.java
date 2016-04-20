@@ -66,11 +66,11 @@ public class Lucid extends Game{
 		
 		//INITIALIZE MAP
 		Sys.maps = new Map[5];
-		Sys.maps[0] = new Map("betatest.tmx");
-		Sys.maps[1] = new Map("betatest.tmx");
-		Sys.maps[2] = new Map("betatest.tmx");
-		Sys.maps[3] = new Map("betatest.tmx");
-		Sys.maps[4] = new Map("betatest.tmx");
+		Sys.maps[0] = new Map("betatest0.tmx");
+		Sys.maps[1] = new Map("betatest1.tmx");
+		Sys.maps[2] = new Map("betatest2.tmx");
+		Sys.maps[3] = new Map("betatest3.tmx");
+		Sys.maps[4] = new Map("betatest4.tmx");
 		Sys.currentMap = Sys.maps[2];		
 		
 		

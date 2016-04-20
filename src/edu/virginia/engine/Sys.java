@@ -26,7 +26,7 @@ public class Sys {
 	final static double HORIZONTAL_SPEED = 1;
 	final static double GRAVITY = 1;
 	public final static int TILE_SIZE = 32;
-	public static int LUCIDITY = 3;
+	public static int LUCIDITY = 2;
 	//STATIC STORAGE
 	
 	public static ArrayList<Sprite> spriteList = new ArrayList<Sprite>();
