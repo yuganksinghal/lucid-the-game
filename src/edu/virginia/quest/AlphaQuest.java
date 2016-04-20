@@ -35,11 +35,9 @@ public class AlphaQuest extends Quest {
 
 	@Override
 	public void handleEvent(Event event) {
-		System.out.println("alphaquest found event!");
 		switch (QUEST_STATE) {
 
 		case NOT_STARTED:
-			System.out.println("quest hasn't started!");
 			if (event.eventType.equals("DIALOG_EVENT")) {
 				DialogEvent de = (DialogEvent) event;
 				System.out.println("checking if speaker is clone");
