@@ -34,9 +34,9 @@ public class NPC extends Walkable implements Interactable {
 	
 	public void addDialogLine(String s) {
 		this.dialog.add(s);
-		if(this.hasEventListener(Sys.instance, "DIALOG_EVENT"));
+		if(!this.hasEventListener(Sys.instance, "DIALOG_EVENT"))
 			this.addEventListener(Sys.instance, "DIALOG_EVENT");
-		if(Sys.MC.hasEventListener(this, "INTERACT_EVENT"));
+		if(!Sys.MC.hasEventListener(this, "INTERACT_EVENT"))
 			Sys.MC.addEventListener(this, "INTERACT_EVENT");
 	}
 	
@@ -50,7 +50,7 @@ public class NPC extends Walkable implements Interactable {
 			InteractEvent e = (InteractEvent) event;
 			if (e.getX() == xGrid && e.getY() == yGrid) {
 				this.face((e.getFacing() + 2) % 4);
-				System.out.println("SIGN WORKS");
+				System.out.println("NPC WORKS" + this.getId());
 				DialogEvent de = new DialogEvent(id);
 				ArrayList<String> dia = new ArrayList<String>();
 				de.setDialog(this.dialog);
@@ -61,6 +61,7 @@ public class NPC extends Walkable implements Interactable {
 		if (event.eventType.equals("DIALOG_CHANGE_EVENT")) {
 			DialogChangeEvent dce = (DialogChangeEvent) event;
 			this.dialog = dce.dialog;
+			System.out.println(this.dialog);
 		}
 	}
 	
@@ -96,7 +97,7 @@ public class NPC extends Walkable implements Interactable {
 			default:
 				System.out.println("bad coding practice in NPC.java :(");
 			}
-			System.out.println("moved to " + xGrid + ", " + yGrid);
+			//System.out.println("moved to " + xGrid + ", " + yGrid);
 		}
 	}
 	

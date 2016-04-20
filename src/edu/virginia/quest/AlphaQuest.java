@@ -81,6 +81,7 @@ public class AlphaQuest extends Quest {
 						this.dispatchEvent(dce);
 					}
 				}
+				System.out.println(QUEST_STATE);
 				// TODO: implement comparable interface for different objects,
 				// including points
 				// TODO: standardize x,y stuff so x,y for parameters and y,x in
@@ -88,6 +89,7 @@ public class AlphaQuest extends Quest {
 			}
 			break;
 		case ITEM_GATHERED:
+			System.out.println("Items Gathered Executing");
 			if (event.eventType.equals("DIALOG_EVENT")) {
 				DialogEvent de = (DialogEvent) event;
 				System.out.println("checking if speaker is clone");
@@ -97,9 +99,10 @@ public class AlphaQuest extends Quest {
 					System.out.println("Quest Completed! Lucidity Level Increased!");
 				}
 			}
+			System.out.println(QUEST_STATE);
 			break;
 		case QUEST_COMPLETED:
-			System.out.println("LAST STATE");
+			System.out.println("LAST STATE: " + event.eventType);
 			LucidityChangeEvent lce = new LucidityChangeEvent(++Sys.LUCIDITY); // TODO:
 			// make
 			// it

@@ -15,7 +15,10 @@ public class Sign extends EventDispatcher implements Interactable  {
 	
 	private ArrayList<String> dialog;
 	
-	public Sign(int y, int x) {
+	private String id;
+	
+	public Sign(String id, int y, int x) {
+		this.id = id;
 		tiles = new ArrayList<Point>();
 		tiles.add(new Point(x,y));
 		dialog = new ArrayList<String>();
@@ -27,9 +30,9 @@ public class Sign extends EventDispatcher implements Interactable  {
 	
 	public void addDialogLine(String s) {
 		dialog.add(s);
-		if(this.hasEventListener(Sys.instance, "DIALOG_EVENT"));
+		if(!this.hasEventListener(Sys.instance, "DIALOG_EVENT"))
 			this.addEventListener(Sys.instance, "DIALOG_EVENT");
-		if(Sys.MC.hasEventListener(this, "INTERACT_EVENT"));
+		if(!Sys.MC.hasEventListener(this, "INTERACT_EVENT"))
 			Sys.MC.addEventListener(this, "INTERACT_EVENT");
 	}
 	
@@ -41,7 +44,7 @@ public class Sign extends EventDispatcher implements Interactable  {
 				int x = p.x;
 				int y = p.y;
 				if (e.getX() == x && e.getY() == y) {
-					System.out.println("SIGN WORKS");
+					System.out.println("SIGN WORKS" + this.id);
 					DialogEvent de = new DialogEvent(null);
 					de.setDialog(dialog);
 					this.dispatchEvent(de);
