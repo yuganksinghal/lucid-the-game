@@ -110,14 +110,14 @@ public class MushroomHuntQuest extends Quest {
 					System.out.println("YOU FINISHED THE QUEST :)");
 					QUEST_STATE++;
 					System.out.println("Quest Completed! Lucidity Level Increased!");
+					LucidityChangeEvent lce = new LucidityChangeEvent(++Sys.LUCIDITY);
+					this.dispatchEvent(lce);
 				}
 			}
 			System.out.println(QUEST_STATE);
 			break;
 		case QUEST_COMPLETED:
 			System.out.println("LAST STATE: " + event.eventType);
-			LucidityChangeEvent lce = new LucidityChangeEvent(++Sys.LUCIDITY);
-			this.dispatchEvent(lce);
 			ArrayList<String> dia = new ArrayList<String>();
 			dia.add("Are you goin out to play?");
 			dia.add("Come back home quickly! Or your soup will get cold");

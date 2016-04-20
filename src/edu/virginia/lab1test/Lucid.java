@@ -226,8 +226,14 @@ public class Lucid extends Game{
 		//draw foreground
 		Sys.currentMap.drawForeground(g);
 		
+		
 		if (camera != null) g.translate(-camera.offset.x, -camera.offset.y);
-
+		
+		
+		
+		g.setColor(new Color(0, 0, 0, 255-(100*Sys.LUCIDITY/4)));
+		g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+		
 		if (GAME_STATE == DIALOG && dialog.size() > 0) {
 			//TODO: set text size as a function of line length?
 			//TODO: break up text into multiple lines somehow.
