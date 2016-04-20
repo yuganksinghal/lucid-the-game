@@ -19,6 +19,7 @@ import edu.virginia.engine.events.IEventListener;
 import edu.virginia.engine.events.LucidityChangeEvent;
 import edu.virginia.engine.map.Map;
 import edu.virginia.quest.AlphaQuest;
+import edu.virginia.quest.DogBiteQuest;
 
 /**
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
@@ -38,8 +39,10 @@ public class Lucid extends Game{
 	Camera camera;
 	Sign bench;
 	NPC clone;
+	NPC dog;
 	NPC partTimeWorker;
 	AlphaQuest alphaQuest;
+	DogBiteQuest dogBiteQuest;
 	Map map3;
 	Map map4;
 	final static int GAME_WIDTH = 600;
@@ -83,6 +86,7 @@ public class Lucid extends Game{
 		clone.addDialogLine("Could you find me some ice?");
 		clone.addDialogLine("I think I saw a whole bunch in front of that building");
 		clone.addDialogLine("You can press Z to pick it up!");
+		
 		Sys.addSprite(clone);
 		
 		partTimeWorker = new NPC("Part-Time Worker", "Player.png");
@@ -91,6 +95,16 @@ public class Lucid extends Game{
 		partTimeWorker.addDialogLine("GO AWAY!");
 		partTimeWorker.addDialogLine("I'M ON BREAK!");
 		Sys.addSprite(partTimeWorker);
+		
+		dog = new NPC("dog", "Player.png");
+		dog.teleport(19, 7, loadedMap);
+		dog.addDialogLine("*BITE*");
+		dog.addDialogLine("Old Man: Oh, Dear");
+		dog.addDialogLine("It seems that Rex bit you.");
+		dog.addDialogLine("Why don't you go home and get that cleaned up?");
+		dog.addDialogLine("...and remember...");
+		dog.addDialogLine("Don't sue me! Sue my Dog!.");
+		Sys.addSprite(dog);
 		
 		
 		Sys.addSprite(partTimeWorker);
@@ -101,7 +115,7 @@ public class Lucid extends Game{
 		
 		// INITIALIZE BENCHES
 		
-		bench = new Sign(12,11);
+		bench = new Sign("bench", 12,11);
 		bench.addTile(13, 11);
 		bench.addTile(14, 11);
 		bench.addTile(12, 20);
@@ -117,19 +131,18 @@ public class Lucid extends Game{
 		dialog = new ArrayList<String>();
 		dialog.add("YOU SHOULD NEVER SEE THIS");
 		
-		ArrayList alpha = new ArrayList<IEventListener>();
-		
+		ArrayList<IEventListener> alpha = new ArrayList<IEventListener>();
 		alpha.add(clone);
 		// INITIALIZE QUESTS
-		
 		alphaQuest = new AlphaQuest(alpha);
-		//clone.addEventListener(alphaQuest, "DIALOG_EVENT");
-		//player.addEventListener(alphaQuest, "INTERACT_EVENT");
-		//alphaQuest.addEventListener(this, "LUCIDITY_CHANGE_EVENT");
-		//alphaQuest.addEventListener(clone, "DIALOG_CHANGE_EVENT");
-		//alphaQuest.addEventListener(this, "DIALOG_EVENT");
+		
+		ArrayList<IEventListener> dogbite = new ArrayList<IEventListener>();
+		dogbite.add(dog);
+		// INITIALIZE QUESTS
+		dogBiteQuest = new DogBiteQuest(dogbite);
 		
 		//SoundManager.playMusic("Lucid.wav");
+		
 	}
 	
 	/**
