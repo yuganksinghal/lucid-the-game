@@ -52,7 +52,6 @@ public class NPC extends Walkable implements Interactable {
 				this.face((e.getFacing() + 2) % 4);
 				System.out.println("NPC WORKS" + this.getId());
 				DialogEvent de = new DialogEvent(id);
-				ArrayList<String> dia = new ArrayList<String>();
 				de.setDialog(this.dialog);
 				this.dispatchEvent(de);
 				//LAUNCH DIALOGUE
@@ -60,8 +59,10 @@ public class NPC extends Walkable implements Interactable {
 		}
 		if (event.eventType.equals("DIALOG_CHANGE_EVENT")) {
 			DialogChangeEvent dce = (DialogChangeEvent) event;
-			this.dialog = dce.dialog;
-			System.out.println(this.dialog);
+			if (dce.speakerId.equals(this.id)) {
+				this.dialog = dce.dialog;
+				System.out.println(this.dialog);
+			}
 		}
 	}
 	

@@ -13,7 +13,7 @@ import edu.virginia.engine.events.InteractEvent;
 import edu.virginia.engine.events.LucidityChangeEvent;
 
 public class AlphaQuest extends Quest {
-
+	
 	// FSM:
 	// 0 - you haven't talked to quest giver
 	// 1 - you just talked to quest giver
@@ -75,7 +75,7 @@ public class AlphaQuest extends Quest {
 						dia.add("You found the ice! Thank you so much.");
 						dia.add("Looks like I'll live another day!...");
 						dia.add("*Your lucidity level has increased.*");
-						DialogChangeEvent dce = new DialogChangeEvent(dia);
+						DialogChangeEvent dce = new DialogChangeEvent(dia, "clone");
 						this.dispatchEvent(dce);
 					}
 				}
@@ -110,7 +110,7 @@ public class AlphaQuest extends Quest {
 			dia.add("I have to eat once every few years...");
 			dia.add("...");
 			dia.add("...or my tummy gets upset.");
-			DialogChangeEvent dce = new DialogChangeEvent(dia);
+			DialogChangeEvent dce = new DialogChangeEvent(dia, "clone");
 			this.dispatchEvent(dce);
 			break;
 		}
