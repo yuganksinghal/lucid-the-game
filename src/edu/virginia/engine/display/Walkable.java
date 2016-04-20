@@ -38,7 +38,7 @@ public class Walkable extends AnimatedSprite {
 	}
 	
 	private void construct() {
-		SPEED = 250;
+		SPEED = 100;
 		this.setAnimationLength(SPEED);
 	}
 

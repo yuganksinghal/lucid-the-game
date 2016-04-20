@@ -17,7 +17,7 @@ public class Sign extends EventDispatcher implements Interactable  {
 	
 	private String id;
 	
-	public Sign(String id, int y, int x) {
+	public Sign(String id, int x, int y) {
 		this.id = id;
 		tiles = new ArrayList<Point>();
 		tiles.add(new Point(x,y));
@@ -27,7 +27,7 @@ public class Sign extends EventDispatcher implements Interactable  {
 		this.addEventListener(Sys.instance, "DIALOG_EVENT");
 	}
 	
-	public void addTile(int y, int x) {
+	public void addTile(int x, int y) {
 		tiles.add(new Point(x,y));
 	}
 	
