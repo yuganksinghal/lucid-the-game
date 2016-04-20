@@ -167,6 +167,10 @@ public class Lucid extends Game{
 		Portal homeDoor1 = new Portal(79,46,18,5);
 		Portal homeDoor2 = new Portal(18,4,79,45);
 		
+		//portals to chapel
+		Portal chapelDoor1 = new Portal(65,9,109,24);
+		Portal chapelDoor2 = new Portal(109,25,65,10);
+		
 	}
 	
 	/**

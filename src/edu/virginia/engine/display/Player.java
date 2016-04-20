@@ -2,12 +2,16 @@ package edu.virginia.engine.display;
 
 import java.util.ArrayList;
 
+import edu.virginia.engine.Sys;
 import edu.virginia.engine.events.InteractEvent;
+import edu.virginia.engine.events.LucidityChangeEvent;
 import edu.virginia.engine.map.Map;
 
 public class Player extends Walkable {
 	int LUCIDITY = 5;
 	boolean actionPressed = false;
+	boolean lucDownPressed = false;
+	boolean lucUpPressed = false;
 	ArrayList<Item> inventory;
 	
 	
@@ -19,6 +23,7 @@ public class Player extends Walkable {
 	public Player(String id) {
 		super(id);
 		construct();
+		this.addEventListener(Sys.instance, "LUCIDITY_CHANGE_EVENT");
 	}
 
 	private void construct() {
@@ -71,19 +76,25 @@ public class Player extends Walkable {
 			if (keys.contains("Z")) {
 				actionPressed = true;
 			}
+			if (keys.contains("N")) {
+				lucDownPressed = true;
+			}
+			if (keys.contains("M")) {
+				lucUpPressed = true;
+			}
+			if (lucDownPressed && !keys.contains("N")) {
+				System.out.println("pressed N");
+				this.dispatchEvent(new LucidityChangeEvent(--Sys.LUCIDITY));
+				lucDownPressed = false;
+			}
+			if (lucUpPressed && !keys.contains("M")) {
+				this.dispatchEvent(new LucidityChangeEvent(++Sys.LUCIDITY));
+				lucUpPressed = false;
+			}
 			if (actionPressed && !keys.contains("Z")) {
 				interact();
 				actionPressed = false;
 			}
-//			this.setAnimation("IDLE");
-		} 
-		else {
-//			if (!getAnimationID().equals("WALKING")) setAnimation("WALKING");
-//			if (!getAnimationID().equals("WALKING_UP") && keys.contains("W")) setAnimation("WALKING_UP");
-//			else if (!getAnimationID().equals("WALKING_DOWN") && keys.contains("S")) setAnimation("WALKING_DOWN");
-//			else if (!getAnimationID().equals("WALKING_LEFT") && keys.contains("A")) setAnimation("WALKING_LEFT");
-//			else if (!getAnimationID().equals("WALKING_RIGHT") && keys.contains("D")) setAnimation("WALKING_RIGHT");
-
 		}
 	}
 
