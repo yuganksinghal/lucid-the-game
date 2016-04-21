@@ -282,7 +282,7 @@ public class Lucid extends Game{
 				Sys.LUCIDITY = 5;
 				luc = 5;
 			} 
-			if (luc<=1){
+			if (luc<=0){
 				Sys.LUCIDITY = 0;
 				luc = 0;
 			}
