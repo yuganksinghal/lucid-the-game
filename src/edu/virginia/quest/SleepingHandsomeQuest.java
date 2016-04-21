@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import edu.virginia.engine.Sys;
+import edu.virginia.engine.events.DialogChangeEvent;
 import edu.virginia.engine.events.DialogEvent;
 import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.EventDispatcher;
@@ -33,50 +34,77 @@ public class SleepingHandsomeQuest extends Quest {
 		// TODO Auto-generated method stub
 
 		switch (QUEST_STATE) {
+
 		case NOT_STARTED:
 			if (event.eventType.equals("DIALOG_EVENT")) {
 				DialogEvent de = (DialogEvent) event;
 				System.out.println("checking if speaker is clone");
-				if (de.speakerID.equals("dog")) {
+				if (de.speakerID.equals("boy")) {
+					System.out.println("It is! Yay! Proceeding through quest!");
 					QUEST_STATE++;
+					System.out.println("Quest Started!");
 				}
 			}
 			break;
 		case QUEST_STARTED:
-			System.out.println("Looking for medkit...");
+			System.out.println("Looking for a book...");
 			if (event.eventType.equals("INTERACT_EVENT")) {
 				InteractEvent ie = (InteractEvent) event;
 				System.out.println("it's an interact event! yay!");
 
-				Point p = new Point(78, 38); // TODO: add points for getting MED
-				// KIT;
-				if (p.x == ie.getX() && p.y == ie.getY()) {
-					System.out.println("YOU GOT AN MEDKIT");
-					ArrayList<String> dial = new ArrayList<String>();
-					dial.add("You patch yourself up with some antibiotics and bandages");
-					dial.add("It still hurts.");
-					dial.add("You notice a shimmering boy next to the bookshelf.");
-					dial.add("Was he always there?");
-
-					DialogEvent de = new DialogEvent("medkit");
-					de.setDialog(dial);
-					this.dispatchEvent(de);
-					QUEST_STATE++;
-					LucidityChangeEvent lce = new LucidityChangeEvent(--Sys.LUCIDITY); // TODO:
-					// make
-					// it
-					// Sys.LUCIDITY++
-					this.dispatchEvent(lce);
-				}
+				Point bookshelf = new Point(0,0);
+					if (bookshelf.x == ie.getX() && bookshelf.y == ie.getY()) {
+						ArrayList<String> dial = new ArrayList<String>();
+						dial.add("You got ____.");
+						dial.add("It seems strange");
+						DialogEvent de = new DialogEvent("bookshelf");
+						de.setDialog(dial);
+						this.dispatchEvent(de);
+						QUEST_STATE++;
+						ArrayList<String> dia = new ArrayList<String>();
+						dia.add("Awesome! You got the ____.");
+						dia.add("Don't forget to give it to her.");
+						DialogChangeEvent dce = new DialogChangeEvent(dia, "boy");
+						
+						this.dispatchEvent(dce);
+						
+						ArrayList<String> dia2 = new ArrayList<String>();
+						dia2.add("This ___.");
+						dia2.add("How do you know about the ____?!");
+						dia2.add("GET OUT OF THE WAY!");
+						dia2.add("*Your lucidity level has increased.*");
+						DialogChangeEvent dce2 = new DialogChangeEvent(dia2, "Part-Time Worker");
+						
+						this.dispatchEvent(dce2);
+					}
+				System.out.println(QUEST_STATE);
 				// TODO: implement comparable interface for different objects,
 				// including points
 				// TODO: standardize x,y stuff so x,y for parameters and y,x in
 				// method bodies
 			}
 			break;
+		case ITEM_GATHERED:
+			System.out.println("Items Gathered Executing");
+			if (event.eventType.equals("DIALOG_EVENT")) {
+				DialogEvent de = (DialogEvent) event;
+				System.out.println("checking if speaker is clone");
+				if (de.speakerID.equals("Part_Time Worker")) {
+					System.out.println("YOU FINISHED THE QUEST :)");
+					QUEST_STATE++;
+					System.out.println("Quest Completed! Lucidity Level Increased!");
+				}
+			}
+			System.out.println(QUEST_STATE);
+			break;
 		case QUEST_COMPLETED:
-			System.out.println("LAST STATE");
-
+			System.out.println("LAST STATE: " + event.eventType);
+			LucidityChangeEvent lce = new LucidityChangeEvent(++Sys.LUCIDITY); // TODO:
+			// make
+			// it
+			// Sys.LUCIDITY++
+			this.dispatchEvent(lce);
+			ArrayList<String> dia = new ArrayList<String>();
 			break;
 		}
 

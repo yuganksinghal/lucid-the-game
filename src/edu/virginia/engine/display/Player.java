@@ -18,6 +18,7 @@ public class Player extends Walkable {
 	public Player(String id, String imageFileName) {
 		super(id, imageFileName);
 		construct();
+		this.addEventListener(Sys.instance, "LUCIDITY_CHANGE_EVENT");
 	}
 
 	public Player(String id) {
