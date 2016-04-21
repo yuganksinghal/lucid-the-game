@@ -39,6 +39,7 @@ public class Lucid extends Game{
 	NPC dog;
 	NPC partTimeWorker;
 	NPC mom;
+	NPC boy;
 	Mirror mirror;
 	AlphaQuest alphaQuest;
 	DogBiteQuest dogBiteQuest;
@@ -114,11 +115,12 @@ public class Lucid extends Game{
 		mom.addDialogLine("Hi honey!");
 		mom.addDialogLine("Could you bring me some mushrooms from down the way?");
 		mom.addDialogLine("We're making soup!");
-		
 		Sys.addSprite(mom);
 		
-		
-		Sys.addSprite(partTimeWorker);
+		boy = new NPC("boy", "Player.png");
+		boy.addDialogLine("Could you please talk to that girl who works at the convenience store for me?");
+		boy.addDialogLine("I've been trying to get her attention all day, but she just keeps ignoring me.");
+		boy.addDialogLine("I know! Why don't you get her a ___ for me");
 		
 		// INITIALIZE CAMERA
 		
@@ -148,6 +150,8 @@ public class Lucid extends Game{
 		alpha.add(clone);
 		// INITIALIZE QUESTS
 		alphaQuest = new AlphaQuest(alpha);
+		
+		
 		
 		ArrayList<IEventListener> dogbite = new ArrayList<IEventListener>();
 		dogbite.add(dog);
@@ -264,6 +268,7 @@ public class Lucid extends Game{
 
 	@Override
 	public void handleEvent(Event event) {
+		System.out.println("Lucid.java got an event!");
 		if (event.eventType.equals("DIALOG_EVENT")) {
 			DialogEvent e = (DialogEvent) event;
 			this.dialog = e.getDialog();
@@ -274,21 +279,34 @@ public class Lucid extends Game{
 			System.out.println("Saw LCE!");
 			LucidityChangeEvent lce = (LucidityChangeEvent) event;
 			int luc = lce.lucidity;
+			if (luc>=5){
+				Sys.LUCIDITY = 5;
+				luc = 5;
+			} 
+			if (luc<=0){
+				Sys.LUCIDITY = 0;
+				luc = 0;
+			}
 			switch (luc) {
-			case 1:
+			case 0:
 				Sys.currentMap = Sys.maps[0];
 				break;
-			case 2:
+			case 1:
+				System.out.println("LUCIDITY 1");
+				Sys.addSprite(boy);
 				Sys.currentMap = Sys.maps[1];
+				boy.teleport(83, 37, Sys.currentMap);
 				break;
-			case 3:
+			case 2:
+				boy.teleport(0, 0, Sys.currentMap);
+				Sys.garbage.add(boy);
 				Sys.currentMap = Sys.maps[2];
 				break;
-			case 4:
+			case 3:
 				Sys.currentMap = Sys.maps[3];
 				System.out.println("LOADED NEW MAP :D");
 				break;
-			case 5:
+			case 4:
 				Sys.currentMap = Sys.maps[4];
 				break;
 			}
