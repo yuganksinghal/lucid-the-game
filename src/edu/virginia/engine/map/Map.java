@@ -293,5 +293,9 @@ public class Map {
 		if (j >= this.height || i >= this.width || j < 0 || i < 0) return true;
 		return (collidables[j][i] || occupied[j][i]);
 	}
+	
+	public void setCollidable(int i, int j, boolean collide){
+		this.collidables[j][i] = collide;
+	}
 
 }

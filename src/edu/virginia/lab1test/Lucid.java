@@ -20,6 +20,7 @@ import edu.virginia.engine.map.Map;
 import edu.virginia.engine.map.Portal;
 import edu.virginia.quest.AlphaQuest;
 import edu.virginia.quest.DogBiteQuest;
+import edu.virginia.quest.MansionQuest;
 import edu.virginia.quest.MushroomHuntQuest;
 
 /**
@@ -41,7 +42,7 @@ public class Lucid extends Game{
 	NPC mom;
 	NPC boy;
 	Mirror mirror;
-	AlphaQuest alphaQuest;
+	MansionQuest mansionQuest;
 	DogBiteQuest dogBiteQuest;
 	MushroomHuntQuest mushroomHuntQuest;
 	Map map3;
@@ -86,12 +87,10 @@ public class Lucid extends Game{
 		
 		clone = new NPC("clone","Dot.png");
 		clone.teleport(18, 22, Sys.currentMap);
-		clone.addDialogLine("I'm a little hungry.");
-		clone.addDialogLine("Could you find me some ice?");
-		clone.addDialogLine("I think I saw a whole bunch in front of that building");
-		clone.addDialogLine("You can press Z to pick it up!");
-		
-		Sys.addSprite(clone);
+		clone.addDialogLine("pssst.");
+		clone.addDialogLine("Hey kid...");
+		clone.addDialogLine("Why don't you go steal a cross from that mansion over there?");
+		clone.addDialogLine(";)");
 		
 		partTimeWorker = new NPC("Part-Time Worker", "Player.png");
 		partTimeWorker.teleport(7, 10, Sys.currentMap);
@@ -146,10 +145,10 @@ public class Lucid extends Game{
 		dialog = new ArrayList<String>();
 		dialog.add("YOU SHOULD NEVER SEE THIS");
 		
-		ArrayList<IEventListener> alpha = new ArrayList<IEventListener>();
-		alpha.add(clone);
+		ArrayList<IEventListener> mansion = new ArrayList<IEventListener>();
+		mansion.add(clone);
 		// INITIALIZE QUESTS
-		alphaQuest = new AlphaQuest(alpha);
+		mansionQuest = new MansionQuest(mansion);
 		
 		
 		
@@ -283,7 +282,7 @@ public class Lucid extends Game{
 				Sys.LUCIDITY = 5;
 				luc = 5;
 			} 
-			if (luc<=0){
+			if (luc<=1){
 				Sys.LUCIDITY = 0;
 				luc = 0;
 			}
@@ -294,12 +293,16 @@ public class Lucid extends Game{
 			case 1:
 				System.out.println("LUCIDITY 1");
 				Sys.addSprite(boy);
+				Sys.addSprite(clone);
 				Sys.currentMap = Sys.maps[1];
 				boy.teleport(83, 37, Sys.currentMap);
+				clone.teleport(24, 27, Sys.currentMap);
 				break;
 			case 2:
+				clone.teleport(0, 1, Sys.currentMap);
 				boy.teleport(0, 0, Sys.currentMap);
 				Sys.garbage.add(boy);
+				Sys.garbage.add(clone);
 				Sys.currentMap = Sys.maps[2];
 				break;
 			case 3:

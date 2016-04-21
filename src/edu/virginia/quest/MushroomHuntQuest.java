@@ -119,8 +119,9 @@ public class MushroomHuntQuest extends Quest {
 		case QUEST_COMPLETED:
 			System.out.println("LAST STATE: " + event.eventType);
 			ArrayList<String> dia = new ArrayList<String>();
-			dia.add("Are you goin out to play?");
-			dia.add("Come back home quickly! Or your soup will get cold");
+			dia.add("You didn't eat the mushrooms, did you?");
+			dia.add("If you eat mushrooms, you'll be poisoned, and start going crazy");
+			dia.add("People have been ending up at an abandoned house from uncooked mushrooms.");
 			DialogChangeEvent dce = new DialogChangeEvent(dia,"mom");
 			this.dispatchEvent(dce);
 			
