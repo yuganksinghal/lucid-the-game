@@ -235,7 +235,7 @@ public class Lucid extends Game{
 		
 		
 		
-		g.setColor(new Color(0, 0, 0, 255-(100*Sys.LUCIDITY/4)));
+		g.setColor(new Color(255, 100, 100, 100-(100*Sys.LUCIDITY/4)));
 		g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 		
 		if (GAME_STATE == DIALOG && dialog.size() > 0) {

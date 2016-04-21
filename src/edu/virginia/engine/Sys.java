@@ -58,6 +58,7 @@ public class Sys {
 	public static void update() {
 		for (Sprite s : Sys.garbage) {
 			Sys.spriteList.remove(s);
+			Sys.currentMap.vacate(s.getPos().x, s.getPos().y);
 		}
 		Sys.garbage.clear();
 		Sys.tweenJuggler.nextFrame();

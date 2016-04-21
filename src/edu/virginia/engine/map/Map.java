@@ -15,7 +15,7 @@ import org.w3c.dom.NodeList;
 
 public class Map {
 	Tile[][] foreground;
-	boolean[][] collidables;
+	static boolean[][] collidables;
 	Tile[][] background;
 	Tile[][] background2;
 	boolean[][] occupied;
@@ -57,7 +57,7 @@ public class Map {
 
 				String tilesetName = tElement.getAttribute("name");
 
-				Node imageNode = tNode.getFirstChild();
+//				Node imageNode = tNode.getFirstChild();
 				Element iElement = (Element) tElement.getElementsByTagName("image").item(0);
 				int imageHeight = Integer.parseInt(iElement.getAttribute("height"));
 				int imageWidth = Integer.parseInt(iElement.getAttribute("width"));
