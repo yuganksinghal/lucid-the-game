@@ -22,6 +22,7 @@ import edu.virginia.quest.AlphaQuest;
 import edu.virginia.quest.DogBiteQuest;
 import edu.virginia.quest.MansionQuest;
 import edu.virginia.quest.MushroomHuntQuest;
+import edu.virginia.quest.SleepingHandsomeQuest;
 
 /**
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
@@ -45,6 +46,7 @@ public class Lucid extends Game{
 	MansionQuest mansionQuest;
 	DogBiteQuest dogBiteQuest;
 	MushroomHuntQuest mushroomHuntQuest;
+	SleepingHandsomeQuest sleeptingHandsomeQuest;
 	Map map3;
 	Map map4;
 	final static int GAME_WIDTH = 600;
@@ -85,7 +87,7 @@ public class Lucid extends Game{
 		
 		
 		
-		clone = new NPC("clone","Dot.png");
+		clone = new NPC("clone","Player.png");
 		clone.teleport(18, 22, Sys.currentMap);
 		clone.addDialogLine("pssst.");
 		clone.addDialogLine("Hey kid...");
@@ -114,12 +116,18 @@ public class Lucid extends Game{
 		mom.addDialogLine("Hi honey!");
 		mom.addDialogLine("Could you bring me some mushrooms from down the way?");
 		mom.addDialogLine("We're making soup!");
+		mom.addDialogLine("But before you do that,");
+		mom.addDialogLine("why don't you help that old man");
+		mom.addDialogLine("outside our house?");
 		Sys.addSprite(mom);
 		
 		boy = new NPC("boy", "Player.png");
-		boy.addDialogLine("Could you please talk to that girl who works at the convenience store for me?");
-		boy.addDialogLine("I've been trying to get her attention all day, but she just keeps ignoring me.");
-		boy.addDialogLine("I know! Why don't you get her a ___ for me");
+		boy.addDialogLine("Could you please talk to that girl");
+		boy.addDialogLine("who works at the convenience store for me?");
+		boy.addDialogLine("I've been trying to get her attention all day,");
+		boy.addDialogLine(" but she just keeps ignoring me.");
+		boy.addDialogLine("I know! Why don't you get her a ___ for me?");
+		boy.addDialogLine("There is one in that bookshelf right there!");
 		
 		// INITIALIZE CAMERA
 		
@@ -156,6 +164,11 @@ public class Lucid extends Game{
 		dogbite.add(dog);
 		// INITIALIZE QUESTS
 		dogBiteQuest = new DogBiteQuest(dogbite);
+		
+		ArrayList<IEventListener> sleepingHandsome = new ArrayList<IEventListener>();
+		sleepingHandsome.add(boy);
+		sleepingHandsome.add(partTimeWorker);
+		sleeptingHandsomeQuest = new SleepingHandsomeQuest(sleepingHandsome);
 		
 		ArrayList<IEventListener> mushroom = new ArrayList<IEventListener>();
 		mushroom.add(mom);
@@ -278,9 +291,9 @@ public class Lucid extends Game{
 			System.out.println("Saw LCE!");
 			LucidityChangeEvent lce = (LucidityChangeEvent) event;
 			int luc = lce.lucidity;
-			if (luc>=5){
-				Sys.LUCIDITY = 5;
-				luc = 5;
+			if (luc>=4){
+				Sys.LUCIDITY = 4;
+				luc = 4;
 			} 
 			if (luc<=0){
 				Sys.LUCIDITY = 0;
@@ -288,6 +301,7 @@ public class Lucid extends Game{
 			}
 			switch (luc) {
 			case 0:
+				System.out.println("Lucidity O");
 				Sys.currentMap = Sys.maps[0];
 				break;
 			case 1:

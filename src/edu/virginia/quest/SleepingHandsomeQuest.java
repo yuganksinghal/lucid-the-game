@@ -22,6 +22,7 @@ public class SleepingHandsomeQuest extends Quest {
 	final int QUEST_COMPLETED = 3;
 
 	public SleepingHandsomeQuest(ArrayList<IEventListener> EL) {
+		super();
 		for (IEventListener a : EL) {
 			((EventDispatcher) a).addEventListener(this, "DIALOG_EVENT");
 			this.addEventListener(a, "DIALOG_CHANGE_EVENT");
@@ -52,7 +53,7 @@ public class SleepingHandsomeQuest extends Quest {
 				InteractEvent ie = (InteractEvent) event;
 				System.out.println("it's an interact event! yay!");
 
-				Point bookshelf = new Point(0,0);
+				Point bookshelf = new Point(82, 36);
 					if (bookshelf.x == ie.getX() && bookshelf.y == ie.getY()) {
 						ArrayList<String> dial = new ArrayList<String>();
 						dial.add("You got ____.");
@@ -72,7 +73,7 @@ public class SleepingHandsomeQuest extends Quest {
 						dia2.add("This ___.");
 						dia2.add("How do you know about the ____?!");
 						dia2.add("GET OUT OF THE WAY!");
-						dia2.add("*Your lucidity level has increased.*");
+						dia2.add("*Your lucidity level has decreased.*");
 						DialogChangeEvent dce2 = new DialogChangeEvent(dia2, "Part-Time Worker");
 						
 						this.dispatchEvent(dce2);
@@ -89,17 +90,17 @@ public class SleepingHandsomeQuest extends Quest {
 			if (event.eventType.equals("DIALOG_EVENT")) {
 				DialogEvent de = (DialogEvent) event;
 				System.out.println("checking if speaker is clone");
-				if (de.speakerID.equals("Part_Time Worker")) {
+				if (de.speakerID.equals("Part-Time Worker")) {
 					System.out.println("YOU FINISHED THE QUEST :)");
 					QUEST_STATE++;
-					System.out.println("Quest Completed! Lucidity Level Increased!");
+					System.out.println("Quest Completed! Lucidity Level Decreased!");
 				}
 			}
 			System.out.println(QUEST_STATE);
 			break;
 		case QUEST_COMPLETED:
 			System.out.println("LAST STATE: " + event.eventType);
-			LucidityChangeEvent lce = new LucidityChangeEvent(++Sys.LUCIDITY); // TODO:
+			LucidityChangeEvent lce = new LucidityChangeEvent(--Sys.LUCIDITY); // TODO:
 			// make
 			// it
 			// Sys.LUCIDITY++
