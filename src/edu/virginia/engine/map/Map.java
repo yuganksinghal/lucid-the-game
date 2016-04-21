@@ -15,10 +15,10 @@ import org.w3c.dom.NodeList;
 
 public class Map {
 	Tile[][] foreground;
-	static boolean[][] collidables;
+	boolean[][] collidables;
 	Tile[][] background;
 	Tile[][] background2;
-	boolean[][] occupied;
+	static boolean[][] occupied;
 
 	boolean debug = true;
 
