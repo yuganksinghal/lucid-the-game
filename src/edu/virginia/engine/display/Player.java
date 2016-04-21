@@ -8,7 +8,6 @@ import edu.virginia.engine.events.LucidityChangeEvent;
 import edu.virginia.engine.map.Map;
 
 public class Player extends Walkable {
-	int LUCIDITY = 5;
 	boolean actionPressed = false;
 	boolean lucDownPressed = false;
 	boolean lucUpPressed = false;

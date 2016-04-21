@@ -67,11 +67,11 @@ public class Lucid extends Game{
 		
 		//INITIALIZE MAP
 		Sys.maps = new Map[5];
-		Sys.maps[0] = new Map("betatest.tmx");
-		Sys.maps[1] = new Map("betatest.tmx");
-		Sys.maps[2] = new Map("betatest.tmx");
-		Sys.maps[3] = new Map("betatest.tmx");
-		Sys.maps[4] = new Map("betatest.tmx");
+		Sys.maps[0] = new Map("betatest0.tmx");
+		Sys.maps[1] = new Map("betatest1.tmx");
+		Sys.maps[2] = new Map("betatest2.tmx");
+		Sys.maps[3] = new Map("betatest3.tmx");
+		Sys.maps[4] = new Map("betatest4.tmx");
 		Sys.currentMap = Sys.maps[2];		
 		
 		
@@ -239,7 +239,7 @@ public class Lucid extends Game{
 		
 		
 		
-		g.setColor(new Color(0, 0, 0, 255-(100*Sys.LUCIDITY/4)));
+		g.setColor(new Color(255, 100, 100, 100-(100*Sys.LUCIDITY/4)));
 		g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 		
 		if (GAME_STATE == DIALOG && dialog.size() > 0) {
