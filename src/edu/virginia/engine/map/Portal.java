@@ -24,6 +24,7 @@ public class Portal implements Interactable {
 		if (event.eventType.equals("INTERACT_EVENT")) {
 			InteractEvent ie = (InteractEvent) event;
 			if (ie.getX() == pointA.x && ie.getY() == pointA.y) {
+				if (ie.getX() == 65 && ie.getY() == 9) System.exit(0);
 				//move player to pointB
 				Sys.MC.teleport(pointB.x, pointB.y, Sys.currentMap);
 			}
