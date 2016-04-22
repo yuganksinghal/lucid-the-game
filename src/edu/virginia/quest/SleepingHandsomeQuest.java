@@ -12,13 +12,7 @@ import edu.virginia.engine.events.IEventListener;
 import edu.virginia.engine.events.InteractEvent;
 import edu.virginia.engine.events.LucidityChangeEvent;
 
-public class AlphaQuest extends Quest {
-	
-	// FSM:
-	// 0 - you haven't talked to quest giver
-	// 1 - you just talked to quest giver
-	// 2 - you have the icicle
-	// 3 - you have talked to the quest giver and turned in the icicle (LUCID++)
+public class SleepingHandsomeQuest extends Quest {
 
 	int QUEST_STATE = 0;
 
@@ -26,22 +20,27 @@ public class AlphaQuest extends Quest {
 	final int QUEST_STARTED = 1;
 	final int ITEM_GATHERED = 2;
 	final int QUEST_COMPLETED = 3;
-	
-	public AlphaQuest(ArrayList<IEventListener>EL){
+
+	public SleepingHandsomeQuest(ArrayList<IEventListener> EL) {
 		super();
-		((EventDispatcher) EL.get(0)).addEventListener(this, "DIALOG_EVENT");
-		this.addEventListener(EL.get(0), "DIALOG_CHANGE_EVENT");
+		for (IEventListener a : EL) {
+			((EventDispatcher) a).addEventListener(this, "DIALOG_EVENT");
+			this.addEventListener(a, "DIALOG_CHANGE_EVENT");
+		}
+		this.addEventListener(this, "DIALOG_EVENT");
 	}
 
 	@Override
 	public void handleEvent(Event event) {
+		// TODO Auto-generated method stub
+
 		switch (QUEST_STATE) {
 
 		case NOT_STARTED:
 			if (event.eventType.equals("DIALOG_EVENT")) {
 				DialogEvent de = (DialogEvent) event;
 				System.out.println("checking if speaker is clone");
-				if (de.speakerID.equals("clone")) {
+				if (de.speakerID.equals("boy")) {
 					System.out.println("It is! Yay! Proceeding through quest!");
 					QUEST_STATE++;
 					System.out.println("Quest Started!");
@@ -49,36 +48,36 @@ public class AlphaQuest extends Quest {
 			}
 			break;
 		case QUEST_STARTED:
-			System.out.println("Looking for icicle...");
+			System.out.println("Looking for a book...");
 			if (event.eventType.equals("INTERACT_EVENT")) {
 				InteractEvent ie = (InteractEvent) event;
 				System.out.println("it's an interact event! yay!");
 
-				ArrayList<Point> fountain = new ArrayList<Point>();
-				fountain.add(new Point(15, 12));
-				fountain.add(new Point(16, 12));
-				fountain.add(new Point(15, 13));
-				fountain.add(new Point(16, 13));
-				fountain.add(new Point(15, 14));
-				fountain.add(new Point(16, 14));
-				for (Point p : fountain) {
-					if (p.x == ie.getX() && p.y == ie.getY()) {
-						System.out.println("YOU GOT AN ICICLE FUCK YEAH");
+				Point bookshelf = new Point(82, 36);
+					if (bookshelf.x == ie.getX() && bookshelf.y == ie.getY()) {
 						ArrayList<String> dial = new ArrayList<String>();
-						dial.add("You break off some of the ice and put it in your pocket.");
-						dial.add("It's real cold.");
-						DialogEvent de = new DialogEvent("fountain");
+						dial.add("You got ____.");
+						dial.add("It seems strange");
+						DialogEvent de = new DialogEvent("bookshelf");
 						de.setDialog(dial);
 						this.dispatchEvent(de);
 						QUEST_STATE++;
 						ArrayList<String> dia = new ArrayList<String>();
-						dia.add("You found the ice! Thank you so much.");
-						dia.add("Looks like I'll live another day!...");
-						dia.add("*Your lucidity level has increased.*");
-						DialogChangeEvent dce = new DialogChangeEvent(dia, "clone");
+						dia.add("Awesome! You got the ____.");
+						dia.add("Don't forget to give it to her.");
+						DialogChangeEvent dce = new DialogChangeEvent(dia, "boy");
+						
 						this.dispatchEvent(dce);
+						
+						ArrayList<String> dia2 = new ArrayList<String>();
+						dia2.add("This ___...");
+						dia2.add("Who told you about this?");
+						dia2.add("Just leave me alone!");
+						dia2.add("*Your lucidity level has decreased.*");
+						DialogChangeEvent dce2 = new DialogChangeEvent(dia2, "Part-Time Worker");
+						
+						this.dispatchEvent(dce2);
 					}
-				}
 				System.out.println(QUEST_STATE);
 				// TODO: implement comparable interface for different objects,
 				// including points
@@ -91,29 +90,25 @@ public class AlphaQuest extends Quest {
 			if (event.eventType.equals("DIALOG_EVENT")) {
 				DialogEvent de = (DialogEvent) event;
 				System.out.println("checking if speaker is clone");
-				if (de.speakerID.equals("clone")) {
+				if (de.speakerID.equals("Part-Time Worker")) {
 					System.out.println("YOU FINISHED THE QUEST :)");
 					QUEST_STATE++;
-					System.out.println("Quest Completed! Lucidity Level Increased!");
+					System.out.println("Quest Completed! Lucidity Level Decreased!");
 				}
 			}
 			System.out.println(QUEST_STATE);
 			break;
 		case QUEST_COMPLETED:
 			System.out.println("LAST STATE: " + event.eventType);
-			LucidityChangeEvent lce = new LucidityChangeEvent(++Sys.LUCIDITY); // TODO:
+			LucidityChangeEvent lce = new LucidityChangeEvent(--Sys.LUCIDITY); // TODO:
 			// make
 			// it
 			// Sys.LUCIDITY++
 			this.dispatchEvent(lce);
 			ArrayList<String> dia = new ArrayList<String>();
-			dia.add("I have to eat once every few years...");
-			dia.add("...");
-			dia.add("...or my tummy gets upset.");
-			DialogChangeEvent dce = new DialogChangeEvent(dia, "clone");
-			this.dispatchEvent(dce);
 			break;
 		}
+
 	}
 
 }

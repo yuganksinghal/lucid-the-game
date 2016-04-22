@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
+import edu.virginia.engine.Sys;
 import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.IEventListener;
 import edu.virginia.engine.map.Map;
@@ -40,8 +41,6 @@ public class Game extends DisplayObject implements ActionListener, KeyListener, 
 	/* The JPanel for this game */
 	private GameScenePanel scenePanel;
 	
-	protected Map loadedMap;
-
 	public Game(String gameId, int width, int height) {
 		super(gameId);
 		
@@ -148,7 +147,7 @@ public class Game extends DisplayObject implements ActionListener, KeyListener, 
 
 		try {
 			/* Update all objects on the stage */
-			this.update(pressedKeys, loadedMap);
+			this.update(pressedKeys, Sys.currentMap);
 
 			/* Draw everything on the screen */
 			this.draw(g);

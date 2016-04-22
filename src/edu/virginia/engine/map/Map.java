@@ -18,7 +18,7 @@ public class Map {
 	boolean[][] collidables;
 	Tile[][] background;
 	Tile[][] background2;
-	boolean[][] occupied;
+	static boolean[][] occupied;
 
 	boolean debug = true;
 
@@ -57,7 +57,7 @@ public class Map {
 
 				String tilesetName = tElement.getAttribute("name");
 
-				Node imageNode = tNode.getFirstChild();
+//				Node imageNode = tNode.getFirstChild();
 				Element iElement = (Element) tElement.getElementsByTagName("image").item(0);
 				int imageHeight = Integer.parseInt(iElement.getAttribute("height"));
 				int imageWidth = Integer.parseInt(iElement.getAttribute("width"));
@@ -292,6 +292,10 @@ public class Map {
 	public boolean checkCollision(int j, int i) {
 		if (j >= this.height || i >= this.width || j < 0 || i < 0) return true;
 		return (collidables[j][i] || occupied[j][i]);
+	}
+	
+	public void setCollidable(int i, int j, boolean collide){
+		this.collidables[j][i] = collide;
 	}
 
 }

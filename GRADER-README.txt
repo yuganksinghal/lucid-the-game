@@ -1,25 +1,35 @@
-Welcome to the alpha version of Lucid!
+Welcome to the beta version of Lucid!
 
 To move, use the A, W, S and D keys. 
 
-You can interact with some objects (like the benches and quest objectives) and with NPCs (like the other ghost) by pressing Z while facing said entity.
+You can interact with NPCs and some objects (usually pointed out in quests) and doors with the Z key.
 
-Mechanics shown:
--Quests
--Changing Lucidity
--Tile movement
--Dialog
--Interaction with Environment
--Much more!
+Guide to NPCs:
+Because we haven't had enough time to implement full sprites for each character, we've compiled this handy list:
+NPC inside the house downstairs - Mom
+NPC inside the house upstairs - Strange Boy
+NPC outside your house - Old Man With Dog
+NPC outside the house to the left - Sales Clerk Girl
+NPC near the mansion/mushroom patch - Mysterious Stranger
 
-Mechanics present but not visibly shown:
--Use of spritesheets and parsing for animation and tilesets
--FSM-governed update loop and quest completion.
--Much more!
+The game shuts off when you reach the chapel. The following section is the finale + plot twist,
+ and will be added before the expo!
 
 
+Things to fix:
+
+Sound broke in attempts to make it better :(
+
+Add more content and the ending of the game.
+
+Fix an NPC-spritesheet-loading glitch
+
+Add a different animated sprite for each NPC.
+
+Constrain NPC movement to small areas (it's currently free-roam or stand-still, 
+so we set it to the latter for the beta).
 
 TEAM:
-Cameron Blandford
-Michael Raiti
-Yugank Singhal
+Cameron Blandford (jcb8nq)
+Michael Raiti (mgr2sr)
+Yugank Singhal (ys5ab)

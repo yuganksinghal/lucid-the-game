@@ -26,7 +26,7 @@ public class Sys {
 	final static double HORIZONTAL_SPEED = 1;
 	final static double GRAVITY = 1;
 	public final static int TILE_SIZE = 32;
-	public static int LUCIDITY = 3;
+	public static int LUCIDITY = 2;
 	//STATIC STORAGE
 	
 	public static ArrayList<Sprite> spriteList = new ArrayList<Sprite>();
@@ -36,12 +36,15 @@ public class Sys {
 	public static QuestManager questManager = new QuestManager();
 	public static CollisionManager collisionManager = new CollisionManager();
 	public static ArrayList<Sprite> garbage = new ArrayList<Sprite>();
+	public static ArrayList<Sprite> toAdd = new ArrayList<Sprite>();
 	public static TweenJuggler tweenJuggler = new TweenJuggler();
 	public static DialogManager dialogManager = new DialogManager();
 	public static ArrayList<Portal> portals = new ArrayList<Portal>();
 	public static ArrayList<Walkable> walkables = new ArrayList<Walkable>();
 	
-	public static HashMap<Map, String> maps = new HashMap<Map, String>();
+//	public static HashMap<Map, String> maps = new HashMap<Map, String>();
+	public static Map currentMap;
+	public static Map[] maps;
 	
 	public static void addItem(Item i) {
 		itemList.add(i);
@@ -50,14 +53,17 @@ public class Sys {
 	}
 	
 	public static void addSprite(Sprite s) {
-		spriteList.add(s);
+		toAdd.add(s);
 	}
 	
 	public static void update() {
 		for (Sprite s : Sys.garbage) {
 			Sys.spriteList.remove(s);
+		}for (Sprite s : Sys.toAdd) {
+			Sys.spriteList.add(s);
 		}
 		Sys.garbage.clear();
+		Sys.toAdd.clear();
 		Sys.tweenJuggler.nextFrame();
 	}
 }

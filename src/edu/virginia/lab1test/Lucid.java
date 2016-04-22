@@ -5,10 +5,9 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-import edu.virginia.engine.SoundManager;
 import edu.virginia.engine.Sys;
 import edu.virginia.engine.display.Game;
-import edu.virginia.engine.display.Item;
+import edu.virginia.engine.display.Mirror;
 import edu.virginia.engine.display.NPC;
 import edu.virginia.engine.display.Player;
 import edu.virginia.engine.display.Sign;
@@ -18,7 +17,12 @@ import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.IEventListener;
 import edu.virginia.engine.events.LucidityChangeEvent;
 import edu.virginia.engine.map.Map;
+import edu.virginia.engine.map.Portal;
 import edu.virginia.quest.AlphaQuest;
+import edu.virginia.quest.DogBiteQuest;
+import edu.virginia.quest.MansionQuest;
+import edu.virginia.quest.MushroomHuntQuest;
+import edu.virginia.quest.SleepingHandsomeQuest;
 
 /**
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
@@ -31,15 +35,18 @@ public class Lucid extends Game{
 	
 	/* Create a sprite object for our game. We'll use player */
 	Player player;
-	Sprite babyMario;
-	Item coin;
-	Item coin2;
-	Sprite platform;
 	Camera camera;
 	Sign bench;
 	NPC clone;
+	NPC dog;
 	NPC partTimeWorker;
-	AlphaQuest alphaQuest;
+	NPC mom;
+	NPC boy;
+	Mirror mirror;
+	MansionQuest mansionQuest;
+	DogBiteQuest dogBiteQuest;
+	MushroomHuntQuest mushroomHuntQuest;
+	SleepingHandsomeQuest sleeptingHandsomeQuest;
 	Map map3;
 	Map map4;
 	final static int GAME_WIDTH = 600;
@@ -62,54 +69,70 @@ public class Lucid extends Game{
 		Sys.instance = this;
 		
 		//INITIALIZE MAP
-		map3 = new Map("betatest.tmx");
-		map4 = new Map("betatest.tmx");
-		loadedMap = map3;
-		
+		Sys.maps = new Map[5];
+		Sys.maps[0] = new Map("betatest0.tmx");
+		Sys.maps[1] = new Map("betatest1.tmx");
+		Sys.maps[2] = new Map("betatest2.tmx");
+		Sys.maps[3] = new Map("betatest3.tmx");
+		Sys.maps[4] = new Map("betatest4.tmx");
+		Sys.currentMap = Sys.maps[2];		
 		
 		
 		// INITIALIZE SPRITES
 		
 		player = new Player("player", "Player.png");
-		player.teleport(16, 16, loadedMap);
+		player.teleport(17, 7, Sys.currentMap);
 		Sys.addSprite(player);
 		Sys.MC = player;
 		
 		
 		
-		clone = new NPC("clone","Dot.png");
-		clone.teleport(18, 22, loadedMap);
-		clone.addDialogLine("I'm a little hungry.");
-		clone.addDialogLine("Could you find me some ice?");
-		clone.addDialogLine("I think I saw a whole bunch in front of that building");
-		clone.addDialogLine("You can press Z to pick it up!");
-		Sys.addSprite(clone);
+		clone = new NPC("clone","Player.png");
+		clone.teleport(18, 22, Sys.currentMap);
+		clone.addDialogLine("pssst.");
+		clone.addDialogLine("Hey kid...");
+		clone.addDialogLine("Why don't you go steal a cross from that mansion over there?");
+		clone.addDialogLine(";)");
 		
 		partTimeWorker = new NPC("Part-Time Worker", "Player.png");
-		partTimeWorker.teleport(7, 10, loadedMap);
+		partTimeWorker.teleport(7, 10, Sys.currentMap);
 		partTimeWorker.addDialogLine("WATCHU LOOKING AT!");
 		partTimeWorker.addDialogLine("GO AWAY!");
 		partTimeWorker.addDialogLine("I'M ON BREAK!");
 		Sys.addSprite(partTimeWorker);
 		
+		dog = new NPC("dog", "Player.png");
+		dog.teleport(19, 7, Sys.currentMap);
+		dog.addDialogLine("*the old man's dog bites you before");
+		dog.addDialogLine("the old man can pull back on its leash*");
+		dog.addDialogLine("OLD MAN: Oh my! I'm so sorry.");
+		dog.addDialogLine("Why don't you go home and get that cleaned up?");
+		dog.addDialogLine("Don't sue me! Sue my dog!");
+		Sys.addSprite(dog);
 		
-		Sys.addSprite(partTimeWorker);
+		mom = new NPC("mom", "Player.png");
+		mom.teleport(78,44, Sys.currentMap);
+		mom.addDialogLine("Hi honey!");
+		mom.addDialogLine("Could you bring me some mushrooms from down the way?");
+		mom.addDialogLine("We're making soup!");
+		mom.addDialogLine("But before you do that,");
+		mom.addDialogLine("why don't you help that old man");
+		mom.addDialogLine("outside our house?");
+		Sys.addSprite(mom);
+		
+		boy = new NPC("boy", "Player.png");
+		boy.addDialogLine("Could you please talk to that girl");
+		boy.addDialogLine("who works at the convenience store for me?");
+		boy.addDialogLine("I've been trying to get her attention all day,");
+		boy.addDialogLine(" but she just keeps ignoring me.");
+		boy.addDialogLine("I know! Why don't you bring her my ____?");
+		boy.addDialogLine("It's on this bookshelf, I'm pretty sure.");
 		
 		// INITIALIZE CAMERA
 		
 		camera = new Camera(GAME_WIDTH, GAME_HEIGHT, player);
 		
-		// INITIALIZE BENCHES
-		
-		bench = new Sign(12,11);
-		bench.addTile(13, 11);
-		bench.addTile(14, 11);
-		bench.addTile(12, 20);
-		bench.addTile(13, 20);
-		bench.addTile(14, 20);
-		bench.addDialogLine("It's a nice bench...");
-		bench.addDialogLine("You wish you could sit on it...");
-		bench.addDialogLine(":(");
+		mirror = new Mirror("mirror",76,36);
 		
 		// ADD LISTENERS
 		
@@ -117,19 +140,44 @@ public class Lucid extends Game{
 		dialog = new ArrayList<String>();
 		dialog.add("YOU SHOULD NEVER SEE THIS");
 		
-		ArrayList alpha = new ArrayList<IEventListener>();
-		
-		alpha.add(clone);
+		ArrayList<IEventListener> mansion = new ArrayList<IEventListener>();
+		mansion.add(clone);
 		// INITIALIZE QUESTS
+		mansionQuest = new MansionQuest(mansion);
 		
-		alphaQuest = new AlphaQuest(alpha);
-		//clone.addEventListener(alphaQuest, "DIALOG_EVENT");
-		//player.addEventListener(alphaQuest, "INTERACT_EVENT");
-		//alphaQuest.addEventListener(this, "LUCIDITY_CHANGE_EVENT");
-		//alphaQuest.addEventListener(clone, "DIALOG_CHANGE_EVENT");
-		//alphaQuest.addEventListener(this, "DIALOG_EVENT");
 		
-		//SoundManager.playMusic("Lucid.wav");
+		
+		ArrayList<IEventListener> dogbite = new ArrayList<IEventListener>();
+		dogbite.add(dog);
+		// INITIALIZE QUESTS
+		dogBiteQuest = new DogBiteQuest(dogbite);
+		
+		ArrayList<IEventListener> sleepingHandsome = new ArrayList<IEventListener>();
+		sleepingHandsome.add(boy);
+		sleepingHandsome.add(partTimeWorker);
+		sleeptingHandsomeQuest = new SleepingHandsomeQuest(sleepingHandsome);
+		
+		ArrayList<IEventListener> mushroom = new ArrayList<IEventListener>();
+		mushroom.add(mom);
+		mushroomHuntQuest = new MushroomHuntQuest(mushroom);
+		
+//		SoundManager.playMusic("Lucid.wav");
+		
+		
+		//DECLARE PORTALS
+		
+		//portals to player house
+		Portal homeDoor1 = new Portal(79,46,18,5);
+		Portal homeDoor2 = new Portal(18,4,79,45);
+		
+		//portals to chapel
+		Portal chapelDoor1 = new Portal(65,9,109,24);
+		Portal chapelDoor2 = new Portal(109,25,65,10);
+		
+		//portals to haunted mansion
+		Portal mansionDoor1 = new Portal(14,35,135,59);
+		Portal mansionDoor2 = new Portal(135,60,14,36);
+		
 	}
 	
 	/**
@@ -176,10 +224,10 @@ public class Lucid extends Game{
 		super.draw(g);
 		g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 		if (camera != null) g.translate(camera.offset.x, camera.offset.y);
-		if (loadedMap == null) return;
+		if (Sys.currentMap == null) return;
 		//draw background
-		loadedMap.drawBackground(g);
-		loadedMap.drawBackground2(g);
+		Sys.currentMap.drawBackground(g);
+		Sys.currentMap.drawBackground2(g);
 
 		//draw sprites
 		for (Sprite s : Sys.spriteList) {
@@ -187,10 +235,16 @@ public class Lucid extends Game{
 		}
 		
 		//draw foreground
-		loadedMap.drawForeground(g);
+		Sys.currentMap.drawForeground(g);
+		
 		
 		if (camera != null) g.translate(-camera.offset.x, -camera.offset.y);
-
+		
+		
+		
+		g.setColor(new Color(255, 100, 100, 100-(100*Sys.LUCIDITY/4)));
+		g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+		
 		if (GAME_STATE == DIALOG && dialog.size() > 0) {
 			//TODO: set text size as a function of line length?
 			//TODO: break up text into multiple lines somehow.
@@ -213,6 +267,7 @@ public class Lucid extends Game{
 
 	@Override
 	public void handleEvent(Event event) {
+		System.out.println("Lucid.java got an event!");
 		if (event.eventType.equals("DIALOG_EVENT")) {
 			DialogEvent e = (DialogEvent) event;
 			this.dialog = e.getDialog();
@@ -223,13 +278,40 @@ public class Lucid extends Game{
 			System.out.println("Saw LCE!");
 			LucidityChangeEvent lce = (LucidityChangeEvent) event;
 			int luc = lce.lucidity;
+			if (luc>=4){
+				Sys.LUCIDITY = 4;
+				luc = 4;
+			} 
+			if (luc<=0){
+				Sys.LUCIDITY = 0;
+				luc = 0;
+			}
 			switch (luc) {
+			case 0:
+				System.out.println("Lucidity O");
+				Sys.currentMap = Sys.maps[0];
+				break;
+			case 1:
+				System.out.println("LUCIDITY 1");
+				Sys.addSprite(boy);
+				Sys.addSprite(clone);
+				Sys.currentMap = Sys.maps[1];
+				boy.teleport(83, 37, Sys.currentMap);
+				clone.teleport(24, 27, Sys.currentMap);
+				break;
+			case 2:
+				clone.teleport(0, 1, Sys.currentMap);
+				boy.teleport(0, 0, Sys.currentMap);
+				Sys.garbage.add(boy);
+				Sys.garbage.add(clone);
+				Sys.currentMap = Sys.maps[2];
+				break;
 			case 3:
-				loadedMap = map3;
+				Sys.currentMap = Sys.maps[3];
+				System.out.println("LOADED NEW MAP :D");
 				break;
 			case 4:
-				loadedMap = map4;
-				System.out.println("LOADED NEW MAP :D");
+				Sys.currentMap = Sys.maps[4];
 				break;
 			}
 		}

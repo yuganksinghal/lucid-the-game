@@ -44,10 +44,10 @@ public class AnimatedSprite extends Sprite {
 	public void addAnimationFrame(String animationId, BufferedImage img) {
 		if (animations.get(animationId) == null) {
 			animations.put(animationId, new ArrayList<BufferedImage>());
-			System.out.println("Created new animation: " + animationId);
+//			System.out.println("Created new animation: " + animationId);
 		}
 		animations.get(animationId).add(img);
-		System.out.println("Added frame to animation: " + animationId);
+//		System.out.println("Added frame to animation: " + animationId);
 	}
 	
 	@Override
@@ -88,9 +88,6 @@ public class AnimatedSprite extends Sprite {
 	protected void setAnimationLength(double i) {
 		animationTime = i / frames;
 		animationLength = i;
-//		System.out.println("number of frames: " + frames);
-//		System.out.println("Animation length: " + animationLength);
-//		System.out.println("Time per frame: " + animationTime);
 	}
 	
 	protected String getAnimationID() {

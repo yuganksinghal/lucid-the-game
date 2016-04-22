@@ -12,14 +12,8 @@ import edu.virginia.engine.events.IEventListener;
 import edu.virginia.engine.events.InteractEvent;
 import edu.virginia.engine.events.LucidityChangeEvent;
 
-public class AlphaQuest extends Quest {
+public class MansionQuest extends Quest{
 	
-	// FSM:
-	// 0 - you haven't talked to quest giver
-	// 1 - you just talked to quest giver
-	// 2 - you have the icicle
-	// 3 - you have talked to the quest giver and turned in the icicle (LUCID++)
-
 	int QUEST_STATE = 0;
 
 	final int NOT_STARTED = 0;
@@ -27,7 +21,7 @@ public class AlphaQuest extends Quest {
 	final int ITEM_GATHERED = 2;
 	final int QUEST_COMPLETED = 3;
 	
-	public AlphaQuest(ArrayList<IEventListener>EL){
+	public MansionQuest(ArrayList<IEventListener>EL){
 		super();
 		((EventDispatcher) EL.get(0)).addEventListener(this, "DIALOG_EVENT");
 		this.addEventListener(EL.get(0), "DIALOG_CHANGE_EVENT");
@@ -54,27 +48,23 @@ public class AlphaQuest extends Quest {
 				InteractEvent ie = (InteractEvent) event;
 				System.out.println("it's an interact event! yay!");
 
-				ArrayList<Point> fountain = new ArrayList<Point>();
-				fountain.add(new Point(15, 12));
-				fountain.add(new Point(16, 12));
-				fountain.add(new Point(15, 13));
-				fountain.add(new Point(16, 13));
-				fountain.add(new Point(15, 14));
-				fountain.add(new Point(16, 14));
-				for (Point p : fountain) {
+				ArrayList<Point> cross = new ArrayList<Point>();
+				cross.add(new Point(138, 34));
+				for (Point p : cross) {
 					if (p.x == ie.getX() && p.y == ie.getY()) {
 						System.out.println("YOU GOT AN ICICLE FUCK YEAH");
 						ArrayList<String> dial = new ArrayList<String>();
-						dial.add("You break off some of the ice and put it in your pocket.");
-						dial.add("It's real cold.");
+						dial.add("You pick up the ornament from the table.");
+						dial.add("You feel its hum reverberating through your body.");
 						DialogEvent de = new DialogEvent("fountain");
 						de.setDialog(dial);
 						this.dispatchEvent(de);
 						QUEST_STATE++;
 						ArrayList<String> dia = new ArrayList<String>();
-						dia.add("You found the ice! Thank you so much.");
-						dia.add("Looks like I'll live another day!...");
-						dia.add("*Your lucidity level has increased.*");
+						dia.add("You've seen this before right?");
+						dia.add("The trees are particularly thin this time of year.");
+						dia.add("*The man looks in the direction of the path to the East.*");
+						Sys.currentMap.setCollidable(45, 16, false);
 						DialogChangeEvent dce = new DialogChangeEvent(dia, "clone");
 						this.dispatchEvent(dce);
 					}
@@ -101,15 +91,10 @@ public class AlphaQuest extends Quest {
 			break;
 		case QUEST_COMPLETED:
 			System.out.println("LAST STATE: " + event.eventType);
-			LucidityChangeEvent lce = new LucidityChangeEvent(++Sys.LUCIDITY); // TODO:
-			// make
-			// it
-			// Sys.LUCIDITY++
-			this.dispatchEvent(lce);
 			ArrayList<String> dia = new ArrayList<String>();
-			dia.add("I have to eat once every few years...");
-			dia.add("...");
-			dia.add("...or my tummy gets upset.");
+			dia.add("You've seen this before right?");
+			dia.add("The trees are particularly thin this time of year.");
+			dia.add("*The man looks in the direction of the path to the East.*");
 			DialogChangeEvent dce = new DialogChangeEvent(dia, "clone");
 			this.dispatchEvent(dce);
 			break;
@@ -117,3 +102,4 @@ public class AlphaQuest extends Quest {
 	}
 
 }
+
