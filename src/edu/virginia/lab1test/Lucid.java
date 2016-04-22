@@ -81,7 +81,7 @@ public class Lucid extends Game{
 		// INITIALIZE SPRITES
 		
 		player = new Player("player", "Player.png");
-		player.teleport(16, 16, Sys.currentMap);
+		player.teleport(17, 7, Sys.currentMap);
 		Sys.addSprite(player);
 		Sys.MC = player;
 		
@@ -103,12 +103,11 @@ public class Lucid extends Game{
 		
 		dog = new NPC("dog", "Player.png");
 		dog.teleport(19, 7, Sys.currentMap);
-		dog.addDialogLine("*BITE*");
-		dog.addDialogLine("Old Man: Oh, Dear");
-		dog.addDialogLine("It seems that Rex bit you.");
+		dog.addDialogLine("*the old man's dog bites you before");
+		dog.addDialogLine("the old man can pull back on its leash*");
+		dog.addDialogLine("OLD MAN: Oh my! I'm so sorry.");
 		dog.addDialogLine("Why don't you go home and get that cleaned up?");
-		dog.addDialogLine("...and remember...");
-		dog.addDialogLine("Don't sue me! Sue my Dog!.");
+		dog.addDialogLine("Don't sue me! Sue my dog!");
 		Sys.addSprite(dog);
 		
 		mom = new NPC("mom", "Player.png");
@@ -126,24 +125,12 @@ public class Lucid extends Game{
 		boy.addDialogLine("who works at the convenience store for me?");
 		boy.addDialogLine("I've been trying to get her attention all day,");
 		boy.addDialogLine(" but she just keeps ignoring me.");
-		boy.addDialogLine("I know! Why don't you get her a ___ for me?");
-		boy.addDialogLine("There is one in that bookshelf right there!");
+		boy.addDialogLine("I know! Why don't you bring her my ____?");
+		boy.addDialogLine("It's on this bookshelf, I'm pretty sure.");
 		
 		// INITIALIZE CAMERA
 		
 		camera = new Camera(GAME_WIDTH, GAME_HEIGHT, player);
-		
-		// INITIALIZE BENCHES
-		
-		bench = new Sign("bench", 12,11);
-		bench.addTile(13, 11);
-		bench.addTile(14, 11);
-		bench.addTile(12, 20);
-		bench.addTile(13, 20);
-		bench.addTile(14, 20);
-		bench.addDialogLine("It's a nice bench...");
-		bench.addDialogLine("You wish you could sit on it...");
-		bench.addDialogLine(":(");
 		
 		mirror = new Mirror("mirror",76,36);
 		

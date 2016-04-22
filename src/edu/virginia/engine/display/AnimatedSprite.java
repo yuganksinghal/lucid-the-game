@@ -88,9 +88,6 @@ public class AnimatedSprite extends Sprite {
 	protected void setAnimationLength(double i) {
 		animationTime = i / frames;
 		animationLength = i;
-//		System.out.println("number of frames: " + frames);
-//		System.out.println("Animation length: " + animationLength);
-//		System.out.println("Time per frame: " + animationTime);
 	}
 	
 	protected String getAnimationID() {

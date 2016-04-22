@@ -70,9 +70,9 @@ public class SleepingHandsomeQuest extends Quest {
 						this.dispatchEvent(dce);
 						
 						ArrayList<String> dia2 = new ArrayList<String>();
-						dia2.add("This ___.");
-						dia2.add("How do you know about the ____?!");
-						dia2.add("GET OUT OF THE WAY!");
+						dia2.add("This ___...");
+						dia2.add("Who told you about this?");
+						dia2.add("Just leave me alone!");
 						dia2.add("*Your lucidity level has decreased.*");
 						DialogChangeEvent dce2 = new DialogChangeEvent(dia2, "Part-Time Worker");
 						

@@ -79,17 +79,16 @@ public class MushroomHuntQuest extends Quest {
 					if (p.x == ie.getX() && p.y == ie.getY()) {
 						System.out.println("YOU GOT AN ICICLE FUCK YEAH");
 						ArrayList<String> dial = new ArrayList<String>();
-						dial.add("You found some Mushrooms!");
-						dial.add("You feel proud of your accomplishment.");
+						dial.add("You pocket the mushrooms and think about dinner...");
+						dial.add("Your stomach growls in anticipation.");
 						DialogEvent de = new DialogEvent("fountain");
 						de.setDialog(dial);
 						this.dispatchEvent(de);
 						QUEST_STATE++;
 						ArrayList<String> dia = new ArrayList<String>();
-						dia.add("Good Boy");
-						dia.add("Your mother gently pats you on the head ");
-						dia.add("You hug her back.");
-						dia.add("*Your lucidity level has increased.*");
+						dia.add("Thanks kiddo!");
+						dia.add("*your mother's warm smile grounds you*");
+						dia.add("*your lucidity level has increased*");
 						DialogChangeEvent dce = new DialogChangeEvent(dia,"mom");
 						this.dispatchEvent(dce);
 					}
@@ -120,8 +119,9 @@ public class MushroomHuntQuest extends Quest {
 			System.out.println("LAST STATE: " + event.eventType);
 			ArrayList<String> dia = new ArrayList<String>();
 			dia.add("You didn't eat the mushrooms, did you?");
-			dia.add("If you eat mushrooms, you'll be poisoned, and start going crazy");
-			dia.add("People have been ending up at an abandoned house from uncooked mushrooms.");
+			dia.add("If you eat those raw, they'll mess with your head, I heard.");
+			dia.add("People have been reporting weird visions of some sorta house");
+			dia.add("near the mushroom field.");
 			DialogChangeEvent dce = new DialogChangeEvent(dia,"mom");
 			this.dispatchEvent(dce);
 			

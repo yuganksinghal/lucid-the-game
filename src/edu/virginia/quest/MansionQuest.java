@@ -54,16 +54,16 @@ public class MansionQuest extends Quest{
 					if (p.x == ie.getX() && p.y == ie.getY()) {
 						System.out.println("YOU GOT AN ICICLE FUCK YEAH");
 						ArrayList<String> dial = new ArrayList<String>();
-						dial.add("You pick up the cross from the table.");
+						dial.add("You pick up the ornament from the table.");
 						dial.add("You feel its hum reverberating through your body.");
 						DialogEvent de = new DialogEvent("fountain");
 						de.setDialog(dial);
 						this.dispatchEvent(de);
 						QUEST_STATE++;
 						ArrayList<String> dia = new ArrayList<String>();
-						dia.add("Heh, You got it kid...");
-						dia.add("You know where crosses belong, right?");
-						dia.add("Try moving through the trees to the east of your house.");
+						dia.add("You've seen this before right?");
+						dia.add("The trees are particularly thin this time of year.");
+						dia.add("*The man looks in the direction of the path to the East.*");
 						Sys.currentMap.setCollidable(45, 16, false);
 						DialogChangeEvent dce = new DialogChangeEvent(dia, "clone");
 						this.dispatchEvent(dce);
@@ -91,13 +91,10 @@ public class MansionQuest extends Quest{
 			break;
 		case QUEST_COMPLETED:
 			System.out.println("LAST STATE: " + event.eventType);
-			// make
-			// it
-			// Sys.LUCIDITY++
 			ArrayList<String> dia = new ArrayList<String>();
-			dia.add("Heh, You got it kid...");
-			dia.add("You know where crosses belong, right?");
-			dia.add("Try moving through the trees to the east of your house.");
+			dia.add("You've seen this before right?");
+			dia.add("The trees are particularly thin this time of year.");
+			dia.add("*The man looks in the direction of the path to the East.*");
 			DialogChangeEvent dce = new DialogChangeEvent(dia, "clone");
 			this.dispatchEvent(dce);
 			break;

@@ -62,8 +62,8 @@ public class DogBiteQuest extends Quest {
 				if (p.x == ie.getX() && p.y == ie.getY()) {
 					System.out.println("YOU GOT AN MEDKIT");
 					ArrayList<String> dial = new ArrayList<String>();
-					dial.add("You patch yourself up with some antibiotics and bandages");
-					dial.add("It still hurts.");
+					dial.add("You patch yourself up with some antibiotic ointment");
+					dial.add("and a bandaid. It still stings...");
 					dial.add("You notice a shimmering boy next to the bookshelf.");
 					dial.add("Was he always there?");
 					
