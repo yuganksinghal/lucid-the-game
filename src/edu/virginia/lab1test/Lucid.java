@@ -187,6 +187,10 @@ public class Lucid extends Game{
 		
 		ArrayList<IEventListener> finalQ = new ArrayList<IEventListener>();
 		finalQ.add(cross);
+		finalQ.add(mom);
+		finalQ.add(partTimeWorker);
+		finalQ.add(oldMan);
+		finalQ.add(boy);
 		finalQuest = new FinalQuest(finalQ);
 //		SoundManager.playMusic("Lucid.wav");
 		
@@ -219,18 +223,18 @@ public class Lucid extends Game{
 		//REMOVE THIS EVENTUALLY
 
 //		else Sys.Blackout = 0;
-		if (Sys.Blackout > 0) {
-			Sys.Blackout -= 0.05;
-		}
-		if (Sys.Blackout < 0) {
-			Sys.Blackout = 0;
-		}
 		
 		if (GAME_STATE == TITLE_SCREEN) {
 			//add title screen stuff here (key detection)
 			if (!pressedKeys.isEmpty()) GAME_STATE = 0;
 		}
 		else if (GAME_STATE == DEFAULT) {
+			if (Sys.Blackout > 0) {
+				Sys.Blackout -= 0.05;
+			}
+			if (Sys.Blackout < 0) {
+				Sys.Blackout = 0;
+			}
 			/* Make sure player is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
 			for (Sprite s : Sys.spriteList) {
 				if (s != null) s.update(pressedKeys, map);

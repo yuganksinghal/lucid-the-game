@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import edu.virginia.engine.Sys;
+import edu.virginia.engine.display.Walkable;
 import edu.virginia.engine.events.DialogChangeEvent;
 import edu.virginia.engine.events.DialogEvent;
 import edu.virginia.engine.events.Event;
@@ -18,11 +19,13 @@ public class FinalQuest extends Quest{
 	
 	final int NOT_STARTED = 0;
 	final int GAME_COMPLETED = 1;
+	ArrayList<IEventListener> el;
 	
 	public FinalQuest(ArrayList<IEventListener>EL){
 		super();
 		((EventDispatcher) EL.get(0)).addEventListener(this, "DIALOG_EVENT");
 		this.addEventListener(EL.get(0), "DIALOG_CHANGE_EVENT");
+		el = EL;
 	}
 	
 	public void handleEvent(Event event) {
@@ -69,9 +72,22 @@ public class FinalQuest extends Quest{
 					DialogEvent dae = new DialogEvent("hospital");
 					dae.setDialog(dial);
 					this.dispatchEvent(dae);
+					QUEST_STATE++;
+					
+					//here we teleport the players
+					((Walkable) (el.get(1))).teleport(20,121,Sys.currentMap);
+					((Walkable) (el.get(1))).face(0);;
+					((Walkable) (el.get(2))).teleport(21, 121, Sys.currentMap);
+					((Walkable) (el.get(2))).face(0);
+					((Walkable) (el.get(3))).teleport(19, 12, Sys.currentMap);
+					((Walkable) (el.get(3))).face(0);
 				}
+				
 			}
 			break;
+		case 3:
+			//here we add the dialog for the end of the game
+			//and then we exit out of the game at the end of the dialog
 		}
 	}
 
