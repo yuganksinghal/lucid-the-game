@@ -306,15 +306,18 @@ public class Lucid extends Game{
 			case 2:
 				clone.teleport(159, 159, Sys.currentMap);
 				boy.teleport(158, 159, Sys.currentMap);
+				System.out.println("Lucidity 2");
 				Sys.garbage.add(boy);
 				Sys.garbage.add(clone);
 				Sys.currentMap = Sys.maps[2];
 				break;
+				
 			case 3:
+				System.out.println("LUCIDITY 3");
 				Sys.currentMap = Sys.maps[3];
-				System.out.println("LOADED NEW MAP :D");
 				break;
 			case 4:
+				System.out.println("LUCIDITY 4");
 				Sys.currentMap = Sys.maps[4];
 				break;
 			}
