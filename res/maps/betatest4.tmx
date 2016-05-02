@@ -76815,7 +76815,7 @@
    <tile gid="0"/>
   </data>
  </layer>
- <layer name="Collision" width="160" height="160">
+ <layer name="Collision" width="160" height="160" visible="0">
   <data>
    <tile gid="194"/>
    <tile gid="194"/>
