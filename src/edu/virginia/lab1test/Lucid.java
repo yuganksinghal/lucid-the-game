@@ -245,6 +245,10 @@ public class Lucid extends Game{
 		g.setColor(new Color(255, 100, 100, 100-(100*Sys.LUCIDITY/4)));
 		g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 		
+		g.setColor(new Color(0, 0, 0, Sys.Blackout*255));
+		g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+		
+		
 		if (GAME_STATE == DIALOG && dialog.size() > 0) {
 			//TODO: set text size as a function of line length?
 			//TODO: break up text into multiple lines somehow.
@@ -300,8 +304,8 @@ public class Lucid extends Game{
 				clone.teleport(24, 27, Sys.currentMap);
 				break;
 			case 2:
-				clone.teleport(0, 1, Sys.currentMap);
-				boy.teleport(0, 0, Sys.currentMap);
+				clone.teleport(159, 159, Sys.currentMap);
+				boy.teleport(158, 159, Sys.currentMap);
 				Sys.garbage.add(boy);
 				Sys.garbage.add(clone);
 				Sys.currentMap = Sys.maps[2];
