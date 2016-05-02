@@ -17,9 +17,7 @@ public class FinalQuest extends Quest{
 	int QUEST_STATE = 0;
 	
 	final int NOT_STARTED = 0;
-	final int QUEST_STARTED = 1;
-	final int ITEM_GATHERED = 2;
-	final int GAME_COMPLETED = 3;
+	final int GAME_COMPLETED = 1;
 	
 	public FinalQuest(ArrayList<IEventListener>EL){
 		super();
@@ -36,9 +34,10 @@ public class FinalQuest extends Quest{
 				if (de.speakerID.equals("cross")) {					
 					QUEST_STATE++;
 					System.out.println("Quest Started!");
+					//Sys.finalPortal.setPointB(null);
 					Sys.LUCIDITY = 0;
 					LucidityChangeEvent lce = new LucidityChangeEvent(Sys.LUCIDITY);
-					
+					this.dispatchEvent(lce);
 				
 					//TODO: 20, 120
 				}
@@ -51,7 +50,8 @@ public class FinalQuest extends Quest{
 					Sys.Blackout = 1;
 					Sys.LUCIDITY = 4;
 					LucidityChangeEvent lce = new LucidityChangeEvent(Sys.LUCIDITY);
-					Sys.MC.teleport(20, 220, Sys.currentMap);
+					this.dispatchEvent(lce);
+					Sys.MC.teleport(20, 120, Sys.currentMap);
 					ArrayList<String> dial = new ArrayList<String>();
 					dial.add("You try to open the door");
 					dial.add("...");
@@ -62,11 +62,13 @@ public class FinalQuest extends Quest{
 					DialogEvent de = new DialogEvent("church");
 					de.setDialog(dial);
 					this.dispatchEvent(de);
-					Sys.Blackout=0;
 					ArrayList<String> dia = new ArrayList<String>();
 					dia.add("...");
 					dia.add("Test Dialogue");
 					dia.add("...");
+					DialogEvent dae = new DialogEvent("hospital");
+					dae.setDialog(dial);
+					this.dispatchEvent(dae);
 				}
 			}
 			break;

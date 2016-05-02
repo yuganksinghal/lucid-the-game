@@ -21,6 +21,7 @@ import edu.virginia.engine.map.Map;
 import edu.virginia.engine.map.Portal;
 import edu.virginia.quest.AlphaQuest;
 import edu.virginia.quest.DogBiteQuest;
+import edu.virginia.quest.FinalQuest;
 import edu.virginia.quest.MansionQuest;
 import edu.virginia.quest.MushroomHuntQuest;
 import edu.virginia.quest.SleepingHandsomeQuest;
@@ -44,11 +45,13 @@ public class Lucid extends Game{
 	NPC mom;
 	NPC boy;
 	NPC oldMan;
+	Sign cross;
 	Mirror mirror;
 	MansionQuest mansionQuest;
 	DogBiteQuest dogBiteQuest;
 	MushroomHuntQuest mushroomHuntQuest;
 	SleepingHandsomeQuest sleeptingHandsomeQuest;
+	FinalQuest finalQuest;
 	Map map3;
 	Map map4;
 	final static int GAME_WIDTH = 600;
@@ -144,6 +147,9 @@ public class Lucid extends Game{
 		
 		// INITIALIZE CAMERA
 		
+		cross = new Sign("cross", 109, 7);
+		cross.addDialogLine("HAI! DIS IS KRAUS. DERP");
+		
 		camera = new Camera(GAME_WIDTH, GAME_HEIGHT, player);
 		
 		mirror = new Mirror("mirror",76,36);
@@ -177,6 +183,10 @@ public class Lucid extends Game{
 		mushroom.add(mom);
 		mushroomHuntQuest = new MushroomHuntQuest(mushroom);
 		
+		
+		ArrayList<IEventListener> finalQ = new ArrayList<IEventListener>();
+		finalQ.add(cross);
+		finalQuest = new FinalQuest(finalQ);
 //		SoundManager.playMusic("Lucid.wav");
 		
 		
@@ -188,7 +198,7 @@ public class Lucid extends Game{
 		
 		//portals to chapel
 		Portal chapelDoor1 = new Portal(65,9,109,24);
-		Portal chapelDoor2 = new Portal(109,25,65,10);
+		//Portal chapelDoor2 = new Portal(109,25,65,10);
 		
 		//portals to haunted mansion
 		Portal mansionDoor1 = new Portal(14,35,135,59);
@@ -269,7 +279,7 @@ public class Lucid extends Game{
 		g.setColor(new Color(255, 100, 100, 100-(100*Sys.LUCIDITY/4)));
 		g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 		
-		g.setColor(new Color(0, 0, 0, Sys.Blackout*255));
+		g.setColor(new Color(0, 0, 255, Sys.Blackout*255));
 		g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 		
 		
