@@ -27,6 +27,7 @@ public class Sys {
 	final static double GRAVITY = 1;
 	public final static int TILE_SIZE = 32;
 	public static int LUCIDITY = 2;
+	public static int Blackout = 0;
 	//STATIC STORAGE
 	
 	public static ArrayList<Sprite> spriteList = new ArrayList<Sprite>();
@@ -45,6 +46,7 @@ public class Sys {
 //	public static HashMap<Map, String> maps = new HashMap<Map, String>();
 	public static Map currentMap;
 	public static Map[] maps;
+
 	
 	public static void addItem(Item i) {
 		itemList.add(i);
