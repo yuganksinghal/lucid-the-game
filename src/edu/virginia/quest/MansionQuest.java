@@ -65,7 +65,7 @@ public class MansionQuest extends Quest{
 						dia.add("The trees are particularly thin this time of year.");
 						dia.add("*The man looks in the direction of the path to the East.*");
 						Sys.currentMap.setCollidable(45, 16, false);
-						DialogChangeEvent dce = new DialogChangeEvent(dia, "clone");
+						DialogChangeEvent dce = new DialogChangeEvent(dia, "Priest");
 						this.dispatchEvent(dce);
 					}
 				}
@@ -81,7 +81,7 @@ public class MansionQuest extends Quest{
 			if (event.eventType.equals("DIALOG_EVENT")) {
 				DialogEvent de = (DialogEvent) event;
 				System.out.println("checking if speaker is clone");
-				if (de.speakerID.equals("clone")) {
+				if (de.speakerID.equals("Priest")) {
 					System.out.println("YOU FINISHED THE QUEST :)");
 					QUEST_STATE++;
 					System.out.println("Quest Completed! Lucidity Level Increased!");
@@ -95,7 +95,7 @@ public class MansionQuest extends Quest{
 			dia.add("You've seen this before right?");
 			dia.add("The trees are particularly thin this time of year.");
 			dia.add("*The man looks in the direction of the path to the East.*");
-			DialogChangeEvent dce = new DialogChangeEvent(dia, "clone");
+			DialogChangeEvent dce = new DialogChangeEvent(dia, "Priest");
 			this.dispatchEvent(dce);
 			break;
 		}
