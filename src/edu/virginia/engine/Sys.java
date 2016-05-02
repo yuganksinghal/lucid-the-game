@@ -40,8 +40,8 @@ public class Sys {
 	public static ArrayList<Sprite> toAdd = new ArrayList<Sprite>();
 	public static TweenJuggler tweenJuggler = new TweenJuggler();
 	public static DialogManager dialogManager = new DialogManager();
-	public static ArrayList<Portal> portals = new ArrayList<Portal>();
 	public static ArrayList<Walkable> walkables = new ArrayList<Walkable>();
+	//public static Portal finalPortal = new Portal(109,25,65,10);
 	
 //	public static HashMap<Map, String> maps = new HashMap<Map, String>();
 	public static Map currentMap;

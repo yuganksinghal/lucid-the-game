@@ -31,4 +31,8 @@ public class Portal implements Interactable {
 			}
 		}
 	}
+	
+	public void setPointB(Point B){
+		this.pointB = B;
+	}
 }

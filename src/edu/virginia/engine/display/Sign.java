@@ -44,7 +44,7 @@ public class Sign extends EventDispatcher implements Interactable  {
 				int y = p.y;
 				if (e.getX() == x && e.getY() == y) {
 					System.out.println("SIGN WORKS" + this.id);
-					DialogEvent de = new DialogEvent(null);
+					DialogEvent de = new DialogEvent(this.id);
 					de.setDialog(dialog);
 					this.dispatchEvent(de);
 					break;
