@@ -34,8 +34,8 @@ public class MansionQuest extends Quest{
 		case NOT_STARTED:
 			if (event.eventType.equals("DIALOG_EVENT")) {
 				DialogEvent de = (DialogEvent) event;
-				System.out.println("checking if speaker is clone");
-				if (de.speakerID.equals("clone")) {
+				System.out.println("checking if speaker is priest");
+				if (de.speakerID.equals("Priest")) {
 					System.out.println("It is! Yay! Proceeding through quest!");
 					QUEST_STATE++;
 					System.out.println("Quest Started!");

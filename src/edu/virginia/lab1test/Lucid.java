@@ -38,7 +38,7 @@ public class Lucid extends Game{
 	Player player;
 	Camera camera;
 	Sign bench;
-	NPC clone;
+	NPC priest;
 	NPC dog;
 	NPC partTimeWorker;
 	NPC mom;
@@ -58,9 +58,10 @@ public class Lucid extends Game{
 	ArrayList<String> dialog;
 	int dialogItr = 0;
 	
-	int GAME_STATE = 0;
+	int GAME_STATE = 2;
 	final static int DEFAULT = 0;
 	final static int DIALOG = 1;
+	final static int TITLE_SCREEN = 2;
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
 	 * */
@@ -90,12 +91,14 @@ public class Lucid extends Game{
 		
 		
 		
-		clone = new NPC("priest","Priest.png");
-		clone.teleport(18, 22, Sys.currentMap);
-		clone.addDialogLine("pssst.");
-		clone.addDialogLine("Hey kid...");
-		clone.addDialogLine("Why don't you go steal a cross from that mansion over there?");
-		clone.addDialogLine(";)");
+		priest = new NPC("Priest","Priest.png");
+		priest.teleport(18, 22, Sys.currentMap);
+		priest.addDialogLine("Hey you.");
+		priest.addDialogLine("Yeah kid, I'm talking to you...");
+		priest.addDialogLine("Can you get an icon for me from that mansion?");
+		priest.addDialogLine("I'm not allowed in there...");
+		priest.addDialogLine("It looks like the one on my robe.");
+		priest.addDialogLine("Thanks, kid.");
 		
 		partTimeWorker = new NPC("Part-Time Worker", "Boy.png");
 		partTimeWorker.teleport(7, 10, Sys.currentMap);
@@ -152,7 +155,7 @@ public class Lucid extends Game{
 		dialog.add("YOU SHOULD NEVER SEE THIS");
 		
 		ArrayList<IEventListener> mansion = new ArrayList<IEventListener>();
-		mansion.add(clone);
+		mansion.add(priest);
 		// INITIALIZE QUESTS
 		mansionQuest = new MansionQuest(mansion);
 		
@@ -201,8 +204,10 @@ public class Lucid extends Game{
 	 * */
 	@Override
 	public void update(ArrayList<String> pressedKeys, Map map){
-		
-		if (GAME_STATE == DEFAULT) {
+		if (GAME_STATE == TITLE_SCREEN) {
+			
+		}
+		else if (GAME_STATE == DEFAULT) {
 			/* Make sure player is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
 			for (Sprite s : Sys.spriteList) {
 				if (s != null) s.update(pressedKeys, map);
@@ -316,17 +321,17 @@ public class Lucid extends Game{
 			case 1:
 				System.out.println("LUCIDITY 1");
 				Sys.addSprite(boy);
-				Sys.addSprite(clone);
+				Sys.addSprite(priest);
 				Sys.currentMap = Sys.maps[1];
 				boy.teleport(83, 37, Sys.currentMap);
-				clone.teleport(24, 27, Sys.currentMap);
+				priest.teleport(24, 27, Sys.currentMap);
 				break;
 			case 2:
-				clone.teleport(159, 159, Sys.currentMap);
+				priest.teleport(159, 159, Sys.currentMap);
 				boy.teleport(158, 159, Sys.currentMap);
 				System.out.println("Lucidity 2");
 				Sys.garbage.add(boy);
-				Sys.garbage.add(clone);
+				Sys.garbage.add(priest);
 				Sys.currentMap = Sys.maps[2];
 				break;
 			case 3:
