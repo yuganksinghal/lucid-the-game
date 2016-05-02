@@ -47,7 +47,7 @@ public class MansionQuest extends Quest{
 				for (Point p : cross) {
 					if (p.x == ie.getX() && p.y == ie.getY()) {
 						ArrayList<String> dial = new ArrayList<String>();
-						dial.add("You pick up the ornament from the table.");
+						dial.add("You pick up the icon from the table.");
 						dial.add("You feel its hum reverberating through your body.");
 						DialogEvent de = new DialogEvent("fountain");
 						de.setDialog(dial);
@@ -58,6 +58,10 @@ public class MansionQuest extends Quest{
 						dia.add("The trees are particularly thin this time of year.");
 						dia.add("*The man looks in the direction of the path to the East.*");
 						Sys.currentMap.setCollidable(45, 16, false);
+						Sys.currentMap.setCollidable(45, 15, false);
+						Sys.currentMap.setCollidable(45, 14, false);
+						Sys.currentMap.setCollidable(45, 13, false);
+						Sys.currentMap.setCollidable(45, 12, false);
 						DialogChangeEvent dce = new DialogChangeEvent(dia, "Priest");
 						this.dispatchEvent(dce);
 					}
@@ -65,7 +69,6 @@ public class MansionQuest extends Quest{
 			}
 			break;
 		case ITEM_GATHERED:
-			System.out.println("Items Gathered Executing");
 			if (event.eventType.equals("DIALOG_EVENT")) {
 				DialogEvent de = (DialogEvent) event;
 				if (de.speakerID.equals("Priest")) {
