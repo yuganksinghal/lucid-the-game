@@ -34,25 +34,18 @@ public class MansionQuest extends Quest{
 		case NOT_STARTED:
 			if (event.eventType.equals("DIALOG_EVENT")) {
 				DialogEvent de = (DialogEvent) event;
-				System.out.println("checking if speaker is priest");
 				if (de.speakerID.equals("Priest")) {
-					System.out.println("It is! Yay! Proceeding through quest!");
 					QUEST_STATE++;
-					System.out.println("Quest Started!");
 				}
 			}
 			break;
 		case QUEST_STARTED:
-			System.out.println("Looking for icicle...");
 			if (event.eventType.equals("INTERACT_EVENT")) {
 				InteractEvent ie = (InteractEvent) event;
-				System.out.println("it's an interact event! yay!");
-
 				ArrayList<Point> cross = new ArrayList<Point>();
 				cross.add(new Point(138, 34));
 				for (Point p : cross) {
 					if (p.x == ie.getX() && p.y == ie.getY()) {
-						System.out.println("YOU GOT AN ICICLE FUCK YEAH");
 						ArrayList<String> dial = new ArrayList<String>();
 						dial.add("You pick up the ornament from the table.");
 						dial.add("You feel its hum reverberating through your body.");
@@ -69,28 +62,20 @@ public class MansionQuest extends Quest{
 						this.dispatchEvent(dce);
 					}
 				}
-				System.out.println(QUEST_STATE);
-				// TODO: implement comparable interface for different objects,
-				// including points
-				// TODO: standardize x,y stuff so x,y for parameters and y,x in
-				// method bodies
 			}
 			break;
 		case ITEM_GATHERED:
 			System.out.println("Items Gathered Executing");
 			if (event.eventType.equals("DIALOG_EVENT")) {
 				DialogEvent de = (DialogEvent) event;
-				System.out.println("checking if speaker is clone");
 				if (de.speakerID.equals("Priest")) {
 					System.out.println("YOU FINISHED THE QUEST :)");
 					QUEST_STATE++;
-					System.out.println("Quest Completed! Lucidity Level Increased!");
 				}
 			}
 			System.out.println(QUEST_STATE);
 			break;
 		case QUEST_COMPLETED:
-			System.out.println("LAST STATE: " + event.eventType);
 			ArrayList<String> dia = new ArrayList<String>();
 			dia.add("You've seen this before right?");
 			dia.add("The trees are particularly thin this time of year.");

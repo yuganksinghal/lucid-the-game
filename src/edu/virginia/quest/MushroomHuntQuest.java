@@ -38,14 +38,10 @@ public class MushroomHuntQuest extends Quest {
 		switch (QUEST_STATE) {
 
 		case NOT_STARTED:
-			System.out.println("mushroom quest hasn't started!");
 			if (event.eventType.equals("DIALOG_EVENT")) {
 				DialogEvent de = (DialogEvent) event;
-				System.out.println("checking if speaker is mom");
 				if (de.speakerID.equals("Mom")) {
-					System.out.println("It is! Yay! Proceeding through quest!");
 					QUEST_STATE++;
-					System.out.println("Quest Started!");
 					ArrayList<String> dia = new ArrayList<String>();
 					dia.add("Hey hon.");
 					dia.add("Did you get those mushrooms like I asked?");
@@ -56,11 +52,8 @@ public class MushroomHuntQuest extends Quest {
 			}
 			break;
 		case QUEST_STARTED:
-			System.out.println("Looking for mushroom...");
 			if (event.eventType.equals("INTERACT_EVENT")) {
 				InteractEvent ie = (InteractEvent) event;
-				System.out.println("it's an interact event! yay!");
-
 				ArrayList<Point> mushroomPatch = new ArrayList<Point>();
 				mushroomPatch.add(new Point(9, 29));  //TODO: switch points
 				mushroomPatch.add(new Point(13, 29));
@@ -77,7 +70,6 @@ public class MushroomHuntQuest extends Quest {
 				mushroomPatch.add(new Point(10, 35));
 				for (Point p : mushroomPatch) {
 					if (p.x == ie.getX() && p.y == ie.getY()) {
-						System.out.println("YOU GOT AN ICICLE FUCK YEAH");
 						ArrayList<String> dial = new ArrayList<String>();
 						dial.add("You pocket the mushrooms and think about dinner...");
 						dial.add("Your stomach growls in anticipation.");
