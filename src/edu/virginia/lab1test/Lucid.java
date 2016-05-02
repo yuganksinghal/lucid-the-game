@@ -192,7 +192,6 @@ public class Lucid extends Game{
 		finalQ.add(oldMan);
 		finalQ.add(boy);
 		finalQuest = new FinalQuest(finalQ);
-//		SoundManager.playMusic("Lucid.wav");
 		
 		
 		//DECLARE PORTALS

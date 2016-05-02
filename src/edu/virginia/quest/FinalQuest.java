@@ -58,7 +58,7 @@ public class FinalQuest extends Quest{
 					ArrayList<String> dial = new ArrayList<String>();
 					dial.add("You try to open the door");
 					dial.add("...");
-					dial.add("...");
+					dial.add(".....");
 					dial.add("It's locked");
 					dial.add("You strangely feel tired");
 					dial.add("You black out");
@@ -85,7 +85,8 @@ public class FinalQuest extends Quest{
 				
 			}
 			break;
-		case 3:
+		case 2:
+			System.out.println("FINAL DIALOGUE. AFTER THIS, GAME ENDS");
 			//here we add the dialog for the end of the game
 			//and then we exit out of the game at the end of the dialog
 		}
