@@ -79,7 +79,7 @@ public class FinalQuest extends Quest{
 					((Walkable) (el.get(1))).face(0);;
 					((Walkable) (el.get(2))).teleport(21, 121, Sys.currentMap);
 					((Walkable) (el.get(2))).face(0);
-					((Walkable) (el.get(3))).teleport(19, 12, Sys.currentMap);
+					((Walkable) (el.get(3))).teleport(19, 121, Sys.currentMap);
 					((Walkable) (el.get(3))).face(0);
 				}
 				

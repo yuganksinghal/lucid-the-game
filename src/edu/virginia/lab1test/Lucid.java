@@ -229,7 +229,7 @@ public class Lucid extends Game{
 		}
 		else if (GAME_STATE == DEFAULT) {
 			if (Sys.Blackout > 0) {
-				Sys.Blackout -= 0.05;
+				Sys.Blackout -= 0.01;
 			}
 			if (Sys.Blackout < 0) {
 				Sys.Blackout = 0;
