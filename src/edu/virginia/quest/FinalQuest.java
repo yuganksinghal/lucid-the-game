@@ -19,6 +19,7 @@ public class FinalQuest extends Quest{
 	
 	final int NOT_STARTED = 0;
 	final int GAME_COMPLETED = 1;
+	final int INSIGHTFUL_DIALOGUE = 2;
 	ArrayList<IEventListener> el;
 	
 	public FinalQuest(ArrayList<IEventListener>EL){
@@ -85,7 +86,7 @@ public class FinalQuest extends Quest{
 				
 			}
 			break;
-		case 2:
+		case INSIGHTFUL_DIALOGUE:
 			System.out.println("FINAL DIALOGUE. AFTER THIS, GAME ENDS");
 			//here we add the dialog for the end of the game
 			//and then we exit out of the game at the end of the dialog
