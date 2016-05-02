@@ -42,14 +42,14 @@ public class MushroomHuntQuest extends Quest {
 			if (event.eventType.equals("DIALOG_EVENT")) {
 				DialogEvent de = (DialogEvent) event;
 				System.out.println("checking if speaker is mom");
-				if (de.speakerID.equals("mom")) {
+				if (de.speakerID.equals("Mom")) {
 					System.out.println("It is! Yay! Proceeding through quest!");
 					QUEST_STATE++;
 					System.out.println("Quest Started!");
 					ArrayList<String> dia = new ArrayList<String>();
 					dia.add("Hey hon.");
 					dia.add("Did you get those mushrooms like I asked?");
-					DialogChangeEvent dce = new DialogChangeEvent(dia, "mom");
+					DialogChangeEvent dce = new DialogChangeEvent(dia, "Mom");
 					this.dispatchEvent(dce);
 					
 				}
@@ -89,7 +89,7 @@ public class MushroomHuntQuest extends Quest {
 						dia.add("Thanks kiddo!");
 						dia.add("*your mother's warm smile grounds you*");
 						dia.add("*your lucidity level has increased*");
-						DialogChangeEvent dce = new DialogChangeEvent(dia,"mom");
+						DialogChangeEvent dce = new DialogChangeEvent(dia,"Mom");
 						this.dispatchEvent(dce);
 					}
 				}
@@ -105,7 +105,7 @@ public class MushroomHuntQuest extends Quest {
 			if (event.eventType.equals("DIALOG_EVENT")) {
 				DialogEvent de = (DialogEvent) event;
 				System.out.println("checking if speaker is clone");
-				if (de.speakerID.equals("mom")) {
+				if (de.speakerID.equals("Mom")) {
 					System.out.println("YOU FINISHED THE QUEST :)");
 					QUEST_STATE++;
 					System.out.println("Quest Completed! Lucidity Level Increased!");
@@ -122,7 +122,7 @@ public class MushroomHuntQuest extends Quest {
 			dia.add("If you eat those raw, they'll mess with your head, I heard.");
 			dia.add("People have been reporting weird visions of some sorta house");
 			dia.add("near the mushroom field.");
-			DialogChangeEvent dce = new DialogChangeEvent(dia,"mom");
+			DialogChangeEvent dce = new DialogChangeEvent(dia,"Mom");
 			this.dispatchEvent(dce);
 			
 			

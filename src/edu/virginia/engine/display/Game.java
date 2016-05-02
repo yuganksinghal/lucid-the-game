@@ -186,7 +186,7 @@ public class Game extends DisplayObject implements ActionListener, KeyListener, 
 		return scenePanel;
 	}
 
-	ArrayList<String> pressedKeys = new ArrayList<String>();
+	static protected ArrayList<String> pressedKeys = new ArrayList<String>();
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(!pressedKeys.contains(KeyEvent.getKeyText(e.getKeyCode())))

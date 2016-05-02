@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import edu.virginia.engine.SoundManager;
 import edu.virginia.engine.Sys;
 import edu.virginia.engine.display.Game;
 import edu.virginia.engine.display.Mirror;
@@ -42,6 +43,7 @@ public class Lucid extends Game{
 	NPC partTimeWorker;
 	NPC mom;
 	NPC boy;
+	NPC oldMan;
 	Mirror mirror;
 	MansionQuest mansionQuest;
 	DogBiteQuest dogBiteQuest;
@@ -51,6 +53,7 @@ public class Lucid extends Game{
 	Map map4;
 	final static int GAME_WIDTH = 600;
 	final static int GAME_HEIGHT = 500;
+	private boolean changeStateToDialog = false;
 	
 	ArrayList<String> dialog;
 	int dialogItr = 0;
@@ -87,21 +90,29 @@ public class Lucid extends Game{
 		
 		
 		
-		clone = new NPC("clone","Player.png");
+		clone = new NPC("priest","Priest.png");
 		clone.teleport(18, 22, Sys.currentMap);
 		clone.addDialogLine("pssst.");
 		clone.addDialogLine("Hey kid...");
 		clone.addDialogLine("Why don't you go steal a cross from that mansion over there?");
 		clone.addDialogLine(";)");
 		
-		partTimeWorker = new NPC("Part-Time Worker", "Player.png");
+		partTimeWorker = new NPC("Part-Time Worker", "Boy.png");
 		partTimeWorker.teleport(7, 10, Sys.currentMap);
 		partTimeWorker.addDialogLine("WATCHU LOOKING AT!");
 		partTimeWorker.addDialogLine("GO AWAY!");
 		partTimeWorker.addDialogLine("I'M ON BREAK!");
 		Sys.addSprite(partTimeWorker);
 		
-		dog = new NPC("dog", "Player.png");
+		
+		oldMan = new NPC("Old Man", "OldMan.png");
+		oldMan.teleport(20, 7, Sys.currentMap);
+		Sys.addSprite(oldMan);
+		oldMan.addDialogLine("Don't be afraid of my pupper!");
+		oldMan.addDialogLine("His bark is worse than his bite.");
+		oldMan.addDialogLine("*You sense the man is lying.*");
+		
+		dog = new NPC("Dog", "Dog.png");
 		dog.teleport(19, 7, Sys.currentMap);
 		dog.addDialogLine("*the old man's dog bites you before");
 		dog.addDialogLine("the old man can pull back on its leash*");
@@ -110,7 +121,7 @@ public class Lucid extends Game{
 		dog.addDialogLine("Don't sue me! Sue my dog!");
 		Sys.addSprite(dog);
 		
-		mom = new NPC("mom", "Player.png");
+		mom = new NPC("Mom", "Mom.png");
 		mom.teleport(78,44, Sys.currentMap);
 		mom.addDialogLine("Hi honey!");
 		mom.addDialogLine("Could you bring me some mushrooms from down the way?");
@@ -120,7 +131,7 @@ public class Lucid extends Game{
 		mom.addDialogLine("outside our house?");
 		Sys.addSprite(mom);
 		
-		boy = new NPC("boy", "Player.png");
+		boy = new NPC("boy", "Boy.png");
 		boy.addDialogLine("Could you please talk to that girl");
 		boy.addDialogLine("who works at the convenience store for me?");
 		boy.addDialogLine("I've been trying to get her attention all day,");
@@ -149,6 +160,8 @@ public class Lucid extends Game{
 		
 		ArrayList<IEventListener> dogbite = new ArrayList<IEventListener>();
 		dogbite.add(dog);
+		dogbite.add(oldMan);
+		dogbite.add(mom);
 		// INITIALIZE QUESTS
 		dogBiteQuest = new DogBiteQuest(dogbite);
 		
@@ -177,7 +190,9 @@ public class Lucid extends Game{
 		//portals to haunted mansion
 		Portal mansionDoor1 = new Portal(14,35,135,59);
 		Portal mansionDoor2 = new Portal(135,60,14,36);
-		
+
+//		SoundManager.playLoop("ahem_x.wav");
+		SoundManager.loopMusic("Lucid.wav");
 	}
 	
 	/**
@@ -195,6 +210,10 @@ public class Lucid extends Game{
 		
 			Sys.update();
 			if (camera != null) camera.update();
+			if (changeStateToDialog) {
+				changeStateToDialog = false;
+				GAME_STATE = DIALOG;
+			}
 		} else if (GAME_STATE == DIALOG) {
 			//look out for the right key to be pressed to continue dialog
 			if (pressedKeys.contains("Z")) {
@@ -231,7 +250,7 @@ public class Lucid extends Game{
 
 		//draw sprites
 		for (Sprite s : Sys.spriteList) {
-			if (s != null) s.draw(g);
+			if (s != null && s.isVisible()) s.draw(g);
 		}
 		
 		//draw foreground
@@ -271,8 +290,7 @@ public class Lucid extends Game{
 		if (event.eventType.equals("DIALOG_EVENT")) {
 			DialogEvent e = (DialogEvent) event;
 			this.dialog = e.getDialog();
-			GAME_STATE = DIALOG;
-			
+			changeStateToDialog = true;
 		}
 		if (event.eventType.equals("LUCIDITY_CHANGE_EVENT")) {
 			System.out.println("Saw LCE!");
@@ -307,7 +325,6 @@ public class Lucid extends Game{
 				Sys.garbage.add(clone);
 				Sys.currentMap = Sys.maps[2];
 				break;
-				
 			case 3:
 				System.out.println("LUCIDITY 3");
 				Sys.currentMap = Sys.maps[3];

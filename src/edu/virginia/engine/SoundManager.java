@@ -36,14 +36,13 @@ public class SoundManager {
 		
 	}
 	public static void playMusic(String url) {
-		System.out.println("res/music/" + url);
 			      try {
 			    	  
 			        Clip clip = AudioSystem.getClip();
 			        
 			        AudioInputStream inputStream = AudioSystem.getAudioInputStream(
-			          SoundManager.class.getResourceAsStream("res/music/" + url));
-			          
+			          SoundManager.class.getResourceAsStream("/res/music/" + url));
+			        
 			        clip.open(inputStream);
 			        clip.start(); 
 			        
@@ -66,5 +65,30 @@ public class SoundManager {
 			}
 
 	}
-	
+	public static synchronized void playLoop(final String url) {
+		Clip clip;
+		try {
+			clip = AudioSystem.getClip();
+			AudioInputStream in = AudioSystem.getAudioInputStream(new File("res" + File.separator + "sounds" + File.separator +url));
+			clip.open(in);
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
+			clip.start();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}	
+	public static synchronized void loopMusic(final String url) {
+		Clip clip;
+		try {
+			clip = AudioSystem.getClip();
+			AudioInputStream in = AudioSystem.getAudioInputStream(new File("res" + File.separator + "music" + File.separator +url));
+			clip.open(in);
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
+			clip.start();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}	
 }

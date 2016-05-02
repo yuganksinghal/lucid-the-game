@@ -29,8 +29,9 @@ public class AnimatedSprite extends Sprite {
 	public AnimatedSprite(String id, String img) {
 		super(id,img);
 		construct();
-		addAnimationFrame("DEFAULT", this.readImage(img));
+		addAnimationFrame("DEFAULT", null);
 		setAnimation("DEFAULT");
+//		this.setImage((BufferedImage) null);
 	}
 	
 	private void construct() {

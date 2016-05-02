@@ -47,8 +47,35 @@ public class DogBiteQuest extends Quest {
 			if (event.eventType.equals("DIALOG_EVENT")) {
 				DialogEvent de = (DialogEvent) event;
 				System.out.println("checking if speaker is clone");
-				if (de.speakerID.equals("dog")) {
+				if (de.speakerID.equals("Dog")) {
 					QUEST_STATE++;
+					//when player gets bitten:
+					//change mom dialog
+					//change dog dialog
+					//change guy dialog
+					ArrayList<String> momDia = new ArrayList<String>();
+					ArrayList<String> dogDia = new ArrayList<String>();
+					ArrayList<String> guyDia = new ArrayList<String>();
+					
+					momDia.add("You're bleeding!");
+					momDia.add("You should put a bandage on that...");
+					
+					dogDia.add("The dog growls menacingly...");
+					dogDia.add("You don't try to pet it.");
+					
+					guyDia.add("I have lawyers too, you know!");
+					guyDia.add("I promise he's usually friendly!");
+					
+					DialogChangeEvent momDCE = new DialogChangeEvent(momDia, "Mom");
+					this.dispatchEvent(momDCE);
+					
+					DialogChangeEvent dogDCE = new DialogChangeEvent(dogDia, "Dog");
+					this.dispatchEvent(dogDCE);
+					
+					DialogChangeEvent guyDCE = new DialogChangeEvent(guyDia, "Old Man");
+					this.dispatchEvent(guyDCE);
+					
+					
 				}
 			}
 			break;
@@ -64,17 +91,27 @@ public class DogBiteQuest extends Quest {
 					ArrayList<String> dial = new ArrayList<String>();
 					dial.add("You patch yourself up with some antibiotic ointment");
 					dial.add("and a bandaid. It still stings...");
-					dial.add("You notice a shimmering boy next to the bookshelf.");
-					dial.add("Was he always there?");
+					dial.add("You notice a shimmering group of boys...");
+					dial.add("Were they always there?");
 					
 					DialogEvent de = new DialogEvent("medkit");
 					de.setDialog(dial);
 					this.dispatchEvent(de);
+					
+					ArrayList<String> momDia = new ArrayList<String>();
+					momDia.add("Glad to see you all patched up!");
+					momDia.add("Do you think you could get some mushrooms for me?");
+					momDia.add("There are a bunch growing to the south of town.");
+					momDia.add("I need one of the bigs ones for my soup.");
+					momDia.add("Thanks honey!");
+					momDia.add("Oh! Before I forget, don't eat them raw.");
+					momDia.add("They're poisonous when they're raw!");
+					momDia.add("Thanks honey! I'll be waiting on you!");
+					DialogChangeEvent dce = new DialogChangeEvent(momDia, "Mom");
+					this.dispatchEvent(dce);
+					
 					QUEST_STATE++;
 					LucidityChangeEvent lce = new LucidityChangeEvent(--Sys.LUCIDITY); // TODO:
-					// make
-					// it
-					// Sys.LUCIDITY++
 					this.dispatchEvent(lce);
 				}
 				// TODO: implement comparable interface for different objects,

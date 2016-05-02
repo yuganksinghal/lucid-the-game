@@ -33,8 +33,11 @@ public class Walkable extends AnimatedSprite {
 	
 	public Walkable(String id, String image) {
 		super(id, image);
+		facing = FACE_DOWN;
+		this.visible = false;
 		parseSpriteSheet(image);
 		construct();
+		this.visible = true;
 	}
 	
 	private void construct() {

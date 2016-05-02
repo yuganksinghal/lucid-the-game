@@ -192,5 +192,9 @@ public class DisplayObject extends EventDispatcher {
 	public float getAlpha() {
 		return alpha;
 	}
+	
+	public boolean isVisible() {
+		return this.visible;
+	}
 
 }
