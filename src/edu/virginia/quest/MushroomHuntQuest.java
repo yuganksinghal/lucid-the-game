@@ -98,9 +98,7 @@ public class MushroomHuntQuest extends Quest {
 				DialogEvent de = (DialogEvent) event;
 				System.out.println("checking if speaker is clone");
 				if (de.speakerID.equals("Mom")) {
-					System.out.println("YOU FINISHED THE QUEST :)");
 					QUEST_STATE++;
-					System.out.println("Quest Completed! Lucidity Level Increased!");
 					LucidityChangeEvent lce = new LucidityChangeEvent(++Sys.LUCIDITY);
 					this.dispatchEvent(lce);
 				}
@@ -108,7 +106,6 @@ public class MushroomHuntQuest extends Quest {
 			System.out.println(QUEST_STATE);
 			break;
 		case QUEST_COMPLETED:
-			System.out.println("LAST STATE: " + event.eventType);
 			ArrayList<String> dia = new ArrayList<String>();
 			dia.add("You didn't eat the mushrooms, did you?");
 			dia.add("If you eat those raw, they'll mess with your head, I heard.");
@@ -116,8 +113,6 @@ public class MushroomHuntQuest extends Quest {
 			dia.add("near the mushroom field.");
 			DialogChangeEvent dce = new DialogChangeEvent(dia,"Mom");
 			this.dispatchEvent(dce);
-			
-			
 			break;
 		}
 	}

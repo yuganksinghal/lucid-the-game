@@ -99,6 +99,7 @@ public class Lucid extends Game{
 		priest.addDialogLine("I'm not allowed in there...");
 		priest.addDialogLine("It looks like the one on my robe.");
 		priest.addDialogLine("Thanks, kid.");
+		priest.addDialogLine(";)");
 		
 		partTimeWorker = new NPC("Part-Time Worker", "Boy.png");
 		partTimeWorker.teleport(7, 10, Sys.currentMap);
@@ -204,8 +205,20 @@ public class Lucid extends Game{
 	 * */
 	@Override
 	public void update(ArrayList<String> pressedKeys, Map map){
+		
+		//REMOVE THIS EVENTUALLY
+
+//		else Sys.Blackout = 0;
+		if (Sys.Blackout > 0) {
+			Sys.Blackout -= 0.05;
+		}
+		if (Sys.Blackout < 0) {
+			Sys.Blackout = 0;
+		}
+		
 		if (GAME_STATE == TITLE_SCREEN) {
-			
+			//add title screen stuff here (key detection)
+			if (!pressedKeys.isEmpty()) GAME_STATE = 0;
 		}
 		else if (GAME_STATE == DEFAULT) {
 			/* Make sure player is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
@@ -219,6 +232,7 @@ public class Lucid extends Game{
 				changeStateToDialog = false;
 				GAME_STATE = DIALOG;
 			}
+
 		} else if (GAME_STATE == DIALOG) {
 			//look out for the right key to be pressed to continue dialog
 			if (pressedKeys.contains("Z")) {
@@ -269,7 +283,9 @@ public class Lucid extends Game{
 		g.setColor(new Color(255, 100, 100, 100-(100*Sys.LUCIDITY/4)));
 		g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 		
-		g.setColor(new Color(0, 0, 0, Sys.Blackout*255));
+		if (Sys.Blackout > 1) Sys.Blackout = 1;
+		if (Sys.Blackout < 0) Sys.Blackout = 0;
+		g.setColor(new Color(0, 0, 0, (int) (Sys.Blackout*255)));
 		g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 		
 		
