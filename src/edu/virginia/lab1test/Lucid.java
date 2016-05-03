@@ -145,6 +145,7 @@ public class Lucid extends Game{
 		boy.addDialogLine(" but she just keeps ignoring me.");
 		boy.addDialogLine("I know! Why don't you bring her my ____?");
 		boy.addDialogLine("It's on this bookshelf, I'm pretty sure.");
+		boy.setAlpha(0.5);
 		
 		// INITIALIZE CAMERA
 		
