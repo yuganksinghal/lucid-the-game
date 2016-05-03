@@ -104,11 +104,12 @@ public class Lucid extends Game{
 		priest.addDialogLine("Thanks, kid.");
 		priest.addDialogLine(";)");
 		
-		partTimeWorker = new NPC("Part-Time Worker", "Boy.png");
-		partTimeWorker.teleport(7, 10, Sys.currentMap);
-		partTimeWorker.addDialogLine("WATCHU LOOKING AT!");
-		partTimeWorker.addDialogLine("GO AWAY!");
-		partTimeWorker.addDialogLine("I'M ON BREAK!");
+		partTimeWorker = new NPC("Part-Time Worker", "Girl.png");
+		partTimeWorker.teleport(4, 8, Sys.currentMap);
+		partTimeWorker.face(3);
+		partTimeWorker.addDialogLine("What are you looking at, dweeb??");
+		partTimeWorker.addDialogLine("I'm on break!");
+		partTimeWorker.addDialogLine("Go away!");
 		Sys.addSprite(partTimeWorker);
 		
 		
@@ -191,6 +192,7 @@ public class Lucid extends Game{
 		finalQ.add(partTimeWorker);
 		finalQ.add(oldMan);
 		finalQ.add(boy);
+		finalQ.add(dog);
 		finalQuest = new FinalQuest(finalQ);
 		
 		

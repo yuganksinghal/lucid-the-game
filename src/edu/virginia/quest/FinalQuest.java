@@ -86,6 +86,20 @@ public class FinalQuest extends Quest{
 					((Walkable) (el.get(4))).face(3);
 					((Walkable) (el.get(5))).teleport(15, 119, Sys.currentMap);
 					((Walkable) (el.get(5))).face(3);
+					
+					ArrayList<String> fd = new ArrayList<String>();
+					fd.add("DAD: Look! He's waking up!");
+					fd.add("MOM: Oh honey, I'm glad you're okay.");
+					fd.add("STEPH: Yeah man, we were worried sick about you!");
+					fd.add("STEPH: You kept yelling a bunch of crazy stuff.");
+					fd.add("STEPH: Must have been a helluva weird dream huh?");
+					fd.add("MOM: Language!");
+					fd.add("STEPH: No need to raise your voice around Mr. Coma here.");
+					fd.add("MOM: You're right. Let me go find the doctor.");
+					fd.add("MOM: Finally, after all these months...");
+					fd.add("     <THE END>");
+					DialogChangeEvent dce = new DialogChangeEvent(fd, "Mom");
+					this.dispatchEvent(dce);
 				}
 				
 			}
