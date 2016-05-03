@@ -91,8 +91,8 @@ public class DogBiteQuest extends Quest {
 					ArrayList<String> dial = new ArrayList<String>();
 					dial.add("You patch yourself up with some antibiotic ointment");
 					dial.add("and a bandaid. It still stings...");
-					dial.add("You notice a shimmering group of boys...");
-					dial.add("Were they always there?");
+					dial.add("You notice a shimmering boy...");
+					dial.add("Was he always there?");
 					
 					DialogEvent de = new DialogEvent("medkit");
 					de.setDialog(dial);
