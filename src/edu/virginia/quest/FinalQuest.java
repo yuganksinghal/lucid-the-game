@@ -3,6 +3,7 @@ package edu.virginia.quest;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import edu.virginia.engine.SoundManager;
 import edu.virginia.engine.Sys;
 import edu.virginia.engine.display.Walkable;
 import edu.virginia.engine.events.DialogChangeEvent;
@@ -26,6 +27,8 @@ public class FinalQuest extends Quest{
 		super();
 		((EventDispatcher) EL.get(0)).addEventListener(this, "DIALOG_EVENT");
 		this.addEventListener(EL.get(0), "DIALOG_CHANGE_EVENT");
+		((EventDispatcher) EL.get(1)).addEventListener(this, "DIALOG_EVENT");
+		this.addEventListener(EL.get(1), "DIALOG_CHANGE_EVENT");
 		el = EL;
 	}
 	
@@ -75,6 +78,8 @@ public class FinalQuest extends Quest{
 					this.dispatchEvent(dae);
 					QUEST_STATE++;
 					
+					//SoundManager.stop();
+					
 					//here we teleport the players
 					((Walkable) (el.get(1))).teleport(20,121,Sys.currentMap);
 					((Walkable) (el.get(1))).face(0);;
@@ -106,6 +111,7 @@ public class FinalQuest extends Quest{
 			break;
 		case INSIGHTFUL_DIALOGUE:
 			System.out.println("FINAL DIALOGUE. AFTER THIS, GAME ENDS");
+			//SoundManager.loopMusic("Hospital.wav");
 			//here we add the dialog for the end of the game
 			//and then we exit out of the game at the end of the dialog
 		}

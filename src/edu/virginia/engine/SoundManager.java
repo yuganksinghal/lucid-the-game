@@ -90,5 +90,13 @@ public class SoundManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}	
+	}
+	public static synchronized void stop() {
+		try {
+			AudioSystem.getClip().stop();
+		} catch (LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
