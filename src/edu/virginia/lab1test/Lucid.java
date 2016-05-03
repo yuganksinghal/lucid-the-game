@@ -333,7 +333,7 @@ public class Lucid extends Game{
 			this.dialog = e.getDialog();
 			changeStateToDialog = true;
 		}
-		if (event.eventType.equals("LUCIDITY_CHANGE_EVENT")) {
+		if (event.eventType.equals("LUCIDITY_CHANGE_EVENT") && Sys.LUCIDITY != 4) {
 			System.out.println("Saw LCE!");
 			LucidityChangeEvent lce = (LucidityChangeEvent) event;
 			int luc = lce.lucidity;
