@@ -3,6 +3,7 @@ package edu.virginia.quest;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import edu.virginia.engine.SoundManager;
 import edu.virginia.engine.Sys;
 import edu.virginia.engine.display.Walkable;
 import edu.virginia.engine.events.DialogChangeEvent;
@@ -88,6 +89,8 @@ public class FinalQuest extends Quest{
 					((Walkable) (el.get(4))).face(3);
 					((Walkable) (el.get(5))).teleport(15, 119, Sys.currentMap);
 					((Walkable) (el.get(5))).face(3);
+					
+					SoundManager.playLoop("Hospital.wav");
 					
 					ArrayList<String> fd = new ArrayList<String>();
 					fd.add("DAD: Look! He's waking up!");
