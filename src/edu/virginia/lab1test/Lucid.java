@@ -94,7 +94,7 @@ public class Lucid extends Game{
 		
 		
 		priest = new NPC("Priest","Priest.png", "Priesttemp.png");
-		priest.teleport(18, 22, Sys.currentMap);
+		priest.teleport(14, 23, Sys.currentMap);
 		priest.addDialogLine("Hey you.");
 		priest.addDialogLine("Yeah kid, I'm talking to you...");
 		priest.addDialogLine("Can you get an icon for me from that mansion?");
