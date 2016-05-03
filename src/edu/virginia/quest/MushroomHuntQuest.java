@@ -101,18 +101,18 @@ public class MushroomHuntQuest extends Quest {
 					QUEST_STATE++;
 					LucidityChangeEvent lce = new LucidityChangeEvent(++Sys.LUCIDITY);
 					this.dispatchEvent(lce);
+					ArrayList<String> dia = new ArrayList<String>();
+					dia.add("You didn't eat the mushrooms, did you?");
+					dia.add("If you eat those raw, they'll mess with your head, I heard.");
+					dia.add("People have been reporting weird visions of some sorta house");
+					dia.add("near the mushroom field.");
+					DialogChangeEvent dce = new DialogChangeEvent(dia,"Mom");
+					this.dispatchEvent(dce);
 				}
 			}
 			System.out.println(QUEST_STATE);
 			break;
 		case QUEST_COMPLETED:
-			ArrayList<String> dia = new ArrayList<String>();
-			dia.add("You didn't eat the mushrooms, did you?");
-			dia.add("If you eat those raw, they'll mess with your head, I heard.");
-			dia.add("People have been reporting weird visions of some sorta house");
-			dia.add("near the mushroom field.");
-			DialogChangeEvent dce = new DialogChangeEvent(dia,"Mom");
-			this.dispatchEvent(dce);
 			break;
 		}
 	}

@@ -19,7 +19,6 @@ import edu.virginia.engine.events.IEventListener;
 import edu.virginia.engine.events.LucidityChangeEvent;
 import edu.virginia.engine.map.Map;
 import edu.virginia.engine.map.Portal;
-import edu.virginia.quest.AlphaQuest;
 import edu.virginia.quest.DogBiteQuest;
 import edu.virginia.quest.FinalQuest;
 import edu.virginia.quest.MansionQuest;
@@ -88,7 +87,7 @@ public class Lucid extends Game{
 		// INITIALIZE SPRITES
 		
 		player = new Player("player", "Player.png", "Playertemp.png");
-		player.teleport(17, 7, Sys.currentMap);
+		player.teleport(77, 37, Sys.currentMap);
 		Sys.addSprite(player);
 		Sys.MC = player;
 		
