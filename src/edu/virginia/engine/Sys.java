@@ -1,7 +1,8 @@
 package edu.virginia.engine;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
+import javax.sound.sampled.Clip;
 
 import edu.virginia.dialog.DialogManager;
 import edu.virginia.engine.display.Game;
@@ -13,7 +14,6 @@ import edu.virginia.engine.events.CollisionManager;
 import edu.virginia.engine.events.PickedUpEvent;
 import edu.virginia.engine.events.QuestManager;
 import edu.virginia.engine.map.Map;
-import edu.virginia.engine.map.Portal;
 import edu.virginia.engine.tween.TweenJuggler;
 
 public class Sys {
@@ -28,6 +28,7 @@ public class Sys {
 	public final static int TILE_SIZE = 32;
 	public static int LUCIDITY = 2;
 	public static double Blackout = 0;
+	public static Clip backgroundMusic;
 	//STATIC STORAGE
 	
 	public static ArrayList<Sprite> spriteList = new ArrayList<Sprite>();

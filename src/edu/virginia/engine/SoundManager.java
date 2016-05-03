@@ -74,21 +74,18 @@ public class SoundManager {
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
 			clip.start();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}	
 	public static synchronized void loopMusic(final String url) {
-		Clip clip;
 		try {
-			clip = AudioSystem.getClip();
+			Sys.backgroundMusic = AudioSystem.getClip();
 			AudioInputStream in = AudioSystem.getAudioInputStream(new File("res" + File.separator + "music" + File.separator +url));
-			clip.open(in);
-			clip.loop(Clip.LOOP_CONTINUOUSLY);
-			clip.start();
+			Sys.backgroundMusic.open(in);
+			Sys.backgroundMusic.loop(Clip.LOOP_CONTINUOUSLY);
+			Sys.backgroundMusic.start();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}	
+	}
 }

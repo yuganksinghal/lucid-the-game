@@ -150,7 +150,9 @@ public class Lucid extends Game{
 		// INITIALIZE CAMERA
 		
 		cross = new Sign("cross", 109, 7);
-		cross.addDialogLine("HAI! DIS IS KRAUS. DERP");
+		cross.addDialogLine("You place the cross in its receptacle on the wall.");
+		cross.addDialogLine("You feel something change...");
+		cross.addDialogLine("Somehere far away.");
 		
 		camera = new Camera(GAME_WIDTH, GAME_HEIGHT, player);
 		

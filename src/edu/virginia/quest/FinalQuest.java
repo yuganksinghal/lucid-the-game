@@ -26,6 +26,8 @@ public class FinalQuest extends Quest{
 		super();
 		((EventDispatcher) EL.get(0)).addEventListener(this, "DIALOG_EVENT");
 		this.addEventListener(EL.get(0), "DIALOG_CHANGE_EVENT");
+		((EventDispatcher) EL.get(1)).addEventListener(this, "DIALOG_EVENT");
+		this.addEventListener(EL.get(1), "DIALOG_CHANGE_EVENT");
 		el = EL;
 	}
 	
