@@ -131,7 +131,8 @@ public class Lucid extends Game{
 		mom = new NPC("Mom", "Mom.png", "Momtemp.png");
 		mom.teleport(78,44, Sys.currentMap);
 		mom.addDialogLine("Hi honey!");
-		mom.addDialogLine("Could you bring me some mushrooms from down the way?");
+		mom.addDialogLine("Could you bring me some mushrooms?");
+		mom.addDialogLine("They're down the path to the south.");
 		mom.addDialogLine("We're making soup!");
 		mom.addDialogLine("But before you do that,");
 		mom.addDialogLine("why don't you help that old man");
