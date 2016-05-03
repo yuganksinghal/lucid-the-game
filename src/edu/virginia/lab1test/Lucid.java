@@ -161,7 +161,7 @@ public class Lucid extends Game{
 		mirror.addTile(130, 46);
 		mirror.addTile(144, 46);
 		mirror.addTile(130, 56);
-		mirror.addTile(145, 56);
+		mirror.addTile(145, 55);
 		
 		// ADD LISTENERS
 		
