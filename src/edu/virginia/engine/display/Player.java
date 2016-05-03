@@ -42,28 +42,28 @@ public class Player extends Walkable {
 	public void playerInput(ArrayList<String> keys, Map map) {
 		if (!moving) {
 
-			if (keys.contains("D")) {
+			if (keys.contains("D") || keys.contains("→")) {
 				if (!map.checkCollision(yGrid,xGrid+1)) {
 					this.right(map);
 					this.moving = true;
 				} else setAnimation("IDLE_RIGHT");
 				this.facing = FACE_RIGHT;
 			}
-			else if (keys.contains("A")) {
+			else if (keys.contains("A") || keys.contains("←")) {
 				if (!map.checkCollision(yGrid,xGrid-1)) {
 					this.left(map);
 					this.moving = true;
 				} else setAnimation("IDLE_LEFT");
 				this.facing = FACE_LEFT;
 			}
-			if (keys.contains("S")) {
+			if (keys.contains("S") || keys.contains("↓")) {
 				if (!map.checkCollision(yGrid+1,xGrid)) {
 					this.down(map);
 					this.moving = true;
 				} else setAnimation("IDLE_DOWN");
 				this.facing = FACE_DOWN;
 			}
-			if (keys.contains("W")) {
+			if (keys.contains("W") || keys.contains("↑")) {
 				if (!map.checkCollision(yGrid-1,xGrid)) {
 					this.up(map);
 					this.moving = true;
