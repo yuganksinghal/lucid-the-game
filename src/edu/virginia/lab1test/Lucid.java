@@ -87,14 +87,14 @@ public class Lucid extends Game{
 		
 		// INITIALIZE SPRITES
 		
-		player = new Player("player", "Player.png");
+		player = new Player("player", "Player.png", "Playertemp.png");
 		player.teleport(17, 7, Sys.currentMap);
 		Sys.addSprite(player);
 		Sys.MC = player;
 		
 		
 		
-		priest = new NPC("Priest","Priest.png");
+		priest = new NPC("Priest","Priest.png", "Priesttemp.png");
 		priest.teleport(18, 22, Sys.currentMap);
 		priest.addDialogLine("Hey you.");
 		priest.addDialogLine("Yeah kid, I'm talking to you...");
@@ -104,7 +104,7 @@ public class Lucid extends Game{
 		priest.addDialogLine("Thanks, kid.");
 		priest.addDialogLine(";)");
 		
-		partTimeWorker = new NPC("Part-Time Worker", "Boy.png");
+		partTimeWorker = new NPC("Part-Time Worker", "Boy.png", "Boytemp.png");
 		partTimeWorker.teleport(7, 10, Sys.currentMap);
 		partTimeWorker.addDialogLine("WATCHU LOOKING AT!");
 		partTimeWorker.addDialogLine("GO AWAY!");
@@ -112,14 +112,14 @@ public class Lucid extends Game{
 		Sys.addSprite(partTimeWorker);
 		
 		
-		oldMan = new NPC("Old Man", "OldMan.png");
+		oldMan = new NPC("Old Man", "OldMan.png", "OldMantemp.png");
 		oldMan.teleport(20, 7, Sys.currentMap);
 		Sys.addSprite(oldMan);
 		oldMan.addDialogLine("Don't be afraid of my pupper!");
 		oldMan.addDialogLine("His bark is worse than his bite.");
 		oldMan.addDialogLine("*You sense the man is lying.*");
 		
-		dog = new NPC("Dog", "Dog.png");
+		dog = new NPC("Dog", "Dog.png", "Dogtemp.png");
 		dog.teleport(19, 7, Sys.currentMap);
 		dog.addDialogLine("*the old man's dog bites you before");
 		dog.addDialogLine("the old man can pull back on its leash*");
@@ -128,7 +128,7 @@ public class Lucid extends Game{
 		dog.addDialogLine("Don't sue me! Sue my dog!");
 		Sys.addSprite(dog);
 		
-		mom = new NPC("Mom", "Mom.png");
+		mom = new NPC("Mom", "Mom.png", "Momtemp.png");
 		mom.teleport(78,44, Sys.currentMap);
 		mom.addDialogLine("Hi honey!");
 		mom.addDialogLine("Could you bring me some mushrooms from down the way?");
@@ -138,7 +138,7 @@ public class Lucid extends Game{
 		mom.addDialogLine("outside our house?");
 		Sys.addSprite(mom);
 		
-		boy = new NPC("boy", "Boy.png");
+		boy = new NPC("boy", "Boy.png", "Boytemp.png");
 		boy.addDialogLine("Could you please talk to that girl");
 		boy.addDialogLine("who works at the convenience store for me?");
 		boy.addDialogLine("I've been trying to get her attention all day,");

@@ -17,8 +17,8 @@ public class NPC extends Walkable implements Interactable {
 	static final int MOVING = 0;
 	static final int STANDING_STILL = 1;
 
-	public NPC(String id, String imageFileName) {
-		super(id, imageFileName);
+	public NPC(String id, String imageFileName, String fillIn) {
+		super(id, imageFileName, fillIn);
 		construct();
 	}
 	
